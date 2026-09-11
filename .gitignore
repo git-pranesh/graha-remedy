@@ -28,5 +28,8 @@ backend/.env
 data/users.json
 data/reports.json
 
-# chart cache
+# chart cache (kept out to avoid stale/huge blobs in git)
 backend/cache/
+
+# workspace scratch
+.freebuff/project-id
