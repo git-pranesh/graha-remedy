@@ -1,0 +1,2436 @@
+/* ─── Graha Remedy App — Neutral Perplexity-inspired Palette ─── */
+/* Base: #F3F0EC paper · Ink: #13343B offblack ·                */
+/* Only accent: True Turquoise #1FB8CD · Monochrome statuses    */
+
+:root {
+  /* Ink & neutral core */
+  --ink:           #13343B;   /* offblack: text, headings, buttons */
+  --ink-hover:     #0E2A30;   /* pressed state for ink surfaces */
+  --grey-mid:      #5B6266;   /* secondary text accents */
+
+  /* Neutral surfaces (harmonised with paper) */
+  --paper:         #F3F0EC;   /* page background */
+  --page-deep:     #EAE6DF;   /* body gradient end */
+  --card-bg:       #FFFFFF;   /* cards, forms, accordions */
+  --fill:          #F6F3ED;   /* inputs, chips, soft rows */
+  --fill-deep:     #EFEBE4;   /* translit boxes, deep fills */
+  --tint:          #F1EDE7;   /* hovers, summary boxes */
+  --tint-strong:   #E9E5DE;   /* badges, emphasised chips */
+
+  /* Only accent (Perplexity turquoise) */
+  --turquoise:     #1FB8CD;
+  --turquoise-dark:#0B7B8C;
+  --turquoise-bg:  #E2F3F6;
+  --turquoise-border:#AEDCE6;
+  --turquoise-hover: #C9E9EF;
+
+  /* Form feedback (muted; not used for astrology chips) */
+  --green:         #417A57;
+  --green-bg:      #E7F1EA;
+  --green-border:  #CBE1D1;
+  --red:           #B03A2E;
+  --red-bg:        #F8E9E6;
+  --red-border:    #E7C4BD;
+
+  /* Monochrome status scale (dosha + severity chips) */
+  --chip-strong-bg:#DCD7D0;   /* severe / active */
+  --chip-strong:   #13343B;
+  --chip-mid-bg:   #EAE6DF;   /* moderate */
+  --chip-mid:      #3E4649;
+  --chip-soft-bg:  #F3F0EA;   /* mild / clear */
+  --chip-soft:     #5F666A;
+
+  /* Semantic */
+  --text:          var(--ink);
+  --text-muted:    rgba(19, 52, 59, 0.66);
+  --text-light:    rgba(19, 52, 59, 0.46);
+  --bg:            var(--paper);
+  --border:        #DBD5CC;
+  --border-light:  #E8E4DC;
+  --border-strong: #C9C3BA;
+  --shadow:        0 2px 12px rgba(19, 52, 59, 0.07);
+  --shadow-lg:     0 8px 32px rgba(19, 52, 59, 0.1);
+
+  /* Type */
+  --sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --mono: 'SF Mono', 'Consolas', monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--page-deep) 100%);
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+}
+
+/* ─── Wizard Shell ──────────────────────────────────────────── */
+
+.wizard {
+  width: 100%;
+  max-width: 640px;
+  min-height: 100svh;
+  padding: 24px 20px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-header {
+  text-align: center;
+  padding: 32px 0 16px;
+}
+
+.wizard-logo {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.wizard-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.wizard-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ─── Step Indicator ────────────────────────────────────────── */
+
+.wizard-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 16px 0 24px;
+}
+
+.wizard-step-item {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.wizard-step-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--border-light);
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.wizard-step-dot.active {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(19, 52, 59, 0.28);
+}
+
+.wizard-step-dot.done {
+  background: var(--turquoise);
+  color: #fff;
+}
+
+.wizard-step-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .wizard-step-label { display: none; }
+}
+
+.wizard-step-line {
+  width: 32px;
+  height: 2px;
+  background: var(--border);
+  margin: 0 8px;
+  border-radius: 1px;
+}
+
+/* ─── Error Banner ──────────────────────────────────────────── */
+
+.wizard-error {
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  color: var(--red);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.wizard-error button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--red);
+  padding: 2px 6px;
+}
+
+/* ─── Step Content ──────────────────────────────────────────── */
+
+.wizard-content {
+  flex: 1;
+}
+
+.step-form {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+}
+
+.step-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.step-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* ─── Form Fields ───────────────────────────────────────────── */
+
+.field {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.field-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.field-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--fill);
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.field-input:focus {
+  border-color: var(--turquoise);
+  box-shadow: 0 0 0 3px rgba(31, 184, 205, 0.16);
+}
+
+.field-hint {
+  display: block;
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+.field-error {
+  background: var(--red-bg);
+  color: var(--red);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+/* ─── Place Autocomplete ────────────────────────────────────── */
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  list-style: none;
+  z-index: 20;
+  max-height: 240px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+
+.suggestion-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.suggestion-item:last-child { border-bottom: none; }
+
+.suggestion-item:hover {
+  background: var(--tint);
+}
+
+/* ─── Buttons ───────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(19, 52, 59, 0.24);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--ink-hover);
+  box-shadow: 0 4px 12px rgba(19, 52, 59, 0.3);
+}
+
+.btn-secondary {
+  background: var(--card-bg);
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--fill-deep);
+  border-color: var(--border-strong);
+}
+
+.step-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Step 2: Categories ────────────────────────────────────── */
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.category-card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.category-card.open {
+  border-color: var(--ink);
+  box-shadow: 0 2px 8px rgba(19, 52, 59, 0.1);
+}
+
+.category-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.category-header:hover {
+  background: var(--tint);
+}
+
+.category-icon {
+  font-size: 20px;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.category-label {
+  flex: 1;
+  font-weight: 600;
+}
+
+.category-chevron {
+  color: var(--text-muted);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.category-body {
+  padding: 4px 16px 16px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* ─── Checkboxes ────────────────────────────────────────────── */
+
+.select-all-row,
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.select-all-row {
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 4px;
+  padding-bottom: 10px;
+}
+
+.select-all-label {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.checkbox-label {
+  color: var(--text);
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--turquoise);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ─── Selected Count ────────────────────────────────────────── */
+
+.selected-count {
+  text-align: center;
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.selected-count .muted {
+  color: var(--text-light);
+  font-weight: 400;
+}
+
+/* ─── Step 3: Results ───────────────────────────────────────── */
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.results-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.results-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.results-subheading {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ─── Chart Summary Cards ───────────────────────────────────── */
+
+.chart-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .chart-summary { grid-template-columns: 1fr; }
+}
+
+.chart-card {
+  background: var(--tint);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.chart-card-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.chart-card-value {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* ─── Planet Grid ───────────────────────────────────────────── */
+
+.planet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.planet-chip {
+  background: var(--fill);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  text-align: center;
+  position: relative;
+}
+
+.planet-chip.retro {
+  border-color: var(--turquoise-border);
+  background: var(--turquoise-bg);
+}
+
+.planet-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: capitalize;
+}
+
+.planet-sign {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.planet-house {
+  display: block;
+  font-size: 10px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+.retro-badge {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--turquoise-dark);
+  background: var(--turquoise-bg);
+  border-radius: 4px;
+  padding: 1px 4px;
+}
+
+/* ─── Dosha Grid ────────────────────────────────────────────── */
+
+.dosha-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dosha-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dosha-active {
+  background: var(--chip-strong-bg);
+  color: var(--chip-strong);
+  border: 1px solid var(--border-strong);
+}
+
+.dosha-clear {
+  background: var(--chip-soft-bg);
+  color: var(--chip-soft);
+  border: 1px solid var(--border-light);
+}
+
+.dosha-icon { font-size: 14px; }
+
+/* ─── Afflictions ───────────────────────────────────────────── */
+
+.affliction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.affliction-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  background: var(--fill);
+  border: 1px solid var(--border-light);
+}
+
+.affliction-row.severity-severe { background: var(--chip-strong-bg); border-color: var(--border-strong); }
+.affliction-row.severity-moderate { background: var(--chip-mid-bg); border-color: var(--border); }
+.affliction-row.severity-mild { background: var(--chip-soft-bg); border-color: var(--border-light); }
+
+.affliction-graha {
+  font-weight: 700;
+  text-transform: capitalize;
+  min-width: 60px;
+  color: var(--ink);
+}
+
+.affliction-severity {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* ─── Diagnostic Factors Checklist ─────────────────────── */
+
+.rc-factors {
+  margin: 8px 0 12px;
+  padding: 10px 14px;
+  background: var(--tint);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.rc-factors-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.rc-factors-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rc-factor-item {
+  font-size: 0.85rem;
+  color: var(--text);
+  padding: 3px 0;
+  line-height: 1.4;
+}
+
+.rc-factor-item::before {
+  content: none;
+}
+
+/* ─── Health Disclaimer ─────────────────────────────────────── */
+
+.health-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  background: var(--fill);
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+
+.health-disclaimer-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.health-disclaimer p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.health-disclaimer strong {
+  color: var(--ink);
+}
+
+/* ─── Kul Devta Display ─────────────────────────────────────── */
+
+.kul-devta-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--tint);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.kul-devta-label {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.kul-devta-value {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ─── Universal Remedies ───────────────────────────────────── */
+
+.universal-remedies {
+  padding: 4px 0;
+}
+
+.universal-section {
+  margin-bottom: 24px;
+}
+
+.universal-section:last-child {
+  margin-bottom: 0;
+}
+
+.universal-section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.universal-section-desc,
+.universal-section-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.universal-mantras {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.universal-mantra-card {
+  padding: 12px 14px;
+  background: linear-gradient(135deg, var(--fill) 0%, #fff 100%);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--grey-mid);
+  transition: all 0.2s ease;
+}
+
+.universal-mantra-card:hover {
+  border-left-color: var(--ink);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.umc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.umc-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.umc-badges {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.umc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.umc-type {
+  color: #fff;
+}
+
+.umc-level {
+  background: transparent;
+}
+
+.umc-transliteration {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0 0 6px 0;
+  line-height: 1.4;
+}
+
+.umc-practice {
+  font-size: 0.82rem;
+  color: var(--text);
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.umc-source {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+  font-style: italic;
+}
+
+/* ─── Foundation Banner (Ganesha) — deep offblack card ═════ */
+
+.foundation-banner {
+  margin: 0 0 8px 0;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(255, 255, 255, 0.07) 0%, transparent 55%),
+    linear-gradient(135deg, #1A3E45 0%, #13343B 55%, #0F2A30 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 8px 24px rgba(19, 52, 59, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.foundation-banner:hover {
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow:
+    0 10px 30px rgba(19, 52, 59, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.foundation-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.foundation-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.foundation-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.foundation-text {
+  flex: 1;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #F7F2EA;
+  line-height: 1.35;
+}
+
+.foundation-sub {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 2px;
+}
+
+.foundation-chevron {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 0.72rem;
+}
+
+.foundation-detail {
+  padding: 2px 16px 14px 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.foundation-desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.86);
+  margin: 0 0 10px 0;
+  line-height: 1.55;
+}
+
+.foundation-mantras {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Mantras rendered inside the dark foundation card */
+.foundation-banner .compact-mantra {
+  background: rgba(255, 255, 255, 0.08);
+  border-left-color: rgba(255, 255, 255, 0.4);
+}
+
+.foundation-banner .cm-name {
+  color: #F7F2EA;
+}
+
+.foundation-banner .cm-translit,
+.foundation-banner .cm-practice {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.foundation-banner .cm-source {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* ─── Universal Suggestion — dark card, same family as the Ganesha banner */
+
+.universal-suggestion {
+  margin-bottom: 14px;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(255, 255, 255, 0.07) 0%, transparent 55%),
+    linear-gradient(135deg, #1A3E45 0%, #13343B 55%, #0F2A30 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #F7F2EA;
+  box-shadow:
+    0 8px 24px rgba(19, 52, 59, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.universal-suggestion:hover {
+  border-color: rgba(255, 255, 255, 0.26);
+  box-shadow:
+    0 10px 30px rgba(19, 52, 59, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.us-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.us-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.us-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+}
+
+.us-copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.us-heading {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.us-text {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #F7F2EA;
+  line-height: 1.4;
+}
+
+.us-chevron {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.us-detail {
+  padding: 2px 15px 14px 15px;
+  animation: fadeIn 0.2s ease;
+}
+
+.us-note {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.86);
+  margin: 0 0 8px 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.us-mantras {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Mantras rendered inside the dark universal card */
+.universal-suggestion .compact-mantra {
+  background: rgba(255, 255, 255, 0.08);
+  border-left-color: rgba(255, 255, 255, 0.4);
+}
+
+.universal-suggestion .cm-name {
+  color: #F7F2EA;
+}
+
+.universal-suggestion .cm-translit,
+.universal-suggestion .cm-practice {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.universal-suggestion .cm-source {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* ─── Compact Mantra — minimal, calm ═══════════════════════ */
+
+.compact-mantra {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  background: var(--fill);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--border-strong);
+}
+
+.cm-icon {
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+}
+
+.cm-name {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+.cm-translit {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.cm-practice {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.cm-source {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* ─── Mantra Cards ─────────────────────────────────────────── */
+
+.mantra-card {
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: var(--fill);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--border-strong);
+}
+
+.mantra-card:last-child {
+  margin-bottom: 0;
+}
+
+.mantra-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.mantra-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.mantra-badges {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.mantra-type-badge,
+.mantra-level-badge {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.mantra-type-badge {
+  background: var(--tint-strong);
+  color: var(--ink);
+  border: 1px solid var(--border-light);
+}
+
+.mantra-level-badge {
+  background: var(--fill);
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+
+.mantra-translit {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 4px 0;
+  padding: 4px 8px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 4px;
+}
+
+.mantra-practice {
+  font-size: 0.82rem;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+.mantra-ref {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.affliction-reasons {
+  color: var(--text-muted);
+  font-size: 12px;
+  flex: 1;
+}
+
+/* ─── Remedy Category ───────────────────────────────────────── */
+
+.remedy-category {
+  margin-bottom: 20px;
+}
+
+.remedy-category:last-child {
+  margin-bottom: 0;
+}
+
+.remedy-category-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--tint);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  border: 1px solid var(--border-light);
+  border-bottom: none;
+}
+
+.remedy-cat-icon {
+  font-size: 18px;
+}
+
+.remedy-cat-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  flex: 1;
+}
+
+.fallback-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--grey-mid);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.remedy-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 12px 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  text-align: center;
+}
+
+/* ─── Remedy Card ───────────────────────────────────────────── */
+
+.remedy-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-top: none;
+  padding: 14px;
+}
+
+.remedy-card:last-child {
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.remedy-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.remedy-graha {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.remedy-severity {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.remedy-severity.severity-severe { background: var(--chip-strong-bg); color: var(--chip-strong); }
+.remedy-severity.severity-moderate { background: var(--chip-mid-bg); color: var(--chip-mid); }
+.remedy-severity.severity-mild { background: var(--chip-soft-bg); color: var(--chip-soft); }
+
+.remedy-reasons {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+/* ─── Remedy Blocks ─────────────────────────────────────────── */
+
+.remedy-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .remedy-sections { grid-template-columns: 1fr; }
+}
+
+.remedy-block {
+  background: var(--fill);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.remedy-block-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.remedy-list {
+  list-style: none;
+  padding: 0;
+}
+
+.remedy-item {
+  font-size: 12px;
+  color: var(--text);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-light);
+  line-height: 1.4;
+}
+
+.remedy-item:last-child {
+  border-bottom: none;
+}
+
+/* ─── Results Actions ───────────────────────────────────────── */
+
+.results-actions {
+  margin-top: 0;
+}
+
+/* ─── Section Title ─────────────────────────────────────────── */
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 8px 0 16px;
+}
+
+/* ─── Summary Section ───────────────────────────────────────── */
+
+.summary-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 480px) {
+  .summary-row { grid-template-columns: 1fr; }
+}
+
+.summary-item {
+  background: var(--tint);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.summary-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.doshas-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+.doshas-summary-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dosha-badge-active {
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--chip-strong-bg);
+  color: var(--chip-strong);
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+}
+
+.dosha-badge-clear {
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--chip-soft-bg);
+  color: var(--chip-soft);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+/* ─── Remedy Section (per category) ─────────────────────────── */
+
+.remedy-section {
+  margin-bottom: 20px;
+}
+
+.remedy-cat-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.remedy-cat-icon-lg {
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.remedy-cat-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0;
+}
+
+.fallback-tag {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--tint-strong);
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-top: 4px;
+}
+
+.remedy-empty-msg {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 16px;
+  text-align: center;
+}
+
+/* ─── Remedy Card Full ──────────────────────────────────────── */
+
+.remedy-card-full {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+
+.remedy-card-full:last-child {
+  margin-bottom: 0;
+}
+
+.rc-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.rc-graha {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.rc-severity {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+
+
+
+.rc-context {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.rc-explanation {
+  display: flex;
+  gap: 10px;
+  background: var(--tint);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--border-strong);
+}
+
+.rc-expl-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  line-height: 1.4;
+}
+
+.rc-explanation p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Remedy Blocks ─────────────────────────────────────────── */
+
+.rc-block {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.rc-block:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.rc-block-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.rc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rc-list-item {
+  font-size: 13px;
+  color: var(--text);
+  padding: 5px 0 5px 16px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.rc-list-item::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.rc-translit {
+  margin-top: 8px;
+  background: var(--fill-deep);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rc-translit-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.rc-translit-text {
+  font-size: 14px;
+  color: var(--ink);
+  font-family: var(--mono);
+  line-height: 1.6;
+}
+
+/* ─── Numbered Puja Steps ───────────────────────────────────── */
+
+.rc-steps {
+  padding-left: 0;
+  margin: 0;
+  counter-reset: puja-step;
+  list-style: none;
+}
+
+.rc-step {
+  counter-increment: puja-step;
+  position: relative;
+  padding: 8px 12px 8px 40px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  background: var(--fill);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  border: 1px solid var(--border-light);
+}
+
+.rc-step:last-child {
+  margin-bottom: 0;
+}
+
+.rc-step::before {
+  content: counter(puja-step);
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 22px;
+  height: 22px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Deity ─────────────────────────────────────────────────── */
+
+.rc-deity-desc {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.rc-deity {
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 600;
+  margin: 0 0 6px;
+  padding: 6px 10px;
+  background: var(--tint-strong);
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Nearby Temples ─────────────────────────────────────────── */
+
+.nearby-temples {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+.nearby-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+
+.nearby-temple-card {
+  background: var(--tint);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.nearby-temple-card:last-child {
+  margin-bottom: 0;
+}
+
+.nt-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  flex: 1;
+  min-width: 120px;
+}
+
+.nt-location {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.nt-distance {
+  font-size: 11px;
+  color: var(--ink);
+  font-weight: 600;
+  background: var(--fill);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.nt-famous {
+  font-size: 11px;
+  color: var(--grey-mid);
+  font-weight: 600;
+}
+
+.nearby-fallback {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: var(--fill-deep);
+  border-radius: var(--radius-sm);
+  line-height: 1.5;
+}
+
+/* ─── Disclaimer ────────────────────────────────────────────── */
+
+.disclaimer {
+  background: var(--fill-deep);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  margin-top: 8px;
+}
+
+.disclaimer p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.disclaimer strong {
+  color: var(--ink);
+}
+
+
+/* ─── Accordion ─────────────────────────────────────────────── */
+
+.accordion {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.accordion-open {
+  border-color: var(--ink);
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  color: var(--ink);
+  transition: background 0.15s;
+}
+
+.accordion-header:hover {
+  background: var(--tint);
+}
+
+.accordion-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.accordion-title {
+  flex: 1;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.accordion-chevron {
+  color: var(--text-muted);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.accordion-body {
+  padding: 4px 20px 20px;
+  border-top: 1px solid var(--border-light);
+  animation: accordion-in 0.2s ease-out;
+}
+
+@keyframes accordion-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Videsh Yoga Box ───────────────────────────────────────── */
+
+.videsh-yoga-box {
+  background: var(--tint);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-top: 4px;
+}
+
+.videsh-explanation {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+.videsh-indicators {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+}
+
+.videsh-indicator {
+  font-size: 13px;
+  color: var(--ink);
+  padding: 6px 0 6px 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.videsh-indicator::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.videsh-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* ─── Google Maps Link — turquoise action CTA ─────────────── */
+
+.google-maps-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 11px 16px;
+  background: var(--turquoise-bg);
+  color: var(--turquoise-dark);
+  border: 1px solid var(--turquoise-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.google-maps-link:hover {
+  background: var(--turquoise-hover);
+  transform: translateY(-1px);
+}
+
+/* ─── Field Optional ────────────────────────────────────────── */
+
+.field-optional {
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* ─── Full Birth Chart — credibility table ──────────────────── */
+
+.chart-credibility {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  background: var(--fill);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.planet-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.planet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 420px;
+}
+
+.planet-table th {
+  text-align: left;
+  padding: 8px 12px;
+  background: var(--fill);
+  color: var(--text-muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+}
+
+.planet-table td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text);
+}
+
+.planet-table tr:last-child td {
+  border-bottom: none;
+}
+
+.planet-table tbody tr:hover {
+  background: var(--fill);
+}
+
+.pt-planet {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.pt-retro {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--turquoise-dark);
+  background: var(--turquoise-bg);
+  border-radius: 4px;
+  padding: 1px 5px;
+  vertical-align: middle;
+}
+
+/* ─── Save Report Box ───────────────────────────────────────── */
+
+.save-report-box {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.srb-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.srb-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.srb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.srb-link-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.srb-link-input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  font-size: 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--fill);
+  color: var(--text);
+  outline: none;
+}
+
+.srb-message {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.srb-message.error {
+  background: var(--red-bg);
+  color: var(--red);
+}
+
+.srb-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.srb-user strong {
+  color: var(--ink);
+}
+
+.srb-user button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--turquoise-dark);
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.srb-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.srb-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.srb-form-row label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.srb-toggle-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  color: var(--turquoise-dark);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.srb-my-reports {
+  margin-top: 14px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 10px;
+}
+
+.srb-my-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+.srb-report-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+}
+
+.srb-report-item:last-child {
+  border-bottom: none;
+}
+
+.srb-report-item a {
+  flex: 1;
+  min-width: 0;
+  color: var(--turquoise-dark);
+  font-weight: 600;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.srb-report-item a:hover {
+  text-decoration: underline;
+}
+
+.srb-report-date {
+  font-size: 11px;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+.btn-turquoise {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(19, 52, 59, 0.24);
+}
+
+.btn-turquoise:hover:not(:disabled) {
+  background: var(--ink-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--border);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--fill);
+  border-color: var(--border-strong);
+  color: var(--ink);
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+/* ─── Print styles ──────────────────────────────────────────── */
+
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .wizard {
+    max-width: none;
+    padding: 0;
+  }
+
+  .wizard-steps,
+  .step-nav,
+  .results-actions,
+  .save-report-box,
+  .foundation-banner .foundation-chevron,
+  .us-chevron,
+  .accordion-chevron,
+  .accordion-header {
+    display: none !important;
+  }
+
+  .results-section,
+  .accordion,
+  .remedy-card-full {
+    box-shadow: none;
+    border-color: #ddd;
+    break-inside: avoid;
+  }
+
+  a {
+    color: #13343B !important;
+    text-decoration: none !important;
+  }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ─── Icon system (lucide + hand-drawn) — alignment & accents ───────── */
+
+.wizard-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+
+.wizard-logo svg {
+  display: block;
+}
+
+.foundation-banner {
+  color: #F7F2EA;
+}
+
+.foundation-icon,
+.foundation-chevron {
+  color: #fff;
+}
+
+.foundation-icon svg,
+.us-icon svg,
+.accordion-icon svg,
+.category-icon svg {
+  display: block;
+}
+
+.om-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-family: "Noto Sans Devanagari", "Nirmala UI", "Mangal", "Kokila",
+    "Sanskrit Text", "Segoe UI", sans-serif;
+}
+
+/* Inline icon spacing inside labels and paragraphs */
+.lbl-ic {
+  vertical-align: -3px;
+  margin-right: 6px;
+  color: var(--text-muted);
+}
+
+.field-label .om-mark {
+  vertical-align: -2px;
+  margin-right: 6px;
+  color: var(--text-muted);
+}
+
+.sug-ic {
+  flex-shrink: 0;
+  vertical-align: -2px;
+  margin-right: 6px;
+  color: var(--text-muted);
+}
+
+.fe-ic {
+  vertical-align: -3px;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+
+/* Icon rows inside flex layouts */
+.category-icon svg {
+  margin: 0 auto;
+}
+
+.dosha-badge-active,
+.dosha-badge-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  vertical-align: middle;
+}
+
+.kul-devta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rc-block-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.rc-factor-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.rc-factor-item svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--turquoise-dark);
+}
+
+.rc-expl-icon,
+.health-disclaimer-icon {
+  display: inline-flex;
+}
+
+.mantra-practice,
+.mantra-ref {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.mantra-practice svg,
+.mantra-ref svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--text-muted);
+}
+
+.google-maps-link svg,
+.chart-credibility svg,
+.btn svg,
+.srb-heading svg,
+.srb-my-title svg {
+  flex-shrink: 0;
+}
+
+.srb-heading,
+.srb-my-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.cm-icon {
+  display: flex;
+  align-items: center;
+}
+
+/* Deity pill inside the Temple Visit block */
+.rc-deity strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}

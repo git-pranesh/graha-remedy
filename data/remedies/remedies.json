@@ -1,0 +1,461 @@
+{
+  "sun": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Suryaya Namaha",
+        "transliteration": "Om Soo-rya-ya Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days during sunrise",
+        "level": "beginner"
+      },
+      {
+        "type": "stotram",
+        "name": "Aditya Hridayam",
+        "reference": "Valmiki Ramayana, Yuddha Kanda 6.105",
+        "practice": "Recite every Sunday morning",
+        "level": "intermediate"
+      },
+      {
+        "type": "namaha",
+        "name": "Surya Gayatri Mantra",
+        "transliteration": "Om Bhaaskaraaya Namaha | Om Jap Suryaya Sahasraanaam",
+        "practice": "Chant 108 times daily",
+        "level": "beginner"
+      }
+    ],
+    "fasting": [
+      "Fast on Sundays — eat only once after sunset",
+      "Eat wheat-based meals on Sunday (no rice)"
+    ],
+    "donations": [
+      "Donate wheat, jaggery, or copper items on Sundays",
+      "Give red cloth or masoor dal to the needy",
+      "Feed a cow with wheat chapati on Sundays"
+    ],
+    "pujaSteps": [
+      "Wake before sunrise on Sunday and bathe with clean water",
+      "Face the East direction and offer water to the rising Sun from a copper vessel",
+      "Add a pinch of red flower petals and a spoon of jaggery to the water",
+      "Chant 'Om Suryaya Namaha' 108 times while offering",
+      "Light a mustard oil lamp with a cotton wick facing the Sun",
+      "Offer red flowers and wheat grains to the Sun altar",
+      "Read or listen to the Aditya Hridayam Stotram",
+      "Distribute wheat or jaggery as prasad"
+    ],
+    "temples": [
+      "Visit a Surya Mandir (Sun Temple) — such as Konark or Modhera",
+      "Offer water mixed with red flowers to the Sun at sunrise",
+      "Perform Surya Namaskar daily at dawn"
+    ],
+    "deity": "Surya (Sun God)",
+    "deityDescription": "temples: Konark Sun Temple, Modhera Sun Temple"
+  },
+  "moon": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Chandraya Namaha",
+        "transliteration": "Om Chan-dra-ya Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days after moonrise",
+        "level": "beginner"
+      },
+      {
+        "type": "beej",
+        "name": "Chandra Beej Mantra",
+        "transliteration": "Om Shram Shreem Shraum Sah Chandraya Namaha",
+        "practice": "Chant 108 times on Mondays",
+        "level": "intermediate"
+      },
+      {
+        "type": "stotram",
+        "name": "Durga Saptashati",
+        "reference": "Markandeya Purana",
+        "practice": "Recite on Mondays, especially during Moon Mahadasha",
+        "level": "advanced"
+      }
+    ],
+    "fasting": [
+      "Fast on Mondays — eat only after moonrise",
+      "Consume only milk-based foods on Mondays"
+    ],
+    "donations": [
+      "Donate white rice, milk, or white cloth on Mondays",
+      "Give silver items or pearls to a girl or woman",
+      "Feed kheer (rice pudding) to elderly women"
+    ],
+    "pujaSteps": [
+      "Bathe and wear clean white clothes on Monday evening",
+      "Set up a small altar with a Shiva Lingam or Moon image",
+      "Offer raw milk, white flowers, and bilva (bael) leaves to the Lingam",
+      "Light a ghee lamp with a white cotton wick",
+      "Chant 'Om Chandraya Namaha' 108 times or the Beej Mantra 108 times",
+      "Offer kheer (rice pudding) as naivedyam",
+      "Distribute kheer or white sweets as prasad",
+      "Sleep facing the East or South-East"
+    ],
+    "temples": [
+      "Visit Shiva temples on Mondays",
+      "Offer white flowers and milk to Shiva Lingam",
+      "Perform Jal Abhishekam (water offering) at the temple"
+    ],
+    "deity": "Chandra (Moon God)",
+    "deityDescription": "worship via Lord Shiva temples on Mondays"
+  },
+  "mars": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Mangalaya Namaha",
+        "transliteration": "Om Man-ga-la-ya Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days",
+        "level": "beginner"
+      },
+      {
+        "type": "beej",
+        "name": "Mangal Beej Mantra",
+        "transliteration": "Om Kraam Kreem Kraum Sah Bhaumaya Namaha",
+        "practice": "Chant 108 times on Tuesdays",
+        "level": "intermediate"
+      },
+      {
+        "type": "stotram",
+        "name": "Hanuman Chalisa",
+        "reference": "Tulsidas, Ramcharitmanas",
+        "practice": "Recite daily, especially on Tuesdays",
+        "level": "beginner"
+      }
+    ],
+    "fasting": [
+      "Fast on Tuesdays — eat only one full meal after sunset",
+      "Eat only jaggery-based sweets on Tuesday evenings"
+    ],
+    "donations": [
+      "Donate red lentils (masoor dal), copper, or red cloth on Tuesdays",
+      "Give sweets to younger brothers or male friends",
+      "Feed monkeys bananas or jaggery"
+    ],
+    "pujaSteps": [
+      "Wear clean red or orange clothes on Tuesday",
+      "Visit a Hanuman temple or set up a small Hanuman image at home",
+      "Apply sindoor (vermillion) to the Hanuman idol",
+      "Offer red flowers, jaggery, and red masoor dal",
+      "Light a mustard oil lamp in front of Hanuman",
+      "Chant 'Hanuman Chalisa' 7 times or 'Om Mangalaya Namaha' 108 times",
+      "Read the Sunderkand path",
+      "Distribute sweets or laddoo as prasad"
+    ],
+    "temples": [
+      "Visit Hanuman temples every Tuesday",
+      "Apply sindoor (vermillion) to Hanuman idol",
+      "Offer red flowers and sweets to Hanuman"
+    ],
+    "deity": "Mangal (Mars)",
+    "deityDescription": "worship via Hanuman temples on Tuesdays"
+  },
+  "mercury": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Budhaya Namaha",
+        "transliteration": "Om Bu-dha-ya Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days",
+        "level": "beginner"
+      },
+      {
+        "type": "beej",
+        "name": "Budh Beej Mantra",
+        "transliteration": "Om Bram Breem Braum Sah Budhaya Namaha",
+        "practice": "Chant 108 times on Wednesdays",
+        "level": "intermediate"
+      },
+      {
+        "type": "stotram",
+        "name": "Vishnu Sahasranamam",
+        "reference": "Mahabharata, Anushasana Parva",
+        "practice": "Recite on Wednesdays",
+        "level": "advanced"
+      }
+    ],
+    "fasting": [
+      "Fast on Wednesdays — eat green vegetables only",
+      "Consume green moong dal khichdi as the only meal"
+    ],
+    "donations": [
+      "Donate green gram (moong), green cloth, or books on Wednesdays",
+      "Give green-colored sweets or fruits",
+      "Donate to schools or educational institutions"
+    ],
+    "pujaSteps": [
+      "Wear green or light green clothes on Wednesday",
+      "Set up a small Vishnu or Krishna image at home",
+      "Offer green moong dal, green cloth, and fresh green leaves",
+      "Light a ghee lamp with a green cotton wick",
+      "Chant 'Om Budhaya Namaha' 108 times",
+      "Offer green sweets (like pista barfi) as naivedyam",
+      "Read Vishnu Sahasranamam or a chapter from the Bhagavad Gita",
+      "Donate books or educational items to students"
+    ],
+    "temples": [
+      "Visit Vishnu temples on Wednesdays",
+      "Offer green moong dal or green sweets to the deity",
+      "Recite Vishnu Sahasranamam at the temple"
+    ],
+    "deity": "Budh (Mercury)",
+    "deityDescription": "worship via Lord Vishnu temples on Wednesdays"
+  },
+  "jupiter": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Brihaspataye Namaha",
+        "transliteration": "Om Bri-ha-spa-ta-ye Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days",
+        "level": "beginner"
+      },
+      {
+        "type": "beej",
+        "name": "Guru Beej Mantra",
+        "transliteration": "Om Gram Greem Graum Sah Gurave Namaha",
+        "practice": "Chant 108 times on Thursdays",
+        "level": "intermediate"
+      },
+      {
+        "type": "stotram",
+        "name": "Narayana Stotram",
+        "reference": "Vedic tradition",
+        "practice": "Recite on Thursdays",
+        "level": "intermediate"
+      }
+    ],
+    "fasting": [
+      "Fast on Thursdays — eat yellow moong dal or chana dal khichdi",
+      "Consume only yellow-colored foods on Thursday"
+    ],
+    "donations": [
+      "Donate yellow cloth, turmeric, chana dal, or gold on Thursdays",
+      "Give yellow sweets (laddoo) to a priest or teacher",
+      "Donate books or educational material to a temple or library"
+    ],
+    "pujaSteps": [
+      "Wear clean yellow clothes on Thursday",
+      "Set up a Guru or Vishnu image with yellow cloth underneath",
+      "Offer yellow flowers, turmeric, chana dal, and banana",
+      "Light a ghee lamp with a yellow cotton wick",
+      "Chant 'Om Brihaspataye Namaha' 108 times or the Beej Mantra",
+      "Offer yellow kheer or laddoo as naivedyam",
+      "Read a chapter from the Vishnu Purana or Bhagavad Gita",
+      "Donate yellow items or books to a Brahmin or teacher"
+    ],
+    "temples": [
+      "Visit Vishnu or Devi temples on Thursdays",
+      "Offer yellow flowers and banana to the deity",
+      "Donate to a Brahmin family on Thursday"
+    ],
+    "deity": "Brihaspati (Jupiter)",
+    "deityDescription": "worship via Lord Vishnu or Devi temples on Thursdays"
+  },
+  "venus": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Shukraya Namaha",
+        "transliteration": "Om Shuk-ra-ya Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days",
+        "level": "beginner"
+      },
+      {
+        "type": "beej",
+        "name": "Shukra Beej Mantra",
+        "transliteration": "Om Draam Dreem Draum Sah Shukraya Namaha",
+        "practice": "Chant 108 times on Fridays",
+        "level": "intermediate"
+      },
+      {
+        "type": "stotram",
+        "name": "Lakshmi Stotram",
+        "reference": "Vedic tradition",
+        "practice": "Recite on Fridays",
+        "level": "intermediate"
+      }
+    ],
+    "fasting": [
+      "Fast on Fridays — eat only one meal of sweet food",
+      "Consume white sweets (like kheer) after sunset on Friday"
+    ],
+    "donations": [
+      "Donate white sweets, curd, white cloth, or silver on Fridays",
+      "Give perfume, sugar, or ghee to women",
+      "Donate to artists or the arts community"
+    ],
+    "pujaSteps": [
+      "Wear clean white clothes on Friday evening",
+      "Set up a Lakshmi image or Shiva-Parvati image with white flowers",
+      "Offer white flowers, curd, kheer, and sugar",
+      "Light a ghee lamp with a white cotton wick",
+      "Chant 'Om Shukraya Namaha' 108 times or the Beej Mantra",
+      "Recite the Lakshmi Stotram or Kanakadhara Stotram",
+      "Offer white sweets (kheer or payasam) as naivedyam",
+      "Donate white items, perfume, or sweets to women in need"
+    ],
+    "temples": [
+      "Visit Lakshmi temples on Fridays",
+      "Offer white flowers and kheer to the goddess",
+      "Light a ghee diya (lamp) at the temple"
+    ],
+    "deity": "Shukra (Venus)",
+    "deityDescription": "worship via Goddess Lakshmi temples on Fridays"
+  },
+  "saturn": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Shanaishcharaya Namaha",
+        "transliteration": "Om Sha-nai-sh-cha-ra-ya Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days",
+        "level": "beginner"
+      },
+      {
+        "type": "beej",
+        "name": "Shani Beej Mantra",
+        "transliteration": "Om Praam Preem Praum Sah Shanaischaraya Namaha",
+        "practice": "Chant 108 times on Saturdays",
+        "level": "intermediate"
+      },
+      {
+        "type": "stotram",
+        "name": "Shani Stotram / Navagraha Stotram",
+        "reference": "Brahmanda Purana",
+        "practice": "Recite on Saturdays",
+        "level": "intermediate"
+      }
+    ],
+    "fasting": [
+      "Fast on Saturdays — eat only one meal after sunset",
+      "Eat black sesame (til) based food on Saturday"
+    ],
+    "donations": [
+      "Donate black cloth, black sesame, iron items, or mustard oil on Saturdays",
+      "Give food (especially rice and urad dal) to the elderly or disabled",
+      "Feed crows with rice mixed with black sesame"
+    ],
+    "pujaSteps": [
+      "Wear clean black or dark blue clothes on Saturday",
+      "Set up a Shani image or Peepal tree altar",
+      "Pour mustard oil on a Shani idol or under a Peepal tree",
+      "Offer black sesame seeds, black urad dal, and iron items",
+      "Light a sesame oil lamp under a Peepal tree",
+      "Chant 'Om Shanaishcharaya Namaha' 108 times or the Beej Mantra",
+      "Read the Shani Stotram or Navagraha Stotram",
+      "Give food, black cloth, or iron items to the needy"
+    ],
+    "temples": [
+      "Visit Shani temples on Saturdays",
+      "Pour mustard oil on a Shani idol",
+      "Light a sesame oil lamp under a Peepal tree"
+    ],
+    "deity": "Shani (Saturn)",
+    "deityDescription": "worship at Shani temples on Saturdays, or under a Peepal tree"
+  },
+  "rahu": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Rahave Namaha",
+        "transliteration": "Om Ra-ha-ve Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days",
+        "level": "beginner"
+      },
+      {
+        "type": "beej",
+        "name": "Rahu Beej Mantra",
+        "transliteration": "Om Bhram Bhreem Bhraum Sah Rahave Namaha",
+        "practice": "Chant 108 times on Saturdays",
+        "level": "intermediate"
+      },
+      {
+        "type": "stotram",
+        "name": "Durga Kavach",
+        "reference": "Markandeya Purana",
+        "practice": "Recite on Saturdays",
+        "level": "intermediate"
+      }
+    ],
+    "fasting": [
+      "Fast on Saturdays — eat only after sunset",
+      "Eat only coconut-based foods on the day of the fast"
+    ],
+    "donations": [
+      "Donate blue cloth, coconut, or mustard oil",
+      "Give blankets or bedsheets to the homeless",
+      "Donate to anti-addiction or rehabilitation organizations"
+    ],
+    "pujaSteps": [
+      "Wear clean dark blue or grey clothes",
+      "Set up a Durga or Rahu image with blue cloth underneath",
+      "Offer blue flowers, coconut, mustard oil, and blue sweets",
+      "Light a mustard oil lamp with a blue cotton wick",
+      "Chant 'Om Rahave Namaha' 108 times or the Beej Mantra",
+      "Recite the Durga Kavach or Durga Saptashati",
+      "Offer coconut and blue sweets as naivedyam",
+      "Donate blue cloth, blankets, or coconut to the needy"
+    ],
+    "temples": [
+      "Visit a Durga temple on Saturdays",
+      "Offer blue flowers and sweets to the goddess",
+      "Perform Rahu Kalam prayers at home"
+    ],
+    "deity": "Rahu",
+    "deityDescription": "worship via Goddess Durga temples on Saturdays"
+  },
+  "ketu": {
+    "mantras": [
+      {
+        "type": "namaha",
+        "name": "Om Ketave Namaha",
+        "transliteration": "Om Ke-ta-ve Na-ma-ha",
+        "practice": "Chant 108 times daily for 40 consecutive days",
+        "level": "beginner"
+      },
+      {
+        "type": "beej",
+        "name": "Ketu Beej Mantra",
+        "transliteration": "Om Sram Sreem Sraum Sah Ketave Namaha",
+        "practice": "Chant 108 times on Tuesdays",
+        "level": "intermediate"
+      },
+      {
+        "type": "stotram",
+        "name": "Ganesha Atharvashirsha",
+        "reference": "Atharva Veda",
+        "practice": "Recite on Tuesdays",
+        "level": "advanced"
+      }
+    ],
+    "fasting": [
+      "Fast on Tuesdays — eat only khichdi (rice + moong dal)",
+      "Eat only vegetarian, sattvic food on the fast day"
+    ],
+    "donations": [
+      "Donate grey cloth, sesame, or blankets",
+      "Give food to dogs or stray animals",
+      "Donate to spiritual or ashram organizations"
+    ],
+    "pujaSteps": [
+      "Wear clean grey or brown clothes on Tuesday",
+      "Set up a Ganesha image or Ketu image with grey cloth",
+      "Offer durva grass, modak, and grey sesame seeds",
+      "Light a ghee lamp with a grey cotton wick",
+      "Chant 'Om Ketave Namaha' 108 times or the Beej Mantra",
+      "Recite the Ganesha Atharvashirsha or Ganapati Stotram",
+      "Offer modak or laddoo as naivedyam",
+      "Feed dogs or stray animals with food"
+    ],
+    "temples": [
+      "Visit Ganesha temples on Tuesdays",
+      "Offer durva grass and modak to Ganesha",
+      "Meditate at a temple dedicated to ancestors (Pitru)"
+    ],
+    "deity": "Ketu",
+    "deityDescription": "worship via Lord Ganesha temples on Tuesdays"
+  }
+}

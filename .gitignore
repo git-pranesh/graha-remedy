@@ -1,0 +1,32 @@
+# dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# build artifacts
+dist/
+backend/dist/
+frontend/dist/
+
+# environment / secrets
+.env
+.env.local
+backend/.env
+
+# editor / os / cache
+.DS_Store
+**/.DS_Store
+*.log
+
+# freebuff runtime
+.freebuff/*.pid
+.freebuff/*.log
+.freebuff/launch-backend.sh
+.freebuff/start-backend.sh
+
+# json-store runtime data (user accounts / saved reports)
+data/users.json
+data/reports.json
+
+# chart cache
+backend/cache/

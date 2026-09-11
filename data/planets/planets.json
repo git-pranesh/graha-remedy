@@ -1,0 +1,164 @@
+{
+  "sun": {
+    "id": "sun",
+    "name": "Surya",
+    "sanskrit": "सूर्य",
+    "element": "Fire",
+    "nature": "Soul / Self",
+    "day": "Sunday",
+    "color": "Red / Orange",
+    "gemstone": "Ruby",
+    "bodyParts": ["Heart", "Right eye", "Bones", "Blood"],
+    "governs": [
+      "authority", "confidence", "father", "health", "vitality", "career"
+    ],
+    "weaknessCauses": [
+      "Low confidence", "Heart problems", "Eye issues",
+      "Struggles with authority", "Poor bone health"
+    ]
+  },
+  "moon": {
+    "id": "moon",
+    "name": "Chandra",
+    "sanskrit": "चन्द्र",
+    "element": "Water",
+    "nature": "Mind / Emotions",
+    "day": "Monday",
+    "color": "White / Silver",
+    "gemstone": "Pearl",
+    "bodyParts": ["Mind", "Left eye", "Lungs", "Stomach", "Breasts"],
+    "governs": [
+      "emotions", "mother", "mind", "nurturing", "travel", "home"
+    ],
+    "weaknessCauses": [
+      "Mental instability", "Emotional volatility", "Stomach issues",
+      "Relationship with mother", "Anxiety", "Insomnia"
+    ]
+  },
+  "mars": {
+    "id": "mars",
+    "name": "Mangal",
+    "sanskrit": "मंगल",
+    "element": "Fire",
+    "nature": "Energy / Courage",
+    "day": "Tuesday",
+    "color": "Red",
+    "gemstone": "Red Coral",
+    "bodyParts": ["Muscles", "Blood", "Bone marrow", "Head"],
+    "governs": [
+      "courage", "siblings", "property", "conflict", "strength"
+    ],
+    "weaknessCauses": [
+      "Anger issues", "Surgery", "Accidents", "Property disputes",
+      "Sibling conflicts", "Low energy"
+    ]
+  },
+  "mercury": {
+    "id": "mercury",
+    "name": "Budh",
+    "sanskrit": "बुध",
+    "element": "Earth",
+    "nature": "Intellect / Communication",
+    "day": "Wednesday",
+    "color": "Green",
+    "gemstone": "Emerald",
+    "bodyParts": ["Skin", "Nervous system", "Tongue", "Lungs"],
+    "governs": [
+      "intelligence", "communication", "business", "education", "speech"
+    ],
+    "weaknessCauses": [
+      "Communication problems", "Learning difficulties", "Skin disorders",
+      "Nervous conditions", "Business losses", "Speech impediments"
+    ]
+  },
+  "jupiter": {
+    "id": "jupiter",
+    "name": "Brihaspati",
+    "sanskrit": "बृहस्पति",
+    "element": "Ether / Space",
+    "nature": "Wisdom / Expansion",
+    "day": "Thursday",
+    "color": "Yellow",
+    "gemstone": "Yellow Sapphire",
+    "bodyParts": ["Liver", "Fat", "Thighs", "Right ear"],
+    "governs": [
+      "wisdom", "children", "fortune", "spirituality", "marriage", "wealth"
+    ],
+    "weaknessCauses": [
+      "Bad luck", "Spiritual obstacles", "Child-related issues",
+      "Weight problems", "Liver issues", "Marriage delays"
+    ]
+  },
+  "venus": {
+    "id": "venus",
+    "name": "Shukra",
+    "sanskrit": "शुक्र",
+    "element": "Water",
+    "nature": "Love / Beauty",
+    "day": "Friday",
+    "color": "White",
+    "gemstone": "Diamond",
+    "bodyParts": ["Reproductive organs", "Kidneys", "Face"],
+    "governs": [
+      "love", "marriage", "art", "luxury", "beauty", "relationships"
+    ],
+    "weaknessCauses": [
+      "Relationship problems", "Lack of luxury", "Artistic blocks",
+      "Reproductive health issues", "Divorce", "Financial losses"
+    ]
+  },
+  "saturn": {
+    "id": "saturn",
+    "name": "Shani",
+    "sanskrit": "शनि",
+    "element": "Air",
+    "nature": "Discipline / Karma",
+    "day": "Saturday",
+    "color": "Blue / Black",
+    "gemstone": "Blue Sapphire",
+    "bodyParts": ["Bones", "Teeth", "Hair", "Left eye", "Nails"],
+    "governs": [
+      "discipline", "longevity", "justice", "service", "sorrow", "delay"
+    ],
+    "weaknessCauses": [
+      "Delays in everything", "Depression", "Bone/joint problems",
+      "Hair loss", "Chronic illness", "Legal issues", "Servant problems"
+    ]
+  },
+  "rahu": {
+    "id": "rahu",
+    "name": "Rahu",
+    "sanskrit": "राहु",
+    "element": "Air",
+    "nature": "Shadow / Illusion",
+    "day": "N/A (observes Saturday)",
+    "color": "Dark Blue / Grey",
+    "gemstone": "Hessonite Garnet",
+    "bodyParts": ["Brain", "Entire body during illness"],
+    "governs": [
+      "obsession", "foreign lands", "technology", "illusion", "sudden events"
+    ],
+    "weaknessCauses": [
+      "Mental confusion", "Addictions", "Foreign settlement problems",
+      "Sudden misfortunes", "Phobias", "Unexplained fears"
+    ]
+  },
+  "ketu": {
+    "id": "ketu",
+    "name": "Ketu",
+    "sanskrit": "केतु",
+    "element": "Earth",
+    "nature": "Spiritual liberation / Detachment",
+    "day": "N/A (observes Tuesday)",
+    "color": "Grey / Smoky",
+    "gemstone": "Cat's Eye",
+    "bodyParts": ["Head", "Stomach (during illness)"],
+    "governs": [
+      "spirituality", "moksha", "detachment", "occult", "past life karma"
+    ],
+    "weaknessCauses": [
+      "Spiritual confusion", "Isolation", "Allergies",
+      "Psychological issues", "Stubbornness", "Feeling lost"
+    ]
+  }
+}
