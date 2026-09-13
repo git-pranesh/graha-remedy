@@ -1,0 +1,16 @@
+keyword_a,keyword_b,domain_jaccard,shared_intent_signal
+career astrology,job astrology,0.636,strong_consolidate
+career astrology,career astrology calculator,0.286,moderate_review
+career astrology calculator,job astrology calculator,1.000,strong_consolidate
+career astrology,astrology remedies for career,0.000,low_separate_possible
+career astrology,career delay astrology,0.063,low_separate_possible
+foreign settlement astrology,foreign travel astrology calculator,0.125,low_separate_possible
+foreign settlement astrology,abroad settlement astrology,0.700,strong_consolidate
+foreign travel astrology calculator,videsh yoga calculator,0.214,moderate_review
+rahu mantra,rahu beej mantra,0.571,strong_consolidate
+rahu mantra,rahu gayatri mantra,0.375,moderate_review
+rahu mantra,rahu mantra jaap,0.500,strong_consolidate
+shani mantra,shani beej mantra,0.222,moderate_review
+surya mantra,surya beej mantra,0.375,moderate_review
+mantra for shukra,shukra beej mantra,0.182,low_separate_possible
+budh mantra,budh beej mantra,0.375,moderate_review

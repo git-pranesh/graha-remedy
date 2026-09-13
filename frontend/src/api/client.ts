@@ -8,7 +8,7 @@ import type {
   UniversalRemedies,
 } from "../types";
 
-const API_BASE = "http://localhost:3001";
+const API_BASE = "";
 
 /* Small wrapper: JSON + cookies (needed for the auth cookie). */
 async function api<T>(path: string, options: RequestInit = {}): Promise<T> {

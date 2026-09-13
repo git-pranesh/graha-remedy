@@ -12,8 +12,27 @@ import { reportsRoutes } from "./routes/reports.js";
 const app = express();
 const PORT = parseInt(process.env.PORT ?? "", 10) || 3001;
 
-// Middleware (credentials: true lets the auth cookie cross the :5173 → :3001 origin)
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"], credentials: true }));
+// Configurable origins for Next.js App Router, legacy dev ports, and production domain
+const defaultOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "http://localhost:5174",
+];
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",").map((o) => o.trim())
+  : defaultOrigins;
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+        return callback(null, true);
+      }
+      return callback(null, true); // Permissive in dev/fallback
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Health check

@@ -1,0 +1,16 @@
+priority,primary_keyword,secondary_keywords,page_type,recommended_slug,india_volume,keyword_difficulty,intent,recommendation,rationale
+1,shani mantra,shani ka beej mantra | shani beej mantra in english | shani grah mantra,mantra,/mantras/shani-mantra,49500,0,informational,publish,Highest relevant demand; mixed Hindi publishers and video results
+2,rahu mantra,beej mantra for rahu | rahu ka mantra | rahu gayatri mantra | rahu mantra jaap,mantra,/mantras/rahu-mantra,33100,0,informational,publish,High demand with weak and mixed-format organic competitors
+3,surya mantra,surya graha mantra | surya navagraha mantra | surya graha beej mantra,mantra,/mantras/surya-mantra,33100,0,informational,publish,High demand; text page should complement video-heavy results
+4,mantra for shukra,shukra beej mantra | shukra graha mantra | mantra for venus,mantra,/mantras/shukra-mantra,12100,0,informational,publish,Strong demand and clear devotional intent
+5,budh mantra,budh beej mantra | budh grah mantra | budh mantra in english,mantra,/mantras/budh-mantra,9900,0,informational,publish,Strong demand and low measured difficulty
+6,brihaspati mantra,guru graha mantra | jupiter mantra | jupiter beej mantra,mantra,/mantras/brihaspati-mantra,9900,0,informational,publish,Strong demand with multiple natural name variants
+7,chandra mantra,moon beej mantra | chandra graha mantra,mantra,/mantras/chandra-mantra,8100,0,informational,publish,Strong demand with clear Moon mantra intent
+8,ketu mantra,ketu beej mantra | ketu mantra in english | ketu mantra jaap,mantra,/mantras/ketu-mantra,8100,0,informational,publish,Strong demand with mixed weak publishers and social results
+9,mangal mantra,mangal grah mantra | mangal jaap mantra | mangal dosha mantra,mantra,/mantras/mangal-mantra,4400,0,informational,publish,Good demand and direct match to existing Mars mantra data
+10,rahu remedies,rahu mahadasha remedies | rahu dasha remedies | best rahu remedy,planet_remedies,/remedies/rahu,4400,0,informational,publish,Strong remedy intent with forums and commercial pages in results
+11,ketu remedy,ketu dasha remedies | ketu mahadasha remedies | powerful ketu remedies,planet_remedies,/remedies/ketu,1900,0,informational,publish,Good remedy intent and weak mixed SERP
+12,vedic astrology remedies,graha remedies | navagraha remedies | planet mantras,hub,/vedic-astrology-remedies,1900,0,informational,publish,Core topical hub that supports every planet page
+13,mercury planet remedies,budh remedies | mercury remedies,planet_remedies,/remedies/mercury,720,0,informational,publish,Moderate demand and clear structured-data match
+14,moon remedies,chandra remedies | moon dasha remedies | moon mahadasha remedies,planet_remedies,/remedies/moon,590,0,informational,publish,Moderate demand with Reddit and Quora in the top results
+15,evil eye remedies,evil eye removal remedies | vedic rituals for evil eye protection,problem,/remedies/evil-eye,210,0,informational,test,Mixed intent but relevant to existing negative-energy problem mapping

@@ -1,0 +1,252 @@
+{
+  "foundation": {
+    "title": "Begin with Ganesha",
+    "description": "In the Vedic tradition, all spiritual practice begins by invoking Lord Ganesha, the Remover of Obstacles. This prepares the mind and heart to receive the blessings of any remedy that follows.",
+    "mantras": [
+      {
+        "type": "invocation",
+        "name": "Shuklam Baradharam Vishnum",
+        "transliteration": "Shuk-lam Ba-ra-dha-ram Vish-num Sha-shi-var-nam Cha-tur-bhu-jam Pra-san-na-va-da-nam Dhyayet Sar-vigh-no-pa-shan-ta-ye",
+        "practice": "Chant once before beginning any prayer or spiritual practice",
+        "level": "beginner",
+        "source": "Ganesh Stotra tradition"
+      },
+      {
+        "type": "mantra",
+        "name": "Vakratunda Mahakaya",
+        "transliteration": "Vak-ra-tun-da Ma-ha-ka-ya Su-rya-ko-ti Sa-ma-pra-bha Nir-vigh-nam Ku-ru Me De-va Sar-va-kaa-rye-shu Sar-va-da",
+        "practice": "Chant 108 times before beginning any new practice or endeavour",
+        "level": "beginner",
+        "source": "Vedic tradition"
+      },
+      {
+        "type": "beej",
+        "name": "Om Gam Ganapataye Namaha",
+        "transliteration": "Om Gam Ga-na-pa-ta-ye Na-ma-ha",
+        "practice": "Chant 108 times before any important activity",
+        "level": "beginner",
+        "source": "Ganesh Upanishad"
+      }
+    ]
+  },
+  "categories": {
+    "health": {
+      "title": "For Health & Well-being",
+      "note": "These mantras are universally recommended for health concerns across all Vedic traditions. They are spiritual practices and complement — never replace — medical care.",
+      "mantras": [
+        {
+          "type": "stotram",
+          "name": "Maha Mrityunjaya Mantra",
+          "transliteration": "Om Tryam-ba-kam Ya-ja-ma-he Su-gan-dhim Pushti-var-dha-nam Ur-va-ru-ka-mi-va Bandha-nan Mri-tyor-muk-shi-ya Maam-ri-taat",
+          "practice": "Chant 108 times daily, especially during illness or health concerns",
+          "level": "beginner",
+          "source": "Rigveda 7.59.12, Yajurveda Taittiriya Samhita 1.8.6"
+        },
+        {
+          "type": "mantra",
+          "name": "Dhanvantari Mantra",
+          "transliteration": "Om Namo Bha-ga-va-te Vasu-de-va-ya Dhan-van-ta-ra-ye A-mri-ta-ka-la-sha Ha-sta-ya Sar-va-ma-ya Vi-na-sha-na-ya Trai-lo-ka-ya Na-tha-ya Dhan-van-ta-ra-ye Na-ma-ha",
+          "practice": "Chant alongside medical treatment, never as a replacement",
+          "level": "beginner",
+          "source": "Ayurvedic tradition"
+        },
+        {
+          "type": "stotram",
+          "name": "Sudarshana Ashtakam",
+          "transliteration": "(8 verses dedicated to Lord Sudarshana — Vishnu's discus of protection)",
+          "practice": "Recite for protection from disease and enemies",
+          "level": "intermediate",
+          "source": "Ahirbudhnya Samhita (Pancharatra Agama)"
+        }
+      ]
+    },
+    "finance": {
+      "title": "For Wealth & Prosperity",
+      "note": "These mantras are traditionally prescribed for financial well-being and removal of debt. They invoke the blessings of Lakshmi, the goddess of prosperity.",
+      "mantras": [
+        {
+          "type": "stotram",
+          "name": "Sri Suktam",
+          "transliteration": "(15 verses from the Rigveda dedicated to Goddess Mahalakshmi)",
+          "practice": "Recite on Fridays, especially during Lakshmi Puja",
+          "level": "intermediate",
+          "source": "Rigveda, 5th Mandala"
+        },
+        {
+          "type": "mantra",
+          "name": "Mahalakshmi Mantra",
+          "transliteration": "Om Shreem Maha-lak-shmyai Na-ma-ha",
+          "practice": "Chant 108 times on Fridays",
+          "level": "beginner",
+          "source": "Lakshmi Purana"
+        },
+        {
+          "type": "mantra",
+          "name": "Om Namo Venkatesaya",
+          "transliteration": "Om Na-mo Ven-ka-te-sa-ya Kaa-mi-taar-tha Pra-dhaa-yi-ne Pra-na-tah Kle-sa Na-sa-ya Go-vin-da-aya Na-mo Na-ma-ha",
+          "practice": "Chant 108 times daily for wish fulfillment and prosperity",
+          "level": "beginner",
+          "source": "Sri Vaishnava / Pancharatra tradition"
+        },
+        {
+          "type": "stotram",
+          "name": "Kanakadhara Stotram",
+          "transliteration": "(21 verses composed by Adi Shankaracharya for attracting prosperity)",
+          "practice": "Recite on Fridays or during financial difficulty",
+          "level": "intermediate",
+          "source": "Attributed to Adi Shankaracharya"
+        }
+      ]
+    },
+    "career": {
+      "title": "For Career & Overcoming Obstacles",
+      "note": "These are universally prescribed for career delays, professional obstacles, and removing barriers to success.",
+      "mantras": [
+        {
+          "type": "stotram",
+          "name": "Hanuman Chalisa",
+          "transliteration": "(40 verses by Tulsidas dedicated to Lord Hanuman)",
+          "practice": "Recite daily, especially on Tuesdays and Saturdays",
+          "level": "beginner",
+          "source": "Tulsidas, Ramcharitmanas"
+        },
+        {
+          "type": "stotram",
+          "name": "Ganesh Atharvashirsha",
+          "transliteration": "(a sacred hymn revealing Ganesha as the supreme reality)",
+          "practice": "Recite for removing deep-rooted obstacles",
+          "level": "advanced",
+          "source": "Atharva Veda"
+        },
+        {
+          "type": "stotram",
+          "name": "Narasimha Kavacham",
+          "transliteration": "(divine armor of protection from Lord Narasimha)",
+          "practice": "Recite for protection from enemies and threats at work",
+          "level": "intermediate",
+          "source": "Brahmanda Purana"
+        }
+      ]
+    },
+    "relationships": {
+      "title": "For Relationships & Marriage",
+      "note": "These mantras are traditionally prescribed for relationship harmony, finding a suitable partner, and marital blessedness.",
+      "mantras": [
+        {
+          "type": "stotram",
+          "name": "Vishnu Sahasranamam",
+          "transliteration": "(the 1000 names of Lord Vishnu from the Mahabharata)",
+          "practice": "Recite for overall harmony and divine blessings",
+          "level": "advanced",
+          "source": "Mahabharata, Anushasana Parva"
+        },
+        {
+          "type": "stotram",
+          "name": "Sri Suktam",
+          "transliteration": "(15 verses from the Rigveda dedicated to Goddess Mahalakshmi)",
+          "practice": "Recite on Fridays for relationship harmony",
+          "level": "intermediate",
+          "source": "Rigveda, 5th Mandala"
+        },
+        {
+          "type": "mantra",
+          "name": "Katyayani Mantra",
+          "transliteration": "Om Ka-tya-ya-nyai Vi-dma-he Ka-n-ka-ta-ya Dhi-ma-hi Tha-n-no Da-rghi Pra-cho-dayaat",
+          "practice": "Chant 108 times daily for marriage-related wishes",
+          "level": "beginner",
+          "source": "Padma Purana"
+        }
+      ]
+    },
+    "mental_peace": {
+      "title": "For Mental Peace & Inner Calm",
+      "note": "These mantras are recommended for reducing anxiety, finding inner stillness, and cultivating spiritual clarity.",
+      "mantras": [
+        {
+          "type": "mantra",
+          "name": "Om Namah Shivaya",
+          "transliteration": "Om Na-mah Shi-va-ya",
+          "practice": "Chant 108 times daily during distress or before sleep",
+          "level": "beginner",
+          "source": "Yajurveda, Shiva Purana"
+        },
+        {
+          "type": "mantra",
+          "name": "Maha Mrityunjaya Mantra",
+          "transliteration": "Om Tryam-ba-kam Ya-ja-ma-he Su-gan-dhim Pushti-var-dha-nam Ur-va-ru-ka-mi-va Bandha-nan Mri-tyor-muk-shi-ya Maam-ri-taat",
+          "practice": "Chant 108 times daily for liberation from fear and anxiety",
+          "level": "beginner",
+          "source": "Rigveda 7.59.12"
+        },
+        {
+          "type": "mantra",
+          "name": "Gayatri Mantra",
+          "transliteration": "Om Bhur Bhu-vaḥ Su-vah Ta-tsa-vi-tur Va-reṇyam Bha-go-va-sy Dhi-ma-hi Dhi-yo Yo Naḥ Pra-cho-dayaat",
+          "practice": "Chant 108 times at dawn for wisdom and mental clarity",
+          "level": "beginner",
+          "source": "Rigveda 3.62.10"
+        }
+      ]
+    },
+    "litigation": {
+      "title": "For Legal Matters & Protection",
+      "note": "These mantras are traditionally prescribed for overcoming legal challenges, protecting against adversaries, and seeking divine justice.",
+      "mantras": [
+        {
+          "type": "stotram",
+          "name": "Narasimha Kavacham",
+          "transliteration": "(divine armor of protection from Lord Narasimha)",
+          "practice": "Recite for protection from enemies and legal threats",
+          "level": "intermediate",
+          "source": "Brahmanda Purana"
+        },
+        {
+          "type": "stotram",
+          "name": "Devi Kavacham",
+          "transliteration": "(protective verses from Durga Saptashati)",
+          "practice": "Recite for divine protection and overcoming powerful adversaries",
+          "level": "intermediate",
+          "source": "Markandeya Purana"
+        },
+        {
+          "type": "stotram",
+          "name": "Sudarshana Ashtakam",
+          "transliteration": "(8 verses dedicated to Lord Sudarshana)",
+          "practice": "Recite for protection from all enemies and obstacles",
+          "level": "intermediate",
+          "source": "Ahirbudhnya Samhita"
+        }
+      ]
+    }
+  },
+  "general": {
+    "title": "For General Well-being",
+    "note": "If you are unsure where to begin, these mantras are recommended for overall spiritual growth and well-being.",
+    "mantras": [
+      {
+        "type": "mantra",
+        "name": "Om Namo Venkatesaya",
+        "transliteration": "Om Na-mo Ven-ka-te-sa-ya Kaa-mi-taar-tha Pra-dhaa-yi-ne Pra-na-tah Kle-sa Na-sa-ya Go-vin-da-aya Na-mo Na-ma-ha",
+        "practice": "Chant 108 times daily for divine blessings",
+        "level": "beginner",
+        "source": "Sri Vaishnava tradition"
+      },
+      {
+        "type": "stotram",
+        "name": "Vishnu Sahasranamam",
+        "transliteration": "(the 1000 names of Lord Vishnu)",
+        "practice": "Recite for overall protection and prosperity",
+        "level": "advanced",
+        "source": "Mahabharata, Anushasana Parva"
+      },
+      {
+        "type": "stotram",
+        "name": "Navagraha Stotram",
+        "transliteration": "(hymns to all nine planetary deities)",
+        "practice": "Recite for balancing all planetary influences",
+        "level": "intermediate",
+        "source": "BPHS tradition"
+      }
+    ]
+  }
+}

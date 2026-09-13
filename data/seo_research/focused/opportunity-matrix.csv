@@ -1,0 +1,31 @@
+priority,cluster,primary_keyword,india_volume,keyword_difficulty,product_fit,current_data_coverage,action,recommended_page,reason
+1,house,ketu 8th house remedies,4400,0,high,low,source_expert_data_first,/remedies/ketu/8th-house,Large demand and weak mixed SERP; requires genuine house-specific interpretation
+2,dasha,rahu mahadasha remedies,1900,0,high,medium,add_dasha_data_then_publish,/dashas/rahu-mahadasha-remedies,Directly aligned with the existing Dasha calculator and strong demand
+3,career,career astrology,2400,2,medium_high,medium,build_hybrid_landing_page,/career-astrology,Tool can identify career-related planets and remedies but must not promise a career prediction
+4,foreign,foreign settlement astrology,720,0,medium,low,add_foreign_yoga_rules_then_publish,/foreign-settlement-astrology,Educational intent and calculator demand exist; current engine does not identify settlement yogas
+5,foreign,foreign settlement calculator,480,0,low_now_high_after_feature,low,build_feature_first,/tools/foreign-settlement-calculator,Distinct calculator intent with low overlap against the educational query
+6,dasha,shani mahadasha remedies,590,0,high,medium,add_dasha_data_then_publish,/dashas/shani-mahadasha-remedies,Relevant demand and weak mixed SERP
+7,dasha,ketu dasha remedies,480,0,high,medium,add_dasha_data_then_publish,/dashas/ketu-mahadasha-remedies,Relevant demand and direct connection to existing Ketu remedies
+8,mantra,shani beej mantra,9900,0,high,high,publish_separate_after_editorial_review,/mantras/shani-beej-mantra,High demand and only moderate domain overlap with broad Shani mantra results
+9,mantra,shukra beej mantra,8100,0,high,high,publish_separate_after_editorial_review,/mantras/shukra-beej-mantra,High demand and low SERP overlap with broad Shukra mantra results
+10,mantra,navagraha mantra,4400,0,high,medium,publish_after_data_expansion,/mantras/navagraha-mantra,Strong demand but requires complete accurate mantra coverage for all nine planets
+11,mantra,rahu beej mantra,12100,0,high,high,consolidate_into_rahu_mantra,/mantras/rahu-mantra,Strong 0.571 domain overlap indicates the same search intent
+12,mantra,rahu gayatri mantra,3600,0,medium,none,source_then_add_section,/mantras/rahu-mantra,Moderate overlap but the current remedy data does not contain an approved Rahu Gayatri mantra
+13,mantra,rahu mantra jaap,2900,0,high,high,consolidate_into_rahu_mantra,/mantras/rahu-mantra,Strong 0.500 domain overlap indicates a practice section rather than a new page
+14,mantra,surya beej mantra,4400,0,high,high,consolidate_initially,/mantras/surya-mantra,Moderate 0.375 overlap; test the parent page before creating another URL
+15,mantra,budh beej mantra,3600,0,high,high,consolidate_initially,/mantras/budh-mantra,Moderate 0.375 overlap; one comprehensive page is safer initially
+16,career,job astrology,1300,16,medium_high,medium,consolidate_with_career,/career-astrology,Strong 0.636 overlap with career astrology
+17,career,career astrology calculator,260,0,medium,medium,embed_tool_on_career_page,/career-astrology,Calculator query overlaps the broad career page and can be served by an embedded remedy workflow
+18,career,astrology remedies for career,10,,high,high,use_as_secondary_section,/career-astrology,Low direct volume but highly aligned with the product and distinct remedy intent
+19,career,career delay astrology,0,,high,high,monitor_after_launch,/career-astrology,Distinct SERP but no measurable exact volume; use as a section and watch Search Console
+20,house,ketu 7th house remedies,320,0,high,low,source_expert_data_first,/remedies/ketu/7th-house,Useful follow-up after the Ketu eighth-house page
+21,house,rahu 7th house remedies,260,0,high,low,source_expert_data_first,/remedies/rahu/7th-house,Meaningful long-tail demand but requires placement-specific data
+22,house,saturn 8th house remedies,140,0,high,low,defer_until_house_system,/remedies/saturn/8th-house,Smaller demand; publish only after a reusable house data model exists
+23,house,moon in 8th house remedies,110,24,high,low,defer_until_house_system,/remedies/moon/8th-house,Relevant but lower priority than Ketu placements
+24,house,jupiter in 8th house remedies,90,47,high,low,defer_until_house_system,/remedies/jupiter/8th-house,Lower volume and materially higher difficulty
+25,conjunction,moon rahu conjunction remedies,110,0,high,low,source_expert_data_first,/remedies/moon-rahu-conjunction,Weak social and forum-heavy SERP offers opportunity after accurate conjunction data exists
+26,conjunction,sun saturn conjunction remedies,50,,high,low,defer_until_conjunction_system,/remedies/sun-saturn-conjunction,Low volume but weak SERP; requires combination-specific interpretation
+27,conjunction,sun rahu conjunction remedies,40,,high,low,defer_until_conjunction_system,/remedies/sun-rahu-conjunction,Low volume and insufficient current data
+28,dasha,moon mahadasha remedies,110,0,high,medium,batch_three,/dashas/moon-mahadasha-remedies,Aligned with calculator but lower demand
+29,dasha,jupiter mahadasha remedies,70,44,high,medium,batch_three,/dashas/jupiter-mahadasha-remedies,Relevant but more difficult and lower volume
+30,foreign,abroad settlement astrology,30,,medium,low,consolidate_with_foreign_settlement,/foreign-settlement-astrology,Strong 0.700 overlap with foreign settlement astrology

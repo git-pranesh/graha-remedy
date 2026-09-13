@@ -1,14 +1,14 @@
 /**
  * Lightweight GA4 wrapper.
  *
- * GA4 stays completely dormant until a `VITE_GA4_ID` env var is provided,
+ * GA4 stays completely dormant until a `NEXT_PUBLIC_GA4_ID` env var is provided,
  * so the app works with zero tracking by default. Events are also safe
  * no-ops when the script has not finished loading.
  *
- *   VITE_GA4_ID=G-XXXXXXXXXX npm run dev
+ *   NEXT_PUBLIC_GA4_ID=G-XXXXXXXXXX npm run dev
  */
 
-const GA4_ID: string | undefined = import.meta.env.VITE_GA4_ID as string | undefined;
+const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
 declare global {
   interface Window {

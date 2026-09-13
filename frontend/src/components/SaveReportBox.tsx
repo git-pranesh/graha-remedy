@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Check, FolderOpen, Link, Lock, Save } from "lucide-react";
 import type { AuthUser, ChartResult, PersonalizedResult, SavedReportMeta } from "../types";

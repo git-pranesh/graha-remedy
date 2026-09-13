@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useCallback } from "react";
 import { Check, Orbit, TriangleAlert, X } from "lucide-react";
 import Step1BirthDetails from "./Step1BirthDetails";

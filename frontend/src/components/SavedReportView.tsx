@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { Orbit, Sparkles, TriangleAlert } from "lucide-react";
 import type { SharedReport, UniversalRemedies } from "../types";

@@ -1,0 +1,66 @@
+{
+  "source": "github.com/rishabhmodi03/hindu-temples (MIT License)",
+  "lastUpdated": "2026-09-01",
+  "temples": [
+    { "id": "brahma-01", "name": "Brahma Temple", "city": "Pushkar", "state": "Rajasthan", "deity": "Brahma", "lat": 26.4900, "lon": 74.7800, "famous": true },
+    { "id": "brahma-02", "name": "Brahma Temple", "city": "Khedbrahma", "state": "Gujarat", "deity": "Brahma", "lat": 23.3500, "lon": 73.3200, "famous": false },
+    { "id": "brahma-03", "name": "Brahma Temple", "city": "Chamba", "state": "Himachal Pradesh", "deity": "Brahma", "lat": 32.5600, "lon": 76.1300, "famous": false },
+    { "id": "brahma-04", "name": "Brahma Temple", "city": "Goa", "state": "Goa", "deity": "Brahma", "lat": 15.4000, "lon": 74.0100, "famous": false },
+    { "id": "brahma-05", "name": "Brahma Temple", "city": "Alwar", "state": "Rajasthan", "deity": "Brahma", "lat": 27.5600, "lon": 76.6300, "famous": false },
+
+    { "id": "vishnu-01", "name": "Tirupati Balaji Temple (Venkateswara)", "city": "Tirupati", "state": "Andhra Pradesh", "deity": "Vishnu", "lat": 13.6833, "lon": 79.3474, "famous": true },
+    { "id": "vishnu-02", "name": "Vaishno Devi Temple", "city": "Katra", "state": "Jammu and Kashmir", "deity": "Vishnu", "lat": 33.0230, "lon": 74.9500, "famous": true },
+    { "id": "vishnu-03", "name": "Ranganathaswamy Temple", "city": "Srirangam", "state": "Tamil Nadu", "deity": "Vishnu", "lat": 10.8570, "lon": 78.6940, "famous": true },
+    { "id": "vishnu-04", "name": "Jagannath Temple", "city": "Puri", "state": "Odisha", "deity": "Vishnu", "lat": 19.8050, "lon": 85.8181, "famous": true },
+    { "id": "vishnu-05", "name": "Dwarkadhish Temple", "city": "Dwarka", "state": "Gujarat", "deity": "Vishnu", "lat": 22.2390, "lon": 68.9680, "famous": true },
+
+    { "id": "shiva-01", "name": "Kashi Vishwanath Temple", "city": "Varanasi", "state": "Uttar Pradesh", "deity": "Shiva", "lat": 25.3109, "lon": 83.0107, "famous": true },
+    { "id": "shiva-02", "name": "Amarnath Cave Temple", "city": "Pahalgam", "state": "Jammu and Kashmir", "deity": "Shiva", "lat": 34.2100, "lon": 75.5000, "famous": true },
+    { "id": "shiva-03", "name": "Kedarnath Temple", "city": "Kedarnath", "state": "Uttarakhand", "deity": "Shiva", "lat": 30.7352, "lon": 79.0669, "famous": true },
+    { "id": "shiva-04", "name": "Somnath Temple", "city": "Veraval", "state": "Gujarat", "deity": "Shiva", "lat": 20.8880, "lon": 70.4013, "famous": true },
+    { "id": "shiva-05", "name": "Mallikarjuna Temple", "city": "Srisailam", "state": "Andhra Pradesh", "deity": "Shiva", "lat": 16.0733, "lon": 78.8686, "famous": true },
+
+    { "id": "krishna-01", "name": "Banke Bihari Temple", "city": "Vrindavan", "state": "Uttar Pradesh", "deity": "Krishna", "lat": 27.5806, "lon": 77.7006, "famous": true },
+    { "id": "krishna-02", "name": "Krishna Janmabhoomi", "city": "Mathura", "state": "Uttar Pradesh", "deity": "Krishna", "lat": 27.4924, "lon": 77.6737, "famous": true },
+    { "id": "krishna-03", "name": "ISKCON Temple", "city": "New Delhi", "state": "Delhi", "deity": "Krishna", "lat": 28.5530, "lon": 77.2410, "famous": true },
+    { "id": "krishna-04", "name": "Guruvayur Temple", "city": "Guruvayur", "state": "Kerala", "deity": "Krishna", "lat": 10.5943, "lon": 76.0375, "famous": true },
+    { "id": "krishna-05", "name": "Dwarkadhish Temple", "city": "Mathura", "state": "Uttar Pradesh", "deity": "Krishna", "lat": 27.4940, "lon": 77.6720, "famous": false },
+
+    { "id": "rama-01", "name": "Ayodhya Ram Janmabhoomi", "city": "Ayodhya", "state": "Uttar Pradesh", "deity": "Rama", "lat": 26.7922, "lon": 82.1998, "famous": true },
+    { "id": "rama-02", "name": "Ramanathaswamy Temple", "city": "Rameshwaram", "state": "Tamil Nadu", "deity": "Rama", "lat": 9.2876, "lon": 79.3174, "famous": true },
+    { "id": "rama-03", "name": "Bhadrachalam Temple", "city": "Bhadrachalam", "state": "Telangana", "deity": "Rama", "lat": 17.6688, "lon": 80.8952, "famous": false },
+    { "id": "rama-04", "name": "Kodandarama Swamy Temple", "city": "Tirupati", "state": "Andhra Pradesh", "deity": "Rama", "lat": 13.6500, "lon": 79.3200, "famous": false },
+    { "id": "rama-05", "name": "Ram Mandir", "city": "Ayodhya", "state": "Uttar Pradesh", "deity": "Rama", "lat": 26.7950, "lon": 82.1960, "famous": true },
+
+    { "id": "ganesha-01", "name": "Siddhivinayak Temple", "city": "Mumbai", "state": "Maharashtra", "deity": "Ganesha", "lat": 19.0169, "lon": 72.8310, "famous": true },
+    { "id": "ganesha-02", "name": "Dagdusheth Halwai Ganapati Temple", "city": "Pune", "state": "Maharashtra", "deity": "Ganesha", "lat": 18.5195, "lon": 73.8553, "famous": true },
+    { "id": "ganesha-03", "name": "Ashtavinayak Temples", "city": "Pune", "state": "Maharashtra", "deity": "Ganesha", "lat": 18.6200, "lon": 74.0100, "famous": true },
+    { "id": "ganesha-04", "name": "Kanipakam Vinayaka Temple", "city": "Kanipakam", "state": "Andhra Pradesh", "deity": "Ganesha", "lat": 13.2800, "lon": 79.0400, "famous": false },
+    { "id": "ganesha-05", "name": "Chintamani Ganpati Temple", "city": "Theur", "state": "Maharashtra", "deity": "Ganesha", "lat": 18.5400, "lon": 74.1500, "famous": false },
+
+    { "id": "hanuman-01", "name": "Hanuman Temple", "city": "New Delhi", "state": "Delhi", "deity": "Hanuman", "lat": 28.6310, "lon": 77.2270, "famous": true },
+    { "id": "hanuman-02", "name": "Salasar Balaji Temple", "city": "Salasar", "state": "Rajasthan", "deity": "Hanuman", "lat": 28.1400, "lon": 74.9700, "famous": true },
+    { "id": "hanuman-03", "name": "Sankat Mochan Hanuman Temple", "city": "Varanasi", "state": "Uttar Pradesh", "deity": "Hanuman", "lat": 25.2860, "lon": 83.0080, "famous": true },
+    { "id": "hanuman-04", "name": "Anjaneya Swamy Temple", "city": "Namakkal", "state": "Tamil Nadu", "deity": "Hanuman", "lat": 11.2200, "lon": 78.1700, "famous": false },
+    { "id": "hanuman-05", "name": "Jakhu Temple", "city": "Shimla", "state": "Himachal Pradesh", "deity": "Hanuman", "lat": 31.1100, "lon": 77.1700, "famous": true },
+
+    { "id": "durga-01", "name": "Kamakhya Temple", "city": "Guwahati", "state": "Assam", "deity": "Durga", "lat": 26.1665, "lon": 91.7100, "famous": true },
+    { "id": "durga-02", "name": "Vaishno Devi Temple", "city": "Katra", "state": "Jammu and Kashmir", "deity": "Durga", "lat": 33.0230, "lon": 74.9500, "famous": true },
+    { "id": "durga-03", "name": "Kalighat Temple", "city": "Kolkata", "state": "West Bengal", "deity": "Durga", "lat": 22.5190, "lon": 88.3440, "famous": true },
+    { "id": "durga-04", "name": "Maa Chintpurni Temple", "city": "Una", "state": "Himachal Pradesh", "deity": "Durga", "lat": 31.4700, "lon": 76.2800, "famous": false },
+    { "id": "durga-05", "name": "Chamundeshwari Temple", "city": "Mysore", "state": "Karnataka", "deity": "Durga", "lat": 12.2700, "lon": 76.6700, "famous": true },
+
+    { "id": "lakshmi-01", "name": "Tirumala Venkateswara Temple", "city": "Tirupati", "state": "Andhra Pradesh", "deity": "Lakshmi", "lat": 13.6833, "lon": 79.3474, "famous": true },
+    { "id": "lakshmi-02", "name": "Sripuram Golden Temple", "city": "Vellore", "state": "Tamil Nadu", "deity": "Lakshmi", "lat": 12.8900, "lon": 79.1300, "famous": true },
+    { "id": "lakshmi-03", "name": "Mahalakshmi Temple", "city": "Mumbai", "state": "Maharashtra", "deity": "Lakshmi", "lat": 18.9520, "lon": 72.8260, "famous": true },
+    { "id": "lakshmi-04", "name": "Ashtalakshmi Temple", "city": "Chennai", "state": "Tamil Nadu", "deity": "Lakshmi", "lat": 13.0050, "lon": 80.2730, "famous": false },
+    { "id": "lakshmi-05", "name": "Kanaka Durga Temple", "city": "Vijayawada", "state": "Andhra Pradesh", "deity": "Lakshmi", "lat": 16.5100, "lon": 80.6200, "famous": true },
+
+    { "id": "saraswati-01", "name": "Brahmaji Temple", "city": "Pushkar", "state": "Rajasthan", "deity": "Saraswati", "lat": 26.4900, "lon": 74.7800, "famous": true },
+    { "id": "saraswati-02", "name": "Saraswati Temple", "city": "Basar", "state": "Telangana", "deity": "Saraswati", "lat": 18.8800, "lon": 77.9600, "famous": true },
+    { "id": "saraswati-03", "name": "Saraswati Temple", "city": "Kurukshetra", "state": "Haryana", "deity": "Saraswati", "lat": 29.9700, "lon": 76.8800, "famous": true },
+    { "id": "saraswati-04", "name": "Saraswati Temple", "city": "Ponda", "state": "Goa", "deity": "Saraswati", "lat": 15.4000, "lon": 74.0100, "famous": false },
+
+    { "id": "kali-01", "name": "Dakshineswar Kali Temple", "city": "Kolkata", "state": "West Bengal", "deity": "Kali", "lat": 22.6550, "lon": 88.3580, "famous": true }
+  ]
+}

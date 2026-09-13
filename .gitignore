@@ -11,7 +11,10 @@ frontend/dist/
 # environment / secrets
 .env
 .env.local
+*.env
+*.env.local
 backend/.env
+frontend/.env*
 
 # editor / os / cache
 .DS_Store
@@ -27,6 +30,11 @@ backend/.env
 # json-store runtime data (user accounts / saved reports)
 data/users.json
 data/reports.json
+**/users.json
+**/reports.json
+**/chart-cache.json
+cache/
+**/cache/
 
 # chart cache (kept out to avoid stale/huge blobs in git)
 backend/cache/

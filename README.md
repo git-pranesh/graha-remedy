@@ -18,7 +18,7 @@ All remedies are rule-based and drawn from classical Jyotish Shastra texts — n
 
 | Layer     | Technology              |
 |-----------|-------------------------|
-| Frontend  | React 18 + TypeScript   |
+| Frontend  | Next.js + React + TypeScript |
 | Backend   | Node.js + Express       |
 | Data      | File-based JSON storage  |
 
@@ -26,10 +26,10 @@ All remedies are rule-based and drawn from classical Jyotish Shastra texts — n
 
 ```
 graha-remedy-app/
-├── frontend/          # React + TypeScript (Vite)
-│   ├── src/
+├── frontend/          # Next.js + React + TypeScript
+│   ├── app/           # App Router pages and layout
+│   ├── src/           # Components, API client, and shared types
 │   ├── public/
-│   ├── index.html
 │   ├── package.json
 │   └── tsconfig.json
 ├── backend/           # Node.js + Express
@@ -58,7 +58,7 @@ npm run dev
 ```
 
 - **Backend** runs on `http://localhost:3001`
-- **Frontend** runs on `http://localhost:5173`
+- **Frontend** runs on `http://localhost:3000`
 
 ## Data Model
 

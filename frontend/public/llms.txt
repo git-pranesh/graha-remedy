@@ -1,0 +1,40 @@
+# Graha Remedy
+
+> Free, rule-based Vedic astrology (Jyotish) spiritual remedy platform. Zero AI in chart calculations or remedy mapping; 100% deterministic lookups sourced from classical scriptures.
+
+## Overview
+Graha Remedy calculates birth charts (Lagna, Moon sign, planetary degrees, active Vimshottari Mahadasha/Antardasha, and key doshas such as Mangal, Kaal Sarp, Sade Sati) from birth date, time, and coordinates, and matches life challenges (career, health, relationships, finance, education, travel) to authentic classical spiritual remedies.
+
+## Key Capabilities
+- **Birth Chart Calculator**: High-precision planetary positions using the Swiss Ephemeris engine.
+- **Rule-Based Remedies**: Classical Mantras (Namaha & Beej), Fasting (Vrata), Charity (Daan), and Deity worship.
+- **Zero Hallucination**: No generative AI used in chart math or remedy output.
+- **100% Free**: No paywalls, no subscriptions, no premium tiers.
+
+## Core Directories & Guides
+- [Vedic Remedy Library](https://graharemedy.com/remedies): Directory of planetary guides and problem protocols.
+- [Shani Mantra Guide](https://graharemedy.com/remedies/shani-mantra): Saturn chanting vidhi, 108 japa rules, Sade Sati remedies.
+- [Shani Beej Mantra](https://graharemedy.com/remedies/shani-beej-mantra): Tantrik seed sound sadhana for Saturn.
+- [Rahu Mantra Guide](https://graharemedy.com/remedies/rahu-mantra): North node pacification, Durga worship, and Saturday japa.
+- [Rahu Remedies](https://graharemedy.com/remedies/rahu-remedies): Multidimensional protocol for Rahu Mahadasha and dosha.
+- [Surya Mantra Guide](https://graharemedy.com/remedies/surya-mantra): Sun mantras, Aditya Hridayam, and sunrise water offering.
+- [Chandra Mantra Guide](https://graharemedy.com/remedies/chandra-mantra): Moon mantras, Shiva worship, and mental calm.
+- [Moon Remedies](https://graharemedy.com/remedies/moon-remedies): Healing emotional volatility, anxiety, and depression via Jyotish.
+- [Mangal Mantra Guide](https://graharemedy.com/remedies/mangal-mantra): Mars mantras, Hanuman Chalisa, and Mangal Dosha mitigation.
+- [Budh Mantra Guide](https://graharemedy.com/remedies/budh-mantra): Mercury mantras for intellect, speech, and business clarity.
+- [Mercury Remedies](https://graharemedy.com/remedies/mercury-planet-remedies): Remedies for stammering, nervous stress, and learning blocks.
+- [Brihaspati Mantra Guide](https://graharemedy.com/remedies/brihaspati-mantra): Jupiter mantras for wisdom, marital harmony, and fortune.
+- [Shukra Mantra Guide](https://graharemedy.com/remedies/shukra-mantra): Venus mantras for relational harmony and creative fulfillment.
+- [Shukra Beej Mantra](https://graharemedy.com/remedies/shukra-beej-mantra): Tantrik seed sound sadhana for Venus.
+- [Ketu Mantra Guide](https://graharemedy.com/remedies/ketu-mantra): South node mantras, Ganesha worship, and spiritual liberation.
+- [Ketu Remedies](https://graharemedy.com/remedies/ketu-remedy): Vedic pacification, feeding street animals, and removing spiritual blocks.
+- [Career Astrology](https://graharemedy.com/remedies/career-astrology): 10th house, karma karakas, professional delays, and remedies.
+- [Evil Eye Remedies](https://graharemedy.com/remedies/evil-eye-remedies): Vedic protection against Nazar Dosha and negative energy.
+- [Vedic Astrology Remedies Pillar Guide](https://graharemedy.com/remedies/vedic-astrology-remedies): Comprehensive overview of Mantra, Vrat, Daan, and Puja.
+
+## Classical Sources
+- *Brihat Parashara Hora Shastra* (Sage Parashara)
+- *Phaladeepika* (Mantreswara)
+- *Valmiki Ramayana* (Aditya Hridayam, Yuddha Kanda)
+- *Markandeya Purana* (Durga Saptashati & Durga Kavach)
+- *Atharva Veda* (Ganesha Atharvashirsha)
