@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Script from "next/script";
 import "../src/index.css";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://graharemedy.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
 
 // oxlint-disable-next-line react/only-export-components -- App Router metadata belongs in the layout.
@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     template: "%s | Graha Remedy",
   },
   description: "Free, rule-based Vedic astrology platform providing classical mantras, fasting schedules, and spiritual remedies with zero AI hallucination.",
+  alternates: {
+    canonical: "./",
+  },
   openGraph: {
     title: "Graha Remedy | Free Vedic Astrology Remedies",
     description: "Classical Jyotish remedies based on birth chart planetary positions and life problems.",
@@ -32,6 +35,37 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": `${SITE_URL}/#website`,
+                  url: SITE_URL,
+                  name: "Graha Remedy",
+                  description:
+                    "Free, rule-based Vedic astrology platform providing classical mantras, fasting schedules, and spiritual remedies with zero AI hallucination.",
+                  publisher: {
+                    "@id": `${SITE_URL}/#organization`,
+                  },
+                },
+                {
+                  "@type": "Organization",
+                  "@id": `${SITE_URL}/#organization`,
+                  name: "Graha Remedy",
+                  url: SITE_URL,
+                  logo: {
+                    "@type": "ImageObject",
+                    url: `${SITE_URL}/favicon.svg`,
+                  },
+                },
+              ],
+            }),
+          }}
+        />
         {GA4_ID && (
           <>
             <Script

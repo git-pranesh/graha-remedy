@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://graharemedy.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
 const SEO_PAGES_DIR = path.resolve(process.cwd(), "../data/seo_pages");
 
 export const dynamic = "force-static";

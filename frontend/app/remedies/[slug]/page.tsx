@@ -25,7 +25,7 @@ interface PageProps {
 }
 
 const SEO_PAGES_DIR = path.resolve(process.cwd(), "../data/seo_pages");
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://graharemedy.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
 const SAFE_SLUG = /^[a-z0-9_-]+$/;
 
 export const dynamicParams = false;
