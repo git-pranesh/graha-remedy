@@ -16,7 +16,7 @@
     "start:frontend": "cd frontend && npm run preview"
   },
   "author": "",
-  "license": "ISC",
+  "license": "AGPL-3.0-or-later",
   "devDependencies": {
     "concurrently": "^9.1.0"
   }

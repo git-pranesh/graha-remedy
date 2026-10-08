@@ -81,4 +81,24 @@ Mapping rules that connect a user's selected problems to the relevant planets an
 
 ## License
 
-ISC
+Copyright (C) 2026 Graha Remedy contributors.
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version. See [LICENSE](LICENSE).
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+
+The live site (https://www.graharemedy.com) runs the code on the `main` branch
+of this repository. Every page links to this source, as required by section 13
+of the AGPL.
+
+### Third-party components
+
+- Astronomical calculations use the Swiss Ephemeris via
+  [`@swisseph/node`](https://www.npmjs.com/package/@swisseph/node), used under
+  the AGPL option of its dual licence. Its copyright notices are preserved in
+  the package source.

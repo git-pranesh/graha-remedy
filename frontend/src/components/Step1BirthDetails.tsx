@@ -132,7 +132,7 @@ export default function Step1BirthDetails({ onSubmit, initial }: Props) {
     <form className="step-form" onSubmit={handleSubmit}>
       <h2 className="step-title">Enter Birth Details</h2>
       <p className="step-desc">
-        We use Swiss Ephemeris calculations — 100% accurate, zero AI.
+        High-precision Swiss Ephemeris calculations, Lahiri ayanamsa. No AI.
       </p>
 
       {/* Date of Birth */}

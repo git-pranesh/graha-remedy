@@ -3469,3 +3469,17 @@ body {
     text-align: center;
   }
 }
+
+/* ─── AGPL source notice (site-wide, rendered by app/layout.tsx) ─── */
+.site-license-bar {
+  padding: 14px 20px 18px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--grey-mid);
+  text-align: center;
+}
+
+.site-license-bar a {
+  color: inherit;
+  text-decoration: underline;
+}
