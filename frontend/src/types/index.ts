@@ -6,6 +6,18 @@ export interface BirthInput {
   placeOfBirth: string;
   /** Optional family deity tradition: shiva, vishnu, devi, ganesha, hanuman */
   kulDevta?: string;
+  /** Resolved coordinates from place search (optional). */
+  latitude?: number;
+  longitude?: number;
+  timezone?: string;
+}
+
+/** A place suggestion from /api/places. */
+export interface PlaceSuggestion {
+  label: string;
+  latitude: number;
+  longitude: number;
+  timezone: string;
 }
 
 /* ─── Geo ─────────────────────────────────────────────────────── */

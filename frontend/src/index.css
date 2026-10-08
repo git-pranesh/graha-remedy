@@ -311,8 +311,13 @@ body {
 
 .suggestion-item:last-child { border-bottom: none; }
 
-.suggestion-item:hover {
+.suggestion-item:hover,
+.suggestion-item.active {
   background: var(--tint);
+}
+
+.place-input {
+  position: relative;
 }
 
 /* ─── Buttons ───────────────────────────────────────────────── */

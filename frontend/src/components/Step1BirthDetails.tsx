@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   ArrowRight,
   Building2,
@@ -9,8 +9,9 @@ import {
   MapPin,
   TriangleAlert,
 } from "lucide-react";
-import { fetchChart, searchPlaces } from "../api/client";
-import type { BirthInput, ChartResult } from "../types";
+import { fetchChart } from "../api/client";
+import type { BirthInput, ChartResult, PlaceSuggestion } from "../types";
+import PlaceInput from "./PlaceInput";
 import { OmMark } from "./icons";
 
 interface Props {
@@ -22,76 +23,28 @@ export default function Step1BirthDetails({ onSubmit, initial }: Props) {
   const [date, setDate] = useState(initial?.dateOfBirth ?? "");
   const [time, setTime] = useState(initial?.timeOfBirth ?? "06:00");
   const [place, setPlace] = useState(initial?.placeOfBirth ?? "");
+  const [placeSel, setPlaceSel] = useState<PlaceSuggestion | null>(
+    initial?.latitude !== undefined && initial?.longitude !== undefined && initial?.timezone
+      ? {
+          label: initial.placeOfBirth,
+          latitude: initial.latitude,
+          longitude: initial.longitude,
+          timezone: initial.timezone,
+        }
+      : null,
+  );
   const [currentCity, setCurrentCity] = useState("");
   const [kulDevta, setKulDevta] = useState(initial?.kulDevta ?? "");
-  const [currentSuggestions, setCurrentSuggestions] = useState<Array<{ displayName: string; lat: number; lon: number }>>([]);
-  const [showCurrentSuggestions, setShowCurrentSuggestions] = useState(false);
-  const currentWrapperRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [suggestions, setSuggestions] = useState<Array<{
-    displayName: string;
-    lat: number;
-    lon: number;
-  }>>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Close suggestions on outside click
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setShowSuggestions(false);
-      }
-      if (currentWrapperRef.current && !currentWrapperRef.current.contains(e.target as Node)) {
-        setShowCurrentSuggestions(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+  const onPlaceChange = useCallback((text: string, selected: PlaceSuggestion | null) => {
+    setPlace(text);
+    setPlaceSel(selected);
   }, []);
 
-  const handlePlaceChange = useCallback((value: string) => {
-    setPlace(value);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(async () => {
-      if (value.length >= 3) {
-        const results = await searchPlaces(value);
-        setSuggestions(results);
-        setShowSuggestions(results.length > 0);
-      } else {
-        setSuggestions([]);
-        setShowSuggestions(false);
-      }
-    }, 400);
-  }, []);
-
-  const handleCurrentCityChange = useCallback((value: string) => {
-    setCurrentCity(value);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(async () => {
-      if (value.length >= 3) {
-        const results = await searchPlaces(value);
-        setCurrentSuggestions(results);
-        setShowCurrentSuggestions(results.length > 0);
-      } else {
-        setCurrentSuggestions([]);
-        setShowCurrentSuggestions(false);
-      }
-    }, 400);
-  }, []);
-
-  const selectSuggestion = useCallback((displayName: string) => {
-    setPlace(displayName);
-    setShowSuggestions(false);
-    setSuggestions([]);
-  }, []);
-
-  const selectCurrentSuggestion = useCallback((displayName: string) => {
-    setCurrentCity(displayName);
-    setShowCurrentSuggestions(false);
-    setCurrentSuggestions([]);
+  const onCurrentCityChange = useCallback((text: string) => {
+    setCurrentCity(text);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -118,6 +71,9 @@ export default function Step1BirthDetails({ onSubmit, initial }: Props) {
         timeOfBirth: time,
         placeOfBirth: place.trim(),
         kulDevta: kulDevta || undefined,
+        ...(placeSel && placeSel.label === place
+          ? { latitude: placeSel.latitude, longitude: placeSel.longitude, timezone: placeSel.timezone }
+          : {}),
       };
       const result = await fetchChart(input, currentCity.trim() || undefined);
       onSubmit(input, result);
@@ -167,70 +123,27 @@ export default function Step1BirthDetails({ onSubmit, initial }: Props) {
       </div>
 
       {/* Place of Birth (autocomplete) */}
-      <div className="field" ref={wrapperRef}>
+      <div className="field">
         <label className="field-label" htmlFor="pob">
           <MapPin size={16} className="lbl-ic" /> Place of Birth
         </label>
-        <input
-          id="pob"
-          type="text"
-          className="field-input"
-          placeholder="e.g. Chennai, India"
-          value={place}
-          onChange={(e) => handlePlaceChange(e.target.value)}
-          onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
-          autoComplete="off"
-          required
-        />
-        {showSuggestions && suggestions.length > 0 && (
-          <ul className="suggestions">
-            {suggestions.map((s, i) => (
-              <li key={i}>
-                <button
-                  type="button"
-                  className="suggestion-item"
-                  onClick={() => selectSuggestion(s.displayName)}
-                >
-                  <MapPin size={13} className="sug-ic" /> {s.displayName}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+        <PlaceInput id="pob" value={place} onChange={onPlaceChange} required />
+        <span className="field-hint">Choose from the list so the correct time zone is used</span>
       </div>
 
       {/* Current City (optional) */}
-      <div className="field" ref={currentWrapperRef}>
+      <div className="field">
         <label className="field-label" htmlFor="currentCity">
           <Building2 size={16} className="lbl-ic" /> Current City{" "}
           <span className="field-optional">(optional)</span>
         </label>
-        <input
+        <PlaceInput
           id="currentCity"
-          type="text"
-          className="field-input"
-          placeholder="e.g. Mumbai, Singapore, Chicago"
           value={currentCity}
-          onChange={(e) => handleCurrentCityChange(e.target.value)}
-          onFocus={() => currentSuggestions.length > 0 && setShowCurrentSuggestions(true)}
-          autoComplete="off"
+          onChange={onCurrentCityChange}
+          placeholder="e.g. Mumbai, Singapore, Chicago"
         />
         <span className="field-hint">For location-specific temple recommendations</span>
-        {showCurrentSuggestions && currentSuggestions.length > 0 && (
-          <ul className="suggestions">
-            {currentSuggestions.map((s, i) => (
-              <li key={i}>
-                <button
-                  type="button"
-                  className="suggestion-item"
-                  onClick={() => selectCurrentSuggestion(s.displayName)}
-                >
-                  <MapPin size={13} className="sug-ic" /> {s.displayName}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
 
       {/* Family Deity Tradition (optional) */}

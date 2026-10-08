@@ -12,6 +12,7 @@ import {
 } from "./astro-engine";
 import { computeDoshas, type DoshaFlags } from "./dosha";
 import { getCachedChart, setCachedChart, getCacheStats } from "./chart-cache";
+import { findPlace } from "./places";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -23,6 +24,41 @@ export interface BirthInput {
   placeOfBirth: string;   // e.g. "Chennai, India"
   currentCity?: string;   // e.g. "Mumbai" or "Singapore" — optional
   kulDevta?: string;      // e.g. "shiva", "vishnu" — optional family deity tradition
+  /** Optional resolved coordinates (from /api/places). Skips geocoding when present. */
+  latitude?: number;
+  longitude?: number;
+  timezone?: string;
+}
+
+function isValidTimezone(tz: string): boolean {
+  try {
+    new Intl.DateTimeFormat("en-US", { timeZone: tz });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Resolve birth place to coordinates + IANA timezone:
+ * 1. coordinates supplied by the client (selected from place search)
+ * 2. offline GeoNames lookup
+ * 3. Nominatim (network) as a last resort
+ */
+async function resolvePlace(input: BirthInput): Promise<GeoResult> {
+  const { latitude, longitude, timezone } = input;
+  if (
+    typeof latitude === "number" && typeof longitude === "number" &&
+    Math.abs(latitude) <= 90 && Math.abs(longitude) <= 180 &&
+    timezone && isValidTimezone(timezone)
+  ) {
+    return { placeName: input.placeOfBirth, latitude, longitude, timezone };
+  }
+  const local = findPlace(input.placeOfBirth);
+  if (local) {
+    return { placeName: local.label, latitude: local.latitude, longitude: local.longitude, timezone: local.timezone };
+  }
+  return geocodePlace(input.placeOfBirth);
 }
 
 export interface ChartResult {
@@ -47,8 +83,8 @@ export async function computeChart(input: BirthInput): Promise<ChartResult> {
   const [year, month, day] = input.dateOfBirth.split("-").map(Number);
   const [hours, minutes] = input.timeOfBirth.split(":").map(Number);
 
-  // Geocode the place
-  const geo = await geocodePlace(input.placeOfBirth);
+  // Resolve the place (coordinates + timezone)
+  const geo = await resolvePlace(input);
 
   // Convert local time to UTC
   const offset = utcOffsetForLocalTime(geo.timezone, year, month, day, hours, minutes);
@@ -88,7 +124,10 @@ export async function computeChart(input: BirthInput): Promise<ChartResult> {
   let currentCityName: string | undefined;
   if (input.currentCity && input.currentCity.trim()) {
     try {
-      const currentGeo = await geocodePlace(input.currentCity.trim());
+      const local = findPlace(input.currentCity.trim());
+      const currentGeo = local
+        ? { latitude: local.latitude, longitude: local.longitude, placeName: local.label }
+        : await geocodePlace(input.currentCity.trim());
       currentLat = currentGeo.latitude;
       currentLon = currentGeo.longitude;
       currentCityName = currentGeo.placeName;
