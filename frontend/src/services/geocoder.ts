@@ -87,50 +87,50 @@ async function getTimezone(lat: number, lon: number): Promise<string> {
 }
 
 /**
- * Convert a timezone name to a UTC offset in hours.
- * Used for Swiss Ephemeris calculations which need a numeric offset.
+ * UTC offset (hours) of an IANA timezone at a given UTC instant.
+ * Uses the runtime's tz database, so DST and historical offsets
+ * (e.g. India's 1942-45 war time) are applied correctly.
+ */
+function offsetAtInstant(timezone: string, utcMs: number): number {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    timeZoneName: "longOffset",
+  }).formatToParts(new Date(utcMs));
+  const value = parts.find((p) => p.type === "timeZoneName")?.value ?? "GMT";
+  const m = value.match(/GMT([+-])(\d{2}):(\d{2})(?::(\d{2}))?/);
+  if (!m) return 0; // "GMT" means +00:00
+  const sign = m[1] === "-" ? -1 : 1;
+  return sign * (Number(m[2]) + Number(m[3]) / 60 + Number(m[4] ?? 0) / 3600);
+}
+
+/**
+ * UTC offset (hours) in effect at a given *local* wall-clock time in a timezone.
+ * This is what birth-chart calculations need: the offset on the birth date,
+ * not today's offset.
+ */
+export function utcOffsetForLocalTime(
+  timezone: string,
+  year: number,
+  month: number,
+  day: number,
+  hour: number,
+  minute: number,
+): number {
+  const localAsUtc = Date.UTC(year, month - 1, day, hour, minute);
+  // Two passes resolve the offset even across a DST boundary.
+  let offset = offsetAtInstant(timezone, localAsUtc);
+  offset = offsetAtInstant(timezone, localAsUtc - offset * 3600_000);
+  return offset;
+}
+
+/**
+ * Current UTC offset (hours) of a timezone.
+ * @deprecated Use utcOffsetForLocalTime for birth charts.
  */
 export function timezoneToOffset(timezone: string): number {
-  // Common Indian timezones
-  const offsets: Record<string, number> = {
-    "Asia/Kolkata": 5.5,
-    "Asia/Calcutta": 5.5,
-    "Asia/Mumbai": 5.5,
-    "Asia/Dubai": 4,
-    "Asia/Kathmandu": 5.75,
-    "Asia/Colombo": 5.5,
-    "Asia/Dhaka": 6,
-    "Asia/Karachi": 5,
-    "Asia/Kabul": 4.5,
-    "Asia/Tehran": 3.5,
-    UTC: 0,
-    GMT: 0,
-  };
-
-  if (offsets[timezone] !== undefined) {
-    return offsets[timezone];
-  }
-
-  // For unknown timezones, try to parse from the name
-  // Fallback: use Intl for a rough estimate (not DST-aware for historical dates)
   try {
-    const now = new Date();
-    const formatter = new Intl.DateTimeFormat("en-US", {
-      timeZone: timezone,
-      timeZoneName: "shortOffset",
-    });
-    const parts = formatter.formatToParts(now);
-    const tzPart = parts.find((p) => p.type === "timeZoneName");
-    if (tzPart) {
-      const match = tzPart.value.match(/GMT([+-]?\d+)?/);
-      if (match) {
-        return match[1] ? parseInt(match[1]) : 0;
-      }
-    }
+    return offsetAtInstant(timezone, Date.now());
   } catch {
-    // ignore
+    return 5.5;
   }
-
-  // Default to IST if nothing else works
-  return 5.5;
 }

@@ -3,14 +3,15 @@
  * from a Vedic birth chart.
  *
  * Doshas computed:
- *   1. Manglik (Mangal) — Mars in 1st, 2nd, 4th, 7th, 8th, 12th from Ascendant
- *   2. Kaal Sarp — all 7 planets hemmed between Rahu and Ketu
- *   3. Sade Sati — Saturn transiting 12th, 1st, or 2nd from Moon sign
+ *   1. Manglik (Mangal) — Mars in 1st, 2nd, 4th, 7th, 8th, 12th from Lagna or Moon
+ *   2. Kaal Sarp — all 7 planets within one half of the Rahu–Ketu axis (by longitude)
+ *   3. Sade Sati — transiting Saturn in the 12th, 1st or 2nd sign from the natal Moon
  *   4. Pitra — specific Rahu/Ketu/Saturn combinations
- *   5. Nadi — Moon in Aadi/Madhya/Antya Nadi nakshatras (health/lineage flag)
+ *   5. Nadi — reported for information only (a matching factor, never flagged)
  */
 
 import type { AstroChart, PlanetPosition } from "./astro-engine";
+import { currentSaturnSignIndex } from "./transits";
 
 export interface DoshaFlags {
   manglik: boolean;
@@ -28,43 +29,24 @@ export interface DoshaFlags {
 // ---------------------------------------------------------------------------
 // Nakshatra Nadi mapping (Aadi / Madhya / Antya)
 // ---------------------------------------------------------------------------
-// Aadi Nadi:  Ashwini, Bharani, Krittika, Ardra, Pushya, Magha,
-//             P.Phalguni, Hasta, Swati, Anuradha, P.Ashadha, Dhanishtha,
-//             P.Bhadra, Revati
-// Madhya Nadi: Rohini, Mrigashira, Punarvasu, Ashlesha, U.Phalguni,
-//             Chitra, Vishakha, Jyeshtha, U.Ashadha, Shatabhisha,
-//             U.Bhadra
-// Antya Naid: — none typically listed, but we use the remaining ones
-
-// Full 27-nakshatra Nadi classification
-const NAKSHATRA_NADI: string[] = [
-  "Aadi",   // 0  Ashwini
-  "Aadi",   // 1  Bharani
-  "Aadi",   // 2  Krittika
-  "Madhya", // 3  Rohini
-  "Madhya", // 4  Mrigashira
-  "Aadi",   // 5  Ardra
-  "Madhya", // 6  Punarvasu
-  "Aadi",   // 7  Pushya
-  "Antya",  // 8  Ashlesha
-  "Aadi",   // 9  Magha
-  "Aadi",   // 10 Purva Phalguni
-  "Madhya", // 11 Uttara Phalguni
-  "Aadi",   // 12 Hasta
-  "Antya",  // 13 Chitra
-  "Madhya", // 14 Swati
-  "Aadi",   // 15 Vishakha
-  "Madhya", // 16 Anuradha
-  "Antya",  // 17 Jyeshtha
-  "Antya",  // 18 Mula
-  "Madhya", // 19 Purva Ashadha
-  "Madhya", // 20 Uttara Ashadha
-  "Aadi",   // 21 Shravana
-  "Aadi",   // 22 Dhanishtha
-  "Antya",  // 23 Shatabhisha
-  "Aadi",   // 24 Purva Bhadrapada
-  "Antya",  // 25 Uttara Bhadrapada
-  "Antya",  // 26 Revati
+// Standard Ashtakoota classification. The sequence zig-zags in groups of
+// three: Aadi, Madhya, Antya, Antya, Madhya, Aadi, Aadi, Madhya, Antya ...
+//   Aadi (Vata):    Ashwini, Ardra, Punarvasu, Uttara Phalguni, Hasta,
+//                   Jyeshtha, Mula, Shatabhisha, Purva Bhadrapada
+//   Madhya (Pitta): Bharani, Mrigashira, Pushya, Purva Phalguni, Chitra,
+//                   Anuradha, Purva Ashadha, Dhanishtha, Uttara Bhadrapada
+//   Antya (Kapha):  Krittika, Rohini, Ashlesha, Magha, Swati, Vishakha,
+//                   Uttara Ashadha, Shravana, Revati
+export const NAKSHATRA_NADI: string[] = [
+  "Aadi", "Madhya", "Antya",   // Ashwini, Bharani, Krittika
+  "Antya", "Madhya", "Aadi",   // Rohini, Mrigashira, Ardra
+  "Aadi", "Madhya", "Antya",   // Punarvasu, Pushya, Ashlesha
+  "Antya", "Madhya", "Aadi",   // Magha, Purva Phalguni, Uttara Phalguni
+  "Aadi", "Madhya", "Antya",   // Hasta, Chitra, Swati
+  "Antya", "Madhya", "Aadi",   // Vishakha, Anuradha, Jyeshtha
+  "Aadi", "Madhya", "Antya",   // Mula, Purva Ashadha, Uttara Ashadha
+  "Antya", "Madhya", "Aadi",   // Shravana, Dhanishtha, Shatabhisha
+  "Aadi", "Madhya", "Antya",   // Purva Bhadrapada, Uttara Bhadrapada, Revati
 ];
 
 const SIGNS = [
@@ -76,119 +58,176 @@ function getSignIndex(lon: number): number {
   return Math.floor(((lon % 360) + 360) % 360 / 30);
 }
 
-function signDistance(fromLon: number, toLon: number): number {
-  const from = getSignIndex(fromLon);
-  const to = getSignIndex(toLon);
-  let diff = to - from;
-  if (diff <= 0) diff += 12;
-  return diff;
-}
 
 // ---------------------------------------------------------------------------
 // Dosha: Manglik
 // ---------------------------------------------------------------------------
 
-function computeManglik(chart: AstroChart): { present: boolean; details: string } {
-  const mars = chart.planets.find((p) => p.planet === "Mars");
-  if (!mars) return { present: false, details: "Mars not found" };
+export interface ManglikAnalysis {
+  present: boolean;
+  fromLagna: boolean;
+  fromMoon: boolean;
+  fromVenus: boolean;
+  marsSign: string;
+  houseFromLagna: number;
+  houseFromMoon: number;
+  houseFromVenus: number;
+  /** Commonly cited mitigating factors found in the chart (traditions differ). */
+  mitigations: string[];
+  details: string;
+}
 
-  const ascSign = getSignIndex(chart.ascendant.longitude);
+const MANGLIK_HOUSES = [1, 2, 4, 7, 8, 12];
+
+/** House (1-12) of `lon` counted from the sign of `fromLon` (whole-sign). */
+function houseFrom(fromLon: number, lon: number): number {
+  return ((getSignIndex(lon) - getSignIndex(fromLon) + 12) % 12) + 1;
+}
+
+/**
+ * Manglik (Kuja) dosha: Mars in the 1st, 2nd, 4th, 7th, 8th or 12th house
+ * counted from the Lagna or the Moon (Venus reported for reference, as some
+ * South Indian traditions also count from Venus).
+ */
+export function analyzeManglik(chart: AstroChart): ManglikAnalysis {
+  const mars = chart.planets.find((p) => p.planet === "Mars")!;
+  const moon = chart.planets.find((p) => p.planet === "Moon")!;
+  const venus = chart.planets.find((p) => p.planet === "Venus")!;
+  const jupiter = chart.planets.find((p) => p.planet === "Jupiter")!;
+
+  const hL = houseFrom(chart.ascendant.longitude, mars.longitude);
+  const hM = houseFrom(moon.longitude, mars.longitude);
+  const hV = houseFrom(venus.longitude, mars.longitude);
+  const fromLagna = MANGLIK_HOUSES.includes(hL);
+  const fromMoon = MANGLIK_HOUSES.includes(hM);
+  const fromVenus = MANGLIK_HOUSES.includes(hV);
+
+  const mitigations: string[] = [];
   const marsSign = getSignIndex(mars.longitude);
+  if (marsSign === 0 || marsSign === 7) mitigations.push(`Mars is in its own sign (${SIGNS[marsSign]})`);
+  if (marsSign === 9) mitigations.push("Mars is exalted in Capricorn");
+  if (getSignIndex(jupiter.longitude) === marsSign) mitigations.push("Jupiter is conjunct Mars");
 
-  const manglikHouses = [1, 2, 4, 7, 8, 12]; // houses from ascendant
-  const marsHouse = mars.house;
+  const present = fromLagna || fromMoon;
+  const sources = [fromLagna && `house ${hL} from Lagna`, fromMoon && `house ${hM} from Moon`].filter(Boolean);
+  const details = present
+    ? `Mars in ${SIGNS[marsSign]} falls in ${sources.join(" and ")}${mitigations.length ? `. Mitigating factors: ${mitigations.join("; ")}` : ""}`
+    : `Mars in ${SIGNS[marsSign]} is in house ${hL} from Lagna and house ${hM} from Moon — not a Manglik position`;
 
-  const isManglik = manglikHouses.includes(marsHouse);
+  return {
+    present,
+    fromLagna,
+    fromMoon,
+    fromVenus,
+    marsSign: SIGNS[marsSign],
+    houseFromLagna: hL,
+    houseFromMoon: hM,
+    houseFromVenus: hV,
+    mitigations,
+    details,
+  };
+}
 
-  // Check for cancellation (Vaishya/Vrishchik exceptions)
-  let cancellation = false;
-  let cancelReason = "";
-
-  // Jupiter in 1st, 4th, 7th cancels Manglik
-  const jupiter = chart.planets.find((p) => p.planet === "Jupiter");
-  if (jupiter && jupiter.house === 1) {
-    cancellation = true;
-    cancelReason = "Jupiter in 1st house cancels Manglik";
-  }
-
-  // Mars retrograde reduces severity
-  const retroNote = mars.retrograde ? " (Mars retrograde — reduced effect)" : "";
-
-  const details = isManglik
-    ? `Mars in house ${marsHouse} (${mars.sign})${retroNote}${cancellation ? `. Cancellation: ${cancelReason}` : ""}`
-    : `Mars in house ${marsHouse} — not a Manglik position`;
-
-  return { present: isManglik && !cancellation, details };
+function computeManglik(chart: AstroChart): { present: boolean; details: string } {
+  const a = analyzeManglik(chart);
+  return { present: a.present, details: a.details };
 }
 
 // ---------------------------------------------------------------------------
 // Dosha: Kaal Sarp
 // ---------------------------------------------------------------------------
 
-function computeKaalSarp(chart: AstroChart): { present: boolean; details: string } {
-  const rahu = chart.planets.find((p) => p.planet === "Rahu");
-  const ketu = chart.planets.find((p) => p.planet === "Ketu");
-  if (!rahu || !ketu) return { present: false, details: "Rahu/Ketu not found" };
+/** The 12 named Kaal Sarp yogas, by the house Rahu occupies from the Lagna. */
+const KAAL_SARP_NAMES = [
+  "Anant", "Kulik", "Vasuki", "Shankhpal", "Padma", "Mahapadma",
+  "Takshak", "Karkotak", "Shankhachud", "Ghatak", "Vishdhar", "Sheshnag",
+];
 
-  const rahuSign = getSignIndex(rahu.longitude);
-  const ketuSign = getSignIndex(ketu.longitude);
+export interface KaalSarpAnalysis {
+  /** All seven planets lie on one side of the Rahu-Ketu axis. */
+  present: boolean;
+  /** Exactly one planet lies outside the hemmed half (often called partial). */
+  partial: boolean;
+  name: string | null;
+  rahuHouse: number;
+  rahuSign: string;
+  ketuSign: string;
+  outside: string[];
+  details: string;
+}
 
-  // Check if all 7 main planets (Sun..Saturn) are between Rahu and Ketu
-  // "Between" means in the clockwise arc from Rahu to Ketu
-  const mainPlanets = chart.planets.filter((p) =>
+/**
+ * Kaal Sarp: all seven planets (Sun to Saturn) within one 180° half of the
+ * zodiac bounded by Rahu and Ketu, measured by longitude.
+ */
+export function analyzeKaalSarp(chart: AstroChart): KaalSarpAnalysis {
+  const rahu = chart.planets.find((p) => p.planet === "Rahu")!;
+  const ketu = chart.planets.find((p) => p.planet === "Ketu")!;
+  const seven = chart.planets.filter((p) =>
     ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"].includes(p.planet),
   );
 
-  // Calculate Rahu-to-Ketu arc
-  let rahuToKetu = ketuSign - rahuSign;
-  if (rahuToKetu <= 0) rahuToKetu += 12;
+  // Arc from Rahu going forward in the zodiac (0-360).
+  const arc = (p: PlanetPosition) => (((p.longitude - rahu.longitude) % 360) + 360) % 360;
+  const firstHalf = seven.filter((p) => arc(p) < 180);   // Rahu -> Ketu
+  const secondHalf = seven.filter((p) => arc(p) >= 180); // Ketu -> Rahu
 
-  let allBetween = true;
-  let outsidePlanets: string[] = [];
+  const rahuHouse = houseFrom(chart.ascendant.longitude, rahu.longitude);
+  let present = false;
+  let partial = false;
+  let outside: string[] = [];
 
-  for (const p of mainPlanets) {
-    const pSign = getSignIndex(p.longitude);
-    let dist = pSign - rahuSign;
-    if (dist < 0) dist += 12;
-    if (dist > rahuToKetu) {
-      allBetween = false;
-      outsidePlanets.push(p.planet);
-    }
+  if (secondHalf.length === 0 || firstHalf.length === 0) {
+    present = true;
+  } else if (secondHalf.length === 1 || firstHalf.length === 1) {
+    partial = true;
+    const lone = secondHalf.length === 1 ? secondHalf : firstHalf;
+    outside = lone.map((p) => p.planet);
+  } else {
+    outside = (firstHalf.length < secondHalf.length ? firstHalf : secondHalf).map((p) => p.planet);
   }
 
-  const details = allBetween
-    ? `All planets between Rahu (${SIGNS[rahuSign]}) and Ketu (${SIGNS[ketuSign]})`
-    : `Planets outside Rahu-Ketu axis: ${outsidePlanets.join(", ")}`;
+  const name = present || partial ? KAAL_SARP_NAMES[rahuHouse - 1] : null;
+  const details = present
+    ? `All seven planets are hemmed between Rahu (${rahu.sign}) and Ketu (${ketu.sign}) — ${name} Kaal Sarp (Rahu in house ${rahuHouse} from Lagna)`
+    : partial
+      ? `Partial: only ${outside.join(", ")} lies outside the Rahu (${rahu.sign}) – Ketu (${ketu.sign}) axis`
+      : `Planets fall on both sides of the Rahu (${rahu.sign}) – Ketu (${ketu.sign}) axis — no Kaal Sarp`;
 
-  return { present: allBetween, details };
+  return { present, partial, name, rahuHouse, rahuSign: rahu.sign, ketuSign: ketu.sign, outside, details };
+}
+
+function computeKaalSarp(chart: AstroChart): { present: boolean; details: string } {
+  const a = analyzeKaalSarp(chart);
+  return { present: a.present, details: a.details };
 }
 
 // ---------------------------------------------------------------------------
 // Dosha: Sade Sati
 // ---------------------------------------------------------------------------
 
+/**
+ * Sade Sati right now: *transiting* Saturn in the 12th, 1st or 2nd sign from
+ * the natal Moon sign. (Natal Saturn is irrelevant to Sade Sati.)
+ */
 function computeSadeSati(chart: AstroChart): { present: boolean; details: string } {
-  const saturn = chart.planets.find((p) => p.planet === "Saturn");
   const moon = chart.planets.find((p) => p.planet === "Moon");
-  if (!saturn || !moon) return { present: false, details: "Saturn/Moon not found" };
+  if (!moon) return { present: false, details: "Moon not found" };
 
-  const saturnSign = getSignIndex(saturn.longitude);
   const moonSign = getSignIndex(moon.longitude);
+  const saturnSign = currentSaturnSignIndex();
+  const d = (saturnSign - moonSign + 12) % 12;
 
-  // Sade Sati: Saturn is in the sign 12th, 1st, or 2nd from Moon
-  const dist = signDistance(moonSign, saturnSign);
+  const phase = d === 11 ? "rising (Saturn in 12th from Moon)"
+    : d === 0 ? "peak (Saturn over the Moon sign)"
+    : d === 1 ? "setting (Saturn in 2nd from Moon)"
+    : null;
 
-  const isSadeSati = dist === 12 || dist === 1 || dist === 2;
+  const details = phase
+    ? `Transiting Saturn in ${SIGNS[saturnSign]}, natal Moon in ${SIGNS[moonSign]} — Sade Sati ${phase}`
+    : `Transiting Saturn in ${SIGNS[saturnSign]}, natal Moon in ${SIGNS[moonSign]} — no Sade Sati now`;
 
-  const phase = dist === 12 ? "rising (12th from Moon)" :
-                dist === 1 ? "peak (on Moon sign)" :
-                dist === 2 ? "setting (2nd from Moon)" : "none";
-
-  const details = isSadeSati
-    ? `Saturn in ${SIGNS[saturnSign]}, Moon in ${SIGNS[moonSign]} — Sade Sati phase: ${phase}`
-    : `Saturn in ${SIGNS[saturnSign]}, Moon in ${SIGNS[moonSign]} — no Sade Sati`;
-
-  return { present: isSadeSati, details };
+  return { present: phase !== null, details };
 }
 
 // ---------------------------------------------------------------------------
@@ -244,20 +283,21 @@ function computePitra(chart: AstroChart): { present: boolean; details: string } 
 // Dosha: Nadi
 // ---------------------------------------------------------------------------
 
+/**
+ * Nadi is a compatibility (Ashtakoota) factor: Nadi dosha exists only when
+ * both partners share the same Nadi. For a single chart we report the Nadi
+ * type and never flag a dosha.
+ */
 function computeNadi(chart: AstroChart): { present: boolean; details: string } {
   const moon = chart.planets.find((p) => p.planet === "Moon");
   if (!moon) return { present: false, details: "Moon not found" };
 
-  const nakIdx = Math.floor(((moon.longitude % 360) + 360) % 360 / (360 / 27));
+  const nakIdx = Math.floor((((moon.longitude % 360) + 360) % 360) / (360 / 27));
   const nadi = NAKSHATRA_NADI[nakIdx];
-
-  // For an individual chart, "Nadi Dosha" flags Aadi Nadi nakshatra
-  // (which can cause compatibility issues in marriage matching)
-  const isAadi = nadi === "Aadi";
-
-  const details = `Moon in ${moon.nakshatra} — Nadi: ${nadi}${isAadi ? " (potential compatibility concern)" : ""}`;
-
-  return { present: isAadi, details };
+  return {
+    present: false,
+    details: `Moon in ${moon.nakshatra} — ${nadi} Nadi. Nadi dosha applies only in marriage matching, when both partners share the same Nadi.`,
+  };
 }
 
 // ---------------------------------------------------------------------------

@@ -3,7 +3,7 @@
  * dosha analysis, Vimshottari Dasha, and caching into a single call.
  */
 
-import { geocodePlace, timezoneToOffset, type GeoResult } from "./geocoder";
+import { geocodePlace, utcOffsetForLocalTime, type GeoResult } from "./geocoder";
 import {
   calculateBirthChart,
   computeVimshottariDasha,
@@ -51,7 +51,7 @@ export async function computeChart(input: BirthInput): Promise<ChartResult> {
   const geo = await geocodePlace(input.placeOfBirth);
 
   // Convert local time to UTC
-  const offset = timezoneToOffset(geo.timezone);
+  const offset = utcOffsetForLocalTime(geo.timezone, year, month, day, hours, minutes);
   const localDecimalHours = hours + minutes / 60;
   const utcDecimalHours = localDecimalHours - offset;
 
