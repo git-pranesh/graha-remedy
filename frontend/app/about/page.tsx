@@ -78,11 +78,34 @@ export default function AboutPage() {
             </p>
             <ol style={{ paddingLeft: 24, marginBottom: 24, lineHeight: 1.8 }}>
               <li>The engine computes your exact Ascendant (Lagna), Moon sign, and planetary longitudes using sidereal Lahiri Ayanamsha.</li>
-              <li>It analyzes planetary dignities (exaltation, debilitation, combustion, moolatrikona).</li>
+              <li>It checks planetary dignity (exaltation and debilitation) and which planets are functional malefics for your Lagna.</li>
               <li>It computes your current Vimshottari Mahadasha and Antardasha periods.</li>
-              <li>It identifies key doshas (Mangal, Kaal Sarp, Sade Sati) deterministically.</li>
+              <li>It identifies key doshas deterministically: Manglik (Mars from Lagna and Moon), Kaal Sarp (all planets on one side of the Rahu–Ketu axis by longitude) and Sade Sati (transiting Saturn relative to your natal Moon).</li>
               <li>It cross-references your selected life problems with classical remedy rules to output targeted mantras, fasting schedules, and charity recommendations.</li>
             </ol>
+
+            <h2>Calculation Conventions</h2>
+            <ul>
+              <li><strong>Ephemeris:</strong> Swiss Ephemeris (apparent positions).</li>
+              <li><strong>Zodiac:</strong> sidereal, Lahiri (Chitrapaksha) ayanamsa; Rahu and Ketu from the mean lunar node.</li>
+              <li><strong>Houses:</strong> whole-sign houses from the Lagna.</li>
+              <li><strong>Time zones:</strong> the UTC offset in force on the birth date (including daylight saving and India&apos;s 1942–45 war time) from the IANA time-zone database; places from GeoNames.</li>
+              <li><strong>Dasha:</strong> Vimshottari, 365.25-day years.</li>
+              <li><strong>Panchang:</strong> the day runs from sunrise to the next sunrise; sunrise and sunset at the Sun&apos;s upper limb with standard refraction; moonrise and moonset at the centre of the Moon&apos;s disc; amanta months named by the solar sign entered, with Adhika months detected.</li>
+            </ul>
+
+            <h2>How We Check Accuracy</h2>
+            <p>
+              We compare our output with independently published panchang data. For New Delhi on 8 October 2026 and Chennai on 15 January
+              2027, sunrise, sunset, moonrise, moonset, nakshatra and yoga end times, Moon-sign change, Rahu Kalam, Yamaganda, Gulika, Abhijit
+              and Brahma Muhurta matched to the minute; tithi and karana end times differed by one to two minutes. Our choghadiya for Dallas
+              matched in 15 of 16 periods, the sixteenth by one minute. Saturn&apos;s sign changes from 2020 to 2028 match published transit
+              dates, and the 2026 Adhika Jyeshtha month is detected correctly. Times are rounded to the nearest minute.
+            </p>
+            <p>
+              Found a result that looks wrong? Please <Link href="/contact">tell us</Link> with the date, time and place — we check every report.
+              Our code is open source, so the calculations can be inspected by anyone.
+            </p>
 
             <div style={{ background: "var(--fill)", border: "1px solid var(--border)", borderRadius: 14, padding: "24px 28px", marginTop: 36, textAlign: "center" }}>
               <div style={{ color: "var(--turquoise-dark)", marginBottom: 8 }}>

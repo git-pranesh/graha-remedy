@@ -306,7 +306,7 @@ export default async function RemedyPage({ params }: PageProps) {
                 </li>
                 <li>
                   <Check size={16} className="feature-check" />
-                  <span><strong>100% Free Forever:</strong> No paywalls, no upsells, and no data tracking</span>
+                  <span><strong>Free:</strong> No paywalls, no upsells, no sign-up required</span>
                 </li>
               </ul>
 
