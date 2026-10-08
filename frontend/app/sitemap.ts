@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import type { MetadataRoute } from "next";
+import { TOOLS } from "../src/lib/tools";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
 const SEO_PAGES_DIR = path.resolve(process.cwd(), "../data/seo_pages");
@@ -21,6 +22,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily",
       priority: 0.9,
     },
+    {
+      url: `${SITE_URL}/calculators`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    ...TOOLS.map((t) => ({
+      url: `${SITE_URL}/${t.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    })),
     {
       url: `${SITE_URL}/about`,
       lastModified: new Date(),

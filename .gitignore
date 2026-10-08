@@ -41,3 +41,4 @@ backend/cache/
 
 # workspace scratch
 .freebuff/project-id
+frontend/tsconfig.tsbuildinfo

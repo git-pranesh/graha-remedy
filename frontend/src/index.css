@@ -3488,3 +3488,240 @@ body {
   color: inherit;
   text-decoration: underline;
 }
+
+/* ─── Standalone calculator pages ─────────────────────────────── */
+.tool-lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 8px 0 24px;
+}
+
+.tool-card {
+  background: var(--fill);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 0 0 32px;
+}
+
+.tool-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+@media (max-width: 560px) {
+  .tool-form-grid { grid-template-columns: 1fr; }
+  .seo-article.tool-article { padding: 28px 18px 36px; }
+}
+
+.tool-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--grey-mid);
+  cursor: pointer;
+}
+
+.tool-result {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 16px;
+}
+
+.tool-kicker {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--turquoise-dark);
+  margin: 0 0 4px;
+}
+
+.tool-headline {
+  font-size: 1.6rem;
+  font-weight: 750;
+  color: var(--ink);
+  margin: 0 0 16px;
+  line-height: 1.25;
+}
+
+.tool-subhead {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 24px 0 10px;
+}
+
+.tool-table-scroll {
+  overflow-x: auto;
+  margin: 12px 0 16px;
+}
+
+.tool-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: var(--card-bg);
+}
+
+.tool-table th,
+.tool-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+  vertical-align: top;
+}
+
+.tool-table tbody th {
+  width: 42%;
+  font-weight: 600;
+  color: var(--grey-mid);
+}
+
+.tool-table thead th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--grey-mid);
+  background: var(--tint);
+}
+
+.tool-table-wide { min-width: 520px; }
+.tool-table tr.current td { background: var(--turquoise-bg); font-weight: 600; }
+
+.tool-note {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--grey-mid);
+  margin: 12px 0;
+}
+
+.tool-note-warn {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  color: var(--ink);
+}
+
+.tool-next {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 16px;
+}
+
+.tool-remedy-link {
+  font-weight: 600;
+  color: var(--turquoise-dark);
+  text-decoration: none;
+}
+
+.tool-remedy-link:hover { text-decoration: underline; }
+
+.tool-result-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: var(--grey-mid);
+}
+
+.tool-timeline { display: flex; flex-direction: column; gap: 6px; }
+
+.tool-dasha {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  padding: 8px 12px;
+}
+
+.tool-dasha.current { border-color: var(--turquoise-border); }
+.tool-dasha summary { cursor: pointer; font-size: 0.92rem; }
+.tool-dasha .tool-table { margin-top: 8px; }
+
+.tool-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: var(--turquoise-bg);
+  color: var(--turquoise-dark);
+}
+
+.tool-faq {
+  border-bottom: 1px solid var(--border-light);
+  padding: 12px 0;
+}
+
+.tool-faq summary {
+  cursor: pointer;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.tool-faq p { margin: 8px 0 0; }
+
+.tool-related { margin-top: 40px; }
+.tool-related h2 { font-size: 1.2rem; margin-bottom: 12px; }
+
+.tool-related ul,
+.tool-hub {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.tool-related a {
+  display: block;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.tool-related a:hover { background: var(--tint); }
+
+.tool-hub { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 24px; }
+
+.tool-hub-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tool-hub-card strong { font-size: 1.05rem; color: var(--ink); }
+.tool-hub-card:hover { background: var(--tint); }
+
+.tool-hub-go {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 650;
+  color: var(--turquoise-dark);
+}

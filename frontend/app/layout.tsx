@@ -10,6 +10,7 @@ const SOURCE_URL = "https://github.com/git-pranesh/graha-remedy";
 // oxlint-disable-next-line react/only-export-components -- App Router metadata belongs in the layout.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  icons: { icon: "/favicon.svg" },
   title: {
     default: "Graha Remedy | Free Vedic Astrology Remedies",
     template: "%s | Graha Remedy",
@@ -99,7 +100,15 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           <a href={SOURCE_URL} rel="noopener" target="_blank">
             Source code
           </a>
-          . Astronomical calculations use the Swiss Ephemeris.
+          . Astronomical calculations use the Swiss Ephemeris. Place data from{" "}
+          <a href="https://www.geonames.org" rel="noopener" target="_blank">
+            GeoNames
+          </a>{" "}
+          (
+          <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">
+            CC BY 4.0
+          </a>
+          ).
         </div>
       </body>
     </html>

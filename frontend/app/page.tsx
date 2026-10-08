@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Calendar, Compass, Orbit, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Calendar, Compass, Orbit, Sparkles } from "lucide-react";
+import { TOOLS } from "../src/lib/tools";
 import SavedReportView from "../src/components/SavedReportView";
 import Wizard from "../src/components/Wizard";
 import { initAnalytics } from "../src/lib/analytics";
@@ -60,7 +61,10 @@ export default function Home() {
 
           <nav className="home-nav-links">
             <Link href="/" className="nav-link active">
-              <Compass size={15} /> Calculator
+              <Compass size={15} /> Remedy Finder
+            </Link>
+            <Link href="/calculators" className="nav-link">
+              <Calculator size={15} /> Calculators
             </Link>
             <Link href="/remedies" className="nav-link">
               <BookOpen size={15} /> Mantra &amp; Remedy Library <span className="nav-badge">18 Guides</span>
@@ -72,6 +76,29 @@ export default function Home() {
       {/* Main Calculator / Wizard */}
       <main className="home-main">
         <Wizard />
+
+        {/* Standalone calculators */}
+        <section className="home-library-section">
+          <div className="home-library-header">
+            <span className="home-library-badge">
+              <Calculator size={13} /> Free Calculators
+            </span>
+            <h2 className="home-library-title">Vedic Astrology Calculators</h2>
+            <p className="home-library-desc">
+              Check a single factor of your birth chart — same Swiss Ephemeris engine, Lahiri ayanamsa.
+            </p>
+          </div>
+          <div className="home-mantra-grid">
+            {TOOLS.map((t) => (
+              <Link key={t.slug} href={`/${t.slug}`} className="home-mantra-card">
+                <div className="home-mantra-info">
+                  <span className="home-mantra-name">{t.name}</span>
+                </div>
+                <ArrowRight size={14} className="home-mantra-arrow" />
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* Content Discovery Section: The 9 Navagraha Mantras */}
         <section className="home-library-section">
@@ -138,9 +165,20 @@ export default function Home() {
           </div>
 
           <div className="home-footer-group">
+            <h4 className="footer-heading">Calculators</h4>
+            <div className="footer-links-col">
+              {TOOLS.map((t) => (
+                <Link key={t.slug} href={`/${t.slug}`}>
+                  {t.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="home-footer-group">
             <h4 className="footer-heading">Resources &amp; Legal</h4>
             <div className="footer-links-col">
-              <Link href="/">Birth Chart Calculator</Link>
+              <Link href="/calculators">All Calculators</Link>
               <Link href="/remedies">Mantra &amp; Remedy Library</Link>
               <Link href="/about">About &amp; Methodology</Link>
               <Link href="/contact">Contact &amp; Corrections</Link>

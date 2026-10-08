@@ -36,10 +36,9 @@ export async function generateStaticParams() {
     const filenames = await fs.readdir(SEO_PAGES_DIR);
     const jsonFiles = filenames.filter((f) => f.endsWith(".json"));
     const slugs = new Set<string>();
+    // Only canonical (hyphenated) slugs are pages; underscore variants redirect (next.config.js).
     for (const f of jsonFiles) {
-      const base = f.slice(0, -".json".length);
-      slugs.add(base);
-      slugs.add(base.replace(/_/g, "-"));
+      slugs.add(f.slice(0, -".json".length).replace(/_/g, "-"));
     }
     return [...slugs].map((slug) => ({ slug }));
   } catch (error) {

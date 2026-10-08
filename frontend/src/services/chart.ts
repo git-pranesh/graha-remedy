@@ -1,6 +1,7 @@
 /**
  * Chart Service — orchestrates geocoding, Swiss Ephemeris calculation,
- * dosha analysis, Vimshottari Dasha, and caching into a single call.
+ * dosha analysis and Vimshottari Dasha into a single call. Not cached: results
+ * include time-dependent values (running dasha, current Sade Sati).
  */
 
 import { geocodePlace, utcOffsetForLocalTime, type GeoResult } from "./geocoder";
@@ -11,7 +12,6 @@ import {
   type VimshottariDasha,
 } from "./astro-engine";
 import { computeDoshas, type DoshaFlags } from "./dosha";
-import { getCachedChart, setCachedChart, getCacheStats } from "./chart-cache";
 import { findPlace } from "./places";
 
 // ---------------------------------------------------------------------------
@@ -91,19 +91,6 @@ export async function computeChart(input: BirthInput): Promise<ChartResult> {
   const localDecimalHours = hours + minutes / 60;
   const utcDecimalHours = localDecimalHours - offset;
 
-  // --- Check cache (using UTC-adjusted coordinates) ---
-  const cached = getCachedChart<ChartResult>(
-    year, month, day,
-    Math.floor(utcDecimalHours),
-    Math.round((utcDecimalHours % 1) * 60),
-    geo.latitude,
-    geo.longitude,
-  );
-
-  if (cached) {
-    return { ...cached, cached: true };
-  }
-
   // --- Compute chart ---
   const chart = calculateBirthChart(
     year, month, day,
@@ -149,17 +136,6 @@ export async function computeChart(input: BirthInput): Promise<ChartResult> {
     currentLon,
   };
 
-  // --- Cache it ---
-  setCachedChart(
-    year, month, day,
-    Math.floor(utcDecimalHours),
-    Math.round((utcDecimalHours % 1) * 60),
-    geo.latitude,
-    geo.longitude,
-    result,
-  );
-
   return result;
 }
 
-export { getCacheStats };

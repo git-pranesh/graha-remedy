@@ -221,7 +221,7 @@ const SPECIAL_SOLUTIONS: GuideItem[] = [
     badge: "Protection",
   },
   {
-    slug: "sun_career_delay",
+    slug: "sun-career-delay",
     title: "Sun Remedies for Career Delay in Vedic Astrology",
     planet: "Sun",
     sanskrit: "सूर्य",
@@ -230,7 +230,7 @@ const SPECIAL_SOLUTIONS: GuideItem[] = [
     summary: "Detailed Vedic guidance when professional recognition, status, or leadership is delayed.",
   },
   {
-    slug: "sun_promotion_blocks",
+    slug: "sun-promotion-blocks",
     title: "Vedic Remedies for Promotion Blocks: Sun (Surya)",
     planet: "Sun",
     sanskrit: "सूर्य",
@@ -239,7 +239,7 @@ const SPECIAL_SOLUTIONS: GuideItem[] = [
     summary: "Spiritual remedies to navigate workplace hierarchy friction and earn fair advancement.",
   },
   {
-    slug: "sun_authority_issues",
+    slug: "sun-authority-issues",
     title: "Vedic Remedies for Sun-Related Authority Issues",
     planet: "Sun",
     sanskrit: "सूर्य",
@@ -248,7 +248,7 @@ const SPECIAL_SOLUTIONS: GuideItem[] = [
     summary: "Balancing healthy self-respect with humility in interactions with superiors and elders.",
   },
   {
-    slug: "sun_job_loss",
+    slug: "sun-job-loss",
     title: "Vedic Remedies for Job Loss: Strengthen Sun (Surya)",
     planet: "Sun",
     sanskrit: "सूर्य",
@@ -257,7 +257,7 @@ const SPECIAL_SOLUTIONS: GuideItem[] = [
     summary: "Rebuilding inner dignity, professional confidence, and purpose after career setbacks.",
   },
   {
-    slug: "sun_business_failure",
+    slug: "sun-business-failure",
     title: "Vedic Remedies for Business Failure: Sun (Surya)",
     planet: "Sun",
     sanskrit: "सूर्य",
