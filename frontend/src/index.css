@@ -3725,3 +3725,70 @@ body {
   font-weight: 650;
   color: var(--turquoise-dark);
 }
+
+/* ─── Panchang pages ──────────────────────────────────────────── */
+.pc-table { margin: 8px 0 16px; }
+.pc-el { display: inline; }
+.pc-sep { color: var(--grey-mid); }
+.pc-note { color: var(--grey-mid); font-size: 0.85em; }
+
+.pc-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+  background: var(--border-strong);
+}
+.pc-dot.good { background: var(--green); }
+.pc-dot.neutral { background: var(--turquoise); }
+.pc-dot.bad { background: var(--red); }
+
+.pc-chog caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 650;
+  color: var(--ink);
+  padding: 4px 0 8px;
+}
+
+.pc-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 20px;
+  margin: 8px 0 20px;
+  border-radius: var(--radius);
+  background: var(--turquoise-bg);
+  border: 1px solid var(--turquoise-border);
+}
+.pc-hero-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--turquoise-dark); }
+.pc-hero-time { font-size: 1.6rem; font-weight: 750; color: var(--ink); }
+.pc-hero-status { font-size: 0.9rem; color: var(--grey-mid); }
+
+.pc-city-links {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 6px 12px;
+}
+.pc-city-links a { color: var(--turquoise-dark); text-decoration: none; font-weight: 600; }
+.pc-city-links a:hover { text-decoration: underline; }
+
+/* Homepage nav: wrap brand above a horizontally scrollable link row on small screens */
+@media (max-width: 860px) {
+  .home-nav-inner { flex-wrap: wrap; gap: 8px; padding: 10px 16px; }
+  .home-nav-links {
+    width: 100%;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .home-nav-links::-webkit-scrollbar { display: none; }
+  .nav-link { white-space: nowrap; flex: 0 0 auto; font-size: 0.85rem; padding: 6px 10px; }
+  .home-nav-links .nav-badge { display: none; }
+}

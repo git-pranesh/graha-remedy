@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Calculator, Calendar, Compass, Orbit, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Calendar, Clock, Compass, Orbit, Sparkles, Sun } from "lucide-react";
 import { TOOLS } from "../src/lib/tools";
 import SavedReportView from "../src/components/SavedReportView";
 import Wizard from "../src/components/Wizard";
@@ -62,6 +62,12 @@ export default function Home() {
           <nav className="home-nav-links">
             <Link href="/" className="nav-link active">
               <Compass size={15} /> Remedy Finder
+            </Link>
+            <Link href="/panchang" className="nav-link">
+              <Sun size={15} /> Panchang
+            </Link>
+            <Link href="/rahu-kaal" className="nav-link">
+              <Clock size={15} /> Rahu Kaal
             </Link>
             <Link href="/calculators" className="nav-link">
               <Calculator size={15} /> Calculators
@@ -161,6 +167,19 @@ export default function Home() {
                   {p.name} Mantra
                 </Link>
               ))}
+            </div>
+          </div>
+
+          <div className="home-footer-group">
+            <h4 className="footer-heading">Daily Panchang</h4>
+            <div className="footer-links-col">
+              <Link href="/panchang">Today&apos;s Panchang</Link>
+              <Link href="/rahu-kaal">Rahu Kaal Today</Link>
+              <Link href="/choghadiya">Choghadiya Today</Link>
+              <Link href="/panchang/delhi">Delhi Panchang</Link>
+              <Link href="/panchang/mumbai">Mumbai Panchang</Link>
+              <Link href="/rahu-kaal/bengaluru">Bengaluru Rahu Kaal</Link>
+              <Link href="/choghadiya/ahmedabad">Ahmedabad Choghadiya</Link>
             </div>
           </div>
 

@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { MetadataRoute } from "next";
 import { TOOLS } from "../src/lib/tools";
+import { CITIES } from "../src/lib/cities";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
 const SEO_PAGES_DIR = path.resolve(process.cwd(), "../data/seo_pages");
@@ -34,6 +35,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
+    ...["panchang", "rahu-kaal", "choghadiya"].flatMap((section) => [
+      { url: `${SITE_URL}/${section}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
+      ...CITIES.map((c) => ({
+        url: `${SITE_URL}/${section}/${c.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "daily" as const,
+        priority: 0.8,
+      })),
+    ]),
     {
       url: `${SITE_URL}/about`,
       lastModified: new Date(),
