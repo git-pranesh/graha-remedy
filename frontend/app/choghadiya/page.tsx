@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import StaleGuard from "@/src/components/panchang/StaleGuard";
 import ContentShell, { PANCHANG_METHOD_NOTE } from "@/src/components/site/ContentShell";
 import { ChoghadiyaTable } from "@/src/components/panchang/PanchangViews";
 import CityIndex from "@/src/components/panchang/CityIndex";
@@ -7,7 +8,7 @@ import { cityBySlug } from "@/src/lib/cities";
 import { cityDayTimes, cityToday } from "@/src/lib/panchang-data";
 import { fmtDateLong } from "@/src/lib/panchang-format";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const TITLE = "Choghadiya Today – Day and Night Choghadiya Timings for Your City";
 const DESCRIPTION =
@@ -29,6 +30,7 @@ export default function ChoghadiyaHub() {
   return (
     <ContentShell crumbs={[{ name: "Choghadiya", path: "/choghadiya" }]} footerNote={PANCHANG_METHOD_NOTE}>
       <h1 className="seo-article-title">Choghadiya Today</h1>
+      <StaleGuard date={date} timezone={city.timezone} />
       <p className="tool-kicker">{fmtDateLong(date)} · shown for Ahmedabad</p>
       <p className="tool-lead">
         Choghadiya times depend on local sunrise and sunset, so they differ between cities by up to an hour or more. Below is today&apos;s

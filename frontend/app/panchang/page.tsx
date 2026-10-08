@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import StaleGuard from "@/src/components/panchang/StaleGuard";
 import ContentShell, { PANCHANG_METHOD_NOTE } from "@/src/components/site/ContentShell";
 import { Muhurtas, PanchangCore, SunMoon } from "@/src/components/panchang/PanchangViews";
 import PanchangExplorer from "@/src/components/panchang/PanchangExplorer";
@@ -8,7 +9,7 @@ import { cityBySlug } from "@/src/lib/cities";
 import { cityPanchang, cityToday } from "@/src/lib/panchang-data";
 import { fmtDateLong, fmtTime } from "@/src/lib/panchang-format";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const TITLE = "Today's Panchang – Tithi, Nakshatra, Yoga, Karana, Rahu Kaal for Your City";
 const DESCRIPTION =
@@ -29,6 +30,7 @@ export default function PanchangHub() {
   return (
     <ContentShell crumbs={[{ name: "Panchang", path: "/panchang" }]} footerNote={PANCHANG_METHOD_NOTE}>
       <h1 className="seo-article-title">Today&apos;s Panchang</h1>
+      <StaleGuard date={date} timezone={delhi.timezone} />
       <p className="tool-kicker">{fmtDateLong(date)} · shown for New Delhi</p>
       <p className="tool-lead">
         The tithi at sunrise today is <strong>{p.tithi[0].name}</strong>

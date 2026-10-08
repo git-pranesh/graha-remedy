@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import StaleGuard from "@/src/components/panchang/StaleGuard";
 import ContentShell, { PANCHANG_METHOD_NOTE } from "@/src/components/site/ContentShell";
 import { HoraTable, Muhurtas, PanchangCore, SunMoon } from "@/src/components/panchang/PanchangViews";
 import PanchangExplorer from "@/src/components/panchang/PanchangExplorer";
@@ -8,7 +9,13 @@ import { CITIES, cityBySlug, relatedCities } from "@/src/lib/cities";
 import { cityPanchang, cityToday } from "@/src/lib/panchang-data";
 import { fmtDateLong, fmtTime, isNow } from "@/src/lib/panchang-format";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
+export const dynamicParams = false;
+
+// oxlint-disable-next-line react/only-export-components -- App Router build-time export.
+export function generateStaticParams() {
+  return CITIES.map((c) => ({ city: c.slug }));
+}
 
 interface Props {
   params: Promise<{ city: string }>;
@@ -77,6 +84,7 @@ export default async function CityPanchangPage({ params }: Props) {
       footerNote={PANCHANG_METHOD_NOTE}
     >
       <h1 className="seo-article-title">Panchang Today in {city.name}</h1>
+      <StaleGuard date={date} timezone={city.timezone} />
       <p className="tool-kicker">{fmtDateLong(date)} · {city.region ? `${city.region}, ` : ""}{city.country}</p>
       <p className="tool-lead">
         Today in {city.name} the tithi at sunrise is <strong>{tithiNow.name}</strong>

@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import StaleGuard from "@/src/components/panchang/StaleGuard";
 import ContentShell, { PANCHANG_METHOD_NOTE } from "@/src/components/site/ContentShell";
 import { ChoghadiyaTable } from "@/src/components/panchang/PanchangViews";
 import PanchangExplorer from "@/src/components/panchang/PanchangExplorer";
-import { cityBySlug, relatedCities } from "@/src/lib/cities";
+import { CITIES, cityBySlug, relatedCities } from "@/src/lib/cities";
 import { cityDayTimes, cityToday } from "@/src/lib/panchang-data";
 import { fmtDateLong, fmtRange, fmtTime, isNow } from "@/src/lib/panchang-format";
 import type { ChoghadiyaSlot, TimeSpan } from "@/src/services/panchang";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
+export const dynamicParams = false;
+
+// oxlint-disable-next-line react/only-export-components -- App Router build-time export.
+export function generateStaticParams() {
+  return CITIES.map((c) => ({ city: c.slug }));
+}
 
 interface Props {
   params: Promise<{ city: string }>;
@@ -52,6 +59,7 @@ export default async function ChoghadiyaCityPage({ params }: Props) {
       footerNote={PANCHANG_METHOD_NOTE}
     >
       <h1 className="seo-article-title">Choghadiya Today in {city.name}</h1>
+      <StaleGuard date={date} timezone={city.timezone} />
       <p className="tool-kicker">{fmtDateLong(date)} · {t.weekday.english}</p>
       {current && (
         <div className="pc-hero">

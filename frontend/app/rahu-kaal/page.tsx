@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import StaleGuard from "@/src/components/panchang/StaleGuard";
 import ContentShell, { PANCHANG_METHOD_NOTE } from "@/src/components/site/ContentShell";
 import { CITIES } from "@/src/lib/cities";
 import { cityDayTimes, cityToday } from "@/src/lib/panchang-data";
 import { fmtDateLong, fmtRange } from "@/src/lib/panchang-format";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const TITLE = "Rahu Kaal Today – Rahu Kalam Timings for Indian and World Cities";
 const DESCRIPTION =
@@ -25,6 +26,7 @@ export default function RahuKaalHub() {
   return (
     <ContentShell crumbs={[{ name: "Rahu Kaal", path: "/rahu-kaal" }]} footerNote={PANCHANG_METHOD_NOTE}>
       <h1 className="seo-article-title">Rahu Kaal Today</h1>
+      <StaleGuard date={istDate} timezone={"Asia/Kolkata"} />
       <p className="tool-kicker">{fmtDateLong(istDate)} (India)</p>
       <p className="tool-lead">
         Rahu Kalam is one of the eight equal parts of daytime, chosen by the weekday, so it starts at a different time in every city. The
