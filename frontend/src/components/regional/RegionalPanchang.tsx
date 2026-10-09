@@ -107,6 +107,7 @@ export default function RegionalPanchang({ lang, city, hub = false }: { lang: So
         </ul>
         <p>
           {lang === "te" ? <Link href="/ta/panchangam">தமிழ் பஞ்சாங்கம்</Link> : <Link href="/te/panchangam">తెలుగు పంచాంగం</Link>} ·{" "}
+          <Link href={`/${lang}/calendar/${date.slice(0, 4)}/${Number(date.slice(5, 7))}`}>{lang === "te" ? "తెలుగు క్యాలెండర్" : "தமிழ் காலண்டர்"} {date.slice(0, 4)}</Link> ·{" "}
           <Link href={`/panchang/${city.slug}`}>Panchang in English (any date or place)</Link> · <Link href="/hi/panchang">हिन्दी पंचांग</Link>
         </p>
       </section>

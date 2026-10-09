@@ -58,6 +58,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(["te", "ta"] as const).flatMap((l) => [
       { url: `${SITE_URL}/${l}/panchangam`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
       ...REGIONAL_CITIES[l].map((c) => ({ url: `${SITE_URL}/${l}/panchangam/${c}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 })),
+      ...[2026, 2027].flatMap((y) => [
+        { url: `${SITE_URL}/${l}/calendar/${y}`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 },
+        ...Array.from({ length: 12 }, (_, i) => ({ url: `${SITE_URL}/${l}/calendar/${y}/${i + 1}`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 })),
+      ]),
     ]),
     { url: `${SITE_URL}/hi`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
     ...["panchang", "choghadiya"].flatMap((section) => [
