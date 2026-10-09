@@ -128,7 +128,7 @@ function elongation(jd: number): number {
 
 export const tithiIndex = (jd: number) => Math.floor(elongation(jd) / 12);
 const karanaIndex = (jd: number) => Math.floor(elongation(jd) / 6);
-const nakshatraIndex = (jd: number) => Math.floor(siderealLon(jd, Planet.Moon) / (360 / 27));
+export const nakshatraIndex = (jd: number) => Math.floor(siderealLon(jd, Planet.Moon) / (360 / 27));
 const yogaIndex = (jd: number) =>
   Math.floor(norm360(siderealLon(jd, Planet.Sun) + siderealLon(jd, Planet.Moon)) / (360 / 27));
 export const sunSignIndex = (jd: number) => Math.floor(siderealLon(jd, Planet.Sun) / 30);
@@ -210,6 +210,75 @@ export function lunarMonthAt(jd: number): { amantaIdx: number; adhika: boolean }
   return { amantaIdx: (s1 + 1) % 12, adhika: s1 === sunSignIndex(nm2) };
 }
 
+
+/** 60-year cycle (Prabhava = 0). South Indian year = (Shaka + 11) mod 60; Shaka 1948 = Parabhava. */
+export const SAMVATSARAS = [
+  "Prabhava", "Vibhava", "Shukla", "Pramoda", "Prajapati", "Angirasa", "Shrimukha", "Bhava", "Yuva", "Dhatu",
+  "Ishvara", "Bahudhanya", "Pramathi", "Vikrama", "Vrisha", "Chitrabhanu", "Svabhanu", "Tarana", "Parthiva", "Vyaya",
+  "Sarvajit", "Sarvadhari", "Virodhi", "Vikriti", "Khara", "Nandana", "Vijaya", "Jaya", "Manmatha", "Durmukhi",
+  "Hevilambi", "Vilambi", "Vikari", "Sharvari", "Plava", "Shubhakrit", "Shobhakrit", "Krodhi", "Vishvavasu", "Parabhava",
+  "Plavanga", "Kilaka", "Saumya", "Sadharana", "Virodhikrit", "Paridhavi", "Pramadi", "Ananda", "Rakshasa", "Nala",
+  "Pingala", "Kalayukti", "Siddharthi", "Raudra", "Durmati", "Dundubhi", "Rudhirodgari", "Raktakshi", "Krodhana", "Akshaya",
+];
+
+/** Tamil solar months, indexed by the Sun's sidereal sign (0 = Mesha = Chithirai). */
+export const TAMIL_MONTHS = [
+  "Chithirai", "Vaikasi", "Aani", "Aadi", "Avani", "Purattasi", "Aippasi", "Karthigai", "Margazhi", "Thai", "Maasi", "Panguni",
+];
+
+/**
+ * Tamil solar date: month = Sun's sidereal sign at sunset; day 1 is the day of the Sankranti if it
+ * occurs before sunset, otherwise the following day.
+ */
+export function tamilSolarDate(sunsetJd: number, sunsetOn: (jd: number) => number): { monthIdx: number; day: number } {
+  const signAt = (jd: number) => Math.floor(siderealLon(jd, Planet.Sun) / 30);
+  const m = signAt(sunsetJd);
+  let day = 1;
+  let ss = sunsetJd;
+  for (let i = 0; i < 33; i++) {
+    const prev = sunsetOn(ss - 1);
+    if (signAt(prev) !== m) break;
+    day++;
+    ss = prev;
+  }
+  return { monthIdx: m, day };
+}
+
+// ---------------------------------------------------------------------------
+// Durmuhurtham, Varjyam, Amrit Kalam
+// ---------------------------------------------------------------------------
+
+/** Daytime muhurtas (1-15) that are Durmuhurtham, by weekday (0 = Sunday). */
+const DUR_MUHURTA = [[14], [9, 12], [4], [8], [6, 12], [4, 9], [1, 2]];
+
+/** Ghatis (of 60) after the nakshatra begins at which Varjyam / Amrit Kalam start; each lasts 4 ghatis. */
+const VARJYAM_GHATI = [50, 24, 30, 40, 14, 21, 30, 20, 32, 30, 20, 18, 21, 20, 14, 14, 10, 14, 20, 24, 20, 10, 10, 18, 16, 24, 30];
+const AMRIT_GHATI = [42, 48, 54, 52, 38, 35, 54, 44, 56, 54, 44, 42, 45, 44, 38, 38, 34, 38, 44, 48, 44, 34, 34, 42, 40, 48, 54];
+
+export function durMuhurtham(dayStart: number, dayEnd: number, weekdayIdx: number): Array<[number, number]> {
+  const m = (dayEnd - dayStart) / 15;
+  return DUR_MUHURTA[weekdayIdx].map((k) => [dayStart + (k - 1) * m, dayStart + k * m]);
+}
+
+/** Varjyam and Amrit Kalam windows that begin within [from, to) — a window belongs to the panchang day in which it starts. */
+export function nakshatraWindows(from: number, to: number): { varjyam: Array<[number, number]>; amrit: Array<[number, number]> } {
+  const segs = segments(nakshatraIndex, from - 1.3, to + 1.3, 1 / 12);
+  const varjyam: Array<[number, number]> = [];
+  const amrit: Array<[number, number]> = [];
+  for (let i = 1; i < segs.length; i++) {
+    const start = segs[i - 1].endJd!;
+    const end = segs[i].endJd;
+    if (end === null) continue;
+    const L = end - start;
+    const n = segs[i].index;
+    const v: [number, number] = [start + (VARJYAM_GHATI[n] / 60) * L, start + ((VARJYAM_GHATI[n] + 4) / 60) * L];
+    const a: [number, number] = [start + (AMRIT_GHATI[n] / 60) * L, start + ((AMRIT_GHATI[n] + 4) / 60) * L];
+    if (v[0] >= from && v[0] < to) varjyam.push(v);
+    if (a[0] >= from && a[0] < to) amrit.push(a);
+  }
+  return { varjyam, amrit };
+}
+
 // ---------------------------------------------------------------------------
 // Public types
 // ---------------------------------------------------------------------------
@@ -259,6 +328,13 @@ export interface Panchang {
   vikramSamvat: number;
   shakaSamvat: number;
   ayanamsa: number;
+  /** 60-year samvatsara (Telugu/Kannada/Marathi: changes at Ugadi). */
+  samvatsara: string;
+  /** Tamil solar month and date. */
+  tamilDate: { month: string; day: number };
+  durMuhurtham: TimeSpan[];
+  varjyam: TimeSpan[];
+  amritKalam: TimeSpan[];
   rahuKalam: TimeSpan;
   yamaganda: TimeSpan;
   gulikaKalam: TimeSpan;
@@ -429,9 +505,20 @@ export function computePanchang(date: string, latitude: number, longitude: numbe
   const vikramSamvat = y + (beforeChaitra ? 56 : 57);
 
   const { _jd, ...times } = t;
-  void _jd;
+  const dayEnd = _jd.dayEnd;
+  const span2 = (w: [number, number]): TimeSpan => ({ start: iso(w[0])!, end: iso(w[1])! });
+  const win = nakshatraWindows(dayStart, panchangEnd);
+  const weekdayIdx = WEEKDAYS.findIndex((w) => w.english === t.weekday.english);
+  const sunsetOn = (jd: number) => riseSet(jd - 0.6, Planet.Sun, RiseTransitFlag.Set, latitude, longitude) ?? jd;
+  const tamil = tamilSolarDate(dayEnd, sunsetOn);
+  const shaka = vikramSamvat - 135;
   return {
     ...times,
+    samvatsara: SAMVATSARAS[(shaka + 11) % 60],
+    tamilDate: { month: TAMIL_MONTHS[tamil.monthIdx], day: tamil.day },
+    durMuhurtham: durMuhurtham(dayStart, dayEnd, weekdayIdx).map(span2),
+    varjyam: win.varjyam.map(span2),
+    amritKalam: win.amrit.map(span2),
     latitude,
     longitude,
     moonrise: moonrise !== null && moonrise < panchangEnd ? iso(moonrise) : null,

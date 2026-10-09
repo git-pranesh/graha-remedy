@@ -39,6 +39,8 @@ export function PanchangCore({ p, lang = "en" }: { p: Panchang; lang?: Lang }) {
           </td>
         </tr>
         <tr><th>{l.samvat}</th><td>{l.vikram} {p.vikramSamvat} · {l.shaka} {p.shakaSamvat}</td></tr>
+        <tr><th>{l.samvatsara}</th><td>{p.samvatsara}</td></tr>
+        <tr><th>{l.tamilDate}</th><td>{p.tamilDate.month} {p.tamilDate.day}</td></tr>
         <tr><th>{l.moonSign}</th><td><Elements items={p.moonSign} base={base} lang={lang} kind="sign" /></td></tr>
         <tr><th>{l.sunSign}</th><td>{tr(lang, "sign", p.sunSign)}</td></tr>
       </tbody>
@@ -63,12 +65,12 @@ export function SunMoon({ p, lang = "en" }: { p: Panchang; lang?: Lang }) {
   );
 }
 
-export function Muhurtas({ t, nowMs, lang = "en" }: { t: Omit<DayTimes, "_jd">; nowMs?: number; lang?: Lang }) {
+export function Muhurtas({ t, nowMs, lang = "en" }: { t: Omit<DayTimes, "_jd"> & Partial<Pick<Panchang, "durMuhurtham" | "varjyam" | "amritKalam">>; nowMs?: number; lang?: Lang }) {
   const base = t.date;
   const l = L[lang];
   const wed = t.weekday.english === "Wednesday";
   const row = (label: string, span: { start: string; end: string }, cls: string, note?: string) => (
-    <tr className={nowMs !== undefined && isNow(span, nowMs) ? "current" : undefined}>
+    <tr key={`${label}-${span.start}`} className={nowMs !== undefined && isNow(span, nowMs) ? "current" : undefined}>
       <th>
         <span className={`pc-dot ${cls}`} /> {label}
       </th>
@@ -93,6 +95,9 @@ export function Muhurtas({ t, nowMs, lang = "en" }: { t: Omit<DayTimes, "_jd">; 
           row(l.abhijit, t.abhijit, "good")
         )}
         {row(l.brahma, t.brahmaMuhurta, "good")}
+        {t.amritKalam?.map((a) => row(l.amrit, a, "good"))}
+        {t.durMuhurtham?.map((a) => row(l.dur, a, "bad"))}
+        {t.varjyam?.map((a) => row(l.varjyam, a, "bad"))}
       </tbody>
     </table>
   );
