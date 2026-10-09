@@ -1,4 +1,4 @@
-import { HI_MONTHS_GREG, L, tr, type Lang } from "./hi";
+import { L, gregMonths, tr, type Lang } from "./hi";
 
 /** Formatting helpers for panchang times. All inputs are ISO strings with a UTC offset. */
 
@@ -17,7 +17,7 @@ export function fmtTime(iso: string | null, baseDate?: string, lang: Lang = "en"
   const t = `${h}:${m} ${ampm}`;
   if (baseDate && date !== baseDate) {
     const [, mo, d] = date.split("-").map(Number);
-    return `${t} (${d} ${lang === "hi" ? HI_MONTHS_GREG[mo - 1].slice(0, 4) : MONTHS_SHORT[mo - 1]})`;
+    return `${t} (${d} ${gregMonths(lang)?.[mo - 1] ?? MONTHS_SHORT[mo - 1]})`;
   }
   return t;
 }
@@ -30,13 +30,13 @@ export function fmtRange(span: { start: string; end: string }, baseDate?: string
 export function fmtDateLong(date: string, lang: Lang = "en"): string {
   const [y, m, d] = date.split("-").map(Number);
   const wd = new Date(Date.UTC(y, m - 1, d)).getUTCDay();
-  return `${tr(lang, "weekday", WEEKDAYS[wd])}, ${d} ${lang === "hi" ? HI_MONTHS_GREG[m - 1] : MONTHS_LONG[m - 1]} ${y}`;
+  return `${tr(lang, "weekday", WEEKDAYS[wd])}, ${d} ${gregMonths(lang)?.[m - 1] ?? MONTHS_LONG[m - 1]} ${y}`;
 }
 
 /** "8 Oct 2026" */
 export function fmtDateShort(date: string, lang: Lang = "en"): string {
   const [y, m, d] = date.split("-").map(Number);
-  return `${d} ${lang === "hi" ? HI_MONTHS_GREG[m - 1] : MONTHS_SHORT[m - 1]} ${y}`;
+  return `${d} ${gregMonths(lang)?.[m - 1] ?? MONTHS_SHORT[m - 1]} ${y}`;
 }
 
 export function fmtDuration(minutes: number, lang: Lang = "en"): string {

@@ -1,6 +1,15 @@
 import type { ChoghadiyaSlot, DayTimes, ElementSpan, HoraSlot, Panchang } from "../../services/panchang";
 import { fmtDuration, fmtRange, fmtTime, isNow } from "../../lib/panchang-format";
 import { L, tr, trTithi, type Lang, type NameKind } from "../../lib/hi";
+import { SAMVATSARAS } from "../../lib/cycles";
+
+/** Tamil year name: same 60-year cycle as the samvatsara, but it changes at Chithirai 1 instead of Ugadi. */
+export function tamilYearName(p: Panchang): string {
+  let i = SAMVATSARAS.indexOf(p.samvatsara);
+  if (p.tamilDate.month === "Panguni" && p.lunarMonth.amanta === "Chaitra") i -= 1;
+  if (p.tamilDate.month === "Chithirai" && p.lunarMonth.amanta === "Phalguna") i += 1;
+  return SAMVATSARAS[(i + 60) % 60];
+}
 
 function Elements({ items, base, lang, kind }: { items: ElementSpan[]; base: string; lang: Lang; kind: NameKind | "tithi-full" }) {
   const l = L[lang];
@@ -10,7 +19,7 @@ function Elements({ items, base, lang, kind }: { items: ElementSpan[]; base: str
       {items.map((e, i) => (
         <span key={`${e.name}-${i}`} className="pc-el">
           <strong>{name(e.name)}</strong>
-          {e.end ? (lang === "hi" ? <> {fmtTime(e.end, base, lang)} {l.until}</> : <> {l.until} {fmtTime(e.end, base, lang)}</>) : i > 0 ? <> {l.thereafter}</> : <> {l.allDay}</>}
+          {e.end ? (lang !== "en" ? <> {fmtTime(e.end, base, lang)} {l.until}</> : <> {l.until} {fmtTime(e.end, base, lang)}</>) : i > 0 ? <> {l.thereafter}</> : <> {l.allDay}</>}
           {i < items.length - 1 && <span className="pc-sep">{l.then}</span>}
         </span>
       ))}
@@ -29,7 +38,7 @@ export function PanchangCore({ p, lang = "en" }: { p: Panchang; lang?: Lang }) {
         <tr><th>{l.nakshatra}</th><td><Elements items={p.nakshatra} base={base} lang={lang} kind="nakshatra" /></td></tr>
         <tr><th>{l.yoga}</th><td><Elements items={p.yoga} base={base} lang={lang} kind="yoga" /></td></tr>
         <tr><th>{l.karana}</th><td><Elements items={p.karana} base={base} lang={lang} kind="karana" /></td></tr>
-        <tr><th>{l.vara}</th><td>{lang === "hi" ? tr(lang, "weekday", p.weekday.english) : `${p.weekday.sanskrit} (${p.weekday.english})`}</td></tr>
+        <tr><th>{l.vara}</th><td>{lang !== "en" ? tr(lang, "weekday", p.weekday.english) : `${p.weekday.sanskrit} (${p.weekday.english})`}</td></tr>
         <tr><th>{l.paksha}</th><td>{tr(lang, "paksha", p.paksha)} {l.pakshaWord}</td></tr>
         <tr>
           <th>{l.lunarMonth}</th>
@@ -39,8 +48,8 @@ export function PanchangCore({ p, lang = "en" }: { p: Panchang; lang?: Lang }) {
           </td>
         </tr>
         <tr><th>{l.samvat}</th><td>{l.vikram} {p.vikramSamvat} · {l.shaka} {p.shakaSamvat}</td></tr>
-        <tr><th>{l.samvatsara}</th><td>{p.samvatsara}</td></tr>
-        <tr><th>{l.tamilDate}</th><td>{p.tamilDate.month} {p.tamilDate.day}</td></tr>
+        <tr><th>{l.samvatsara}</th><td>{tr(lang, "samvatsara", lang === "ta" ? tamilYearName(p) : p.samvatsara)}</td></tr>
+        {lang !== "te" && <tr><th>{l.tamilDate}</th><td>{tr(lang, "tamilMonth", p.tamilDate.month)} {p.tamilDate.day}</td></tr>}
         <tr><th>{l.moonSign}</th><td><Elements items={p.moonSign} base={base} lang={lang} kind="sign" /></td></tr>
         <tr><th>{l.sunSign}</th><td>{tr(lang, "sign", p.sunSign)}</td></tr>
       </tbody>

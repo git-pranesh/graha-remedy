@@ -3,6 +3,7 @@ import path from "node:path";
 import type { MetadataRoute } from "next";
 import { TOOLS } from "../src/lib/tools";
 import { CITIES } from "../src/lib/cities";
+import { REGIONAL_CITIES } from "../src/components/regional/RegionalPanchang";
 import { MAHADASHA_PLANETS } from "../src/lib/mahadasha";
 import { CAL_KINDS, CAL_YEARS } from "../src/lib/calendar-pages";
 
@@ -54,6 +55,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/sankranti`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
     { url: `${SITE_URL}/makar-sankranti`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
     ...[2026, 2027].map((y) => ({ url: `${SITE_URL}/sankranti/${y}`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 })),
+    ...(["te", "ta"] as const).flatMap((l) => [
+      { url: `${SITE_URL}/${l}/panchangam`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
+      ...REGIONAL_CITIES[l].map((c) => ({ url: `${SITE_URL}/${l}/panchangam/${c}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 })),
+    ]),
     { url: `${SITE_URL}/hi`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
     ...["panchang", "choghadiya"].flatMap((section) => [
       { url: `${SITE_URL}/hi/${section}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },

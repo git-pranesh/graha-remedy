@@ -10,7 +10,7 @@ export interface Crumb {
 }
 
 interface Props {
-  lang?: "en" | "hi";
+  lang?: "en" | "hi" | "te" | "ta";
   /** Link to the same page in the other language. */
   switchTo?: { href: string; label: string };
   /** Path prefix for breadcrumb/footer links (e.g. "/hi"). */
@@ -23,12 +23,18 @@ interface Props {
 /** Header with breadcrumbs, article container and footer for content pages. */
 export default function ContentShell({ lang = "en", switchTo, crumbs, schema = [], children, footerNote }: Props) {
   const hi = lang === "hi";
-  const links: [string, string][] = hi
+  const homeLabel = { en: "Home", hi: "होम", te: "హోమ్", ta: "முகப்பு" }[lang];
+  const homePath = { en: "", hi: "/hi", te: "/te/panchangam", ta: "/ta/panchangam" }[lang];
+  const links: [string, string][] = lang === "te"
+    ? [["/te/panchangam", "తెలుగు పంచాంగం"], ["/ta/panchangam", "தமிழ் பஞ்சாங்கம்"], ["/panchang", "Panchang (English)"], ["/rahu-kaal", "Rahu Kaal"], ["/ekadashi", "Ekadashi"], ["/about", "About"], ["/contact", "Contact"]]
+    : lang === "ta"
+    ? [["/ta/panchangam", "தமிழ் பஞ்சாங்கம்"], ["/te/panchangam", "తెలుగు పంచాంగం"], ["/panchang", "Panchang (English)"], ["/rahu-kaal", "Rahu Kaal"], ["/ekadashi", "Ekadashi"], ["/about", "About"], ["/contact", "Contact"]]
+    : hi
     ? [["/", "होम"], ["/hi/panchang", "पंचांग"], ["/hi/choghadiya", "चौघड़िया"], ["/hi/ekadashi", "एकादशी"], ["/hi/amavasya", "अमावस्या"], ["/hi/purnima", "पूर्णिमा"], ["/about", "About (English)"], ["/contact", "संपर्क / सुधार"]]
     : [["/", "Home"], ["/panchang", "Panchang"], ["/rahu-kaal", "Rahu Kaal"], ["/choghadiya", "Choghadiya"], ["/ekadashi", "Ekadashi"], ["/sankranti", "Sankranti"], ["/calculators", "Calculators"], ["/about", "About & Methodology"], ["/contact", "Contact & Corrections"]];
   const breadcrumb = {
     "@type": "BreadcrumbList",
-    itemListElement: [{ name: hi ? "होम" : "Home", path: hi ? "/hi" : "" }, ...crumbs].map((c, i) => ({
+    itemListElement: [{ name: homeLabel, path: homePath }, ...crumbs].map((c, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: c.name,
@@ -48,7 +54,7 @@ export default function ContentShell({ lang = "en", switchTo, crumbs, schema = [
             <span className="seo-brand-text">Graha Remedy</span>
           </Link>
           <nav className="seo-breadcrumbs" aria-label="Breadcrumb">
-            <Link href={hi ? "/hi" : "/"}>{hi ? "होम" : "Home"}</Link>
+            <Link href={homePath || "/"}>{homeLabel}</Link>
             {crumbs.slice(0, -1).map((c) => (
               <span key={c.path}>
                 <span className="crumb-sep">/</span>
@@ -64,7 +70,7 @@ export default function ContentShell({ lang = "en", switchTo, crumbs, schema = [
             </Link>
           )}
           <Link href="/" className="btn btn-secondary btn-sm seo-nav-cta">
-            <Sparkles size={14} /> {hi ? "उपाय खोजें" : "Remedy Finder"}
+            <Sparkles size={14} /> {hi ? "उपाय खोजें" : lang === "te" ? "పరిహారాలు" : lang === "ta" ? "பரிகாரங்கள்" : "Remedy Finder"}
           </Link>
         </div>
       </header>

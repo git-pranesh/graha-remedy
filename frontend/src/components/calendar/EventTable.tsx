@@ -8,7 +8,7 @@ const T = {
   hi: { fast: "व्रत की तिथि", date: "तिथि", ek: "एकादशी", darsha: "दर्श (व्रत) दिन", pur: "पूर्णिमा व्रत दिन", month: "मास (पूर्णिमांत)", begins: "तिथि प्रारंभ", ends: "तिथि समाप्त", also: "अगले दिन भी", alt: "(वैष्णव / गौण)", same: "उसी दिन", adhika: "अधिक ", paksha: " पक्ष" },
 };
 
-export default function EventTable({ events, today, lang = "en" }: { events: CalendarEvent[]; today?: string; lang?: Lang }) {
+export default function EventTable({ events, today, lang = "en" }: { events: CalendarEvent[]; today?: string; lang?: Extract<Lang, "en" | "hi"> }) {
   const k = events[0]?.kind;
   const t = T[lang];
   const wd = (d: string) => WD[lang][new Date(d + "T00:00:00Z").getUTCDay()];

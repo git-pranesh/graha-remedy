@@ -1,6 +1,8 @@
 /** Hindi (Devanagari) names and UI labels for panchang pages. Numerals stay Latin. */
 
-export type Lang = "en" | "hi";
+import { L_TA, L_TE, TA, TE } from "./i18n-south";
+
+export type Lang = "en" | "hi" | "te" | "ta";
 
 const TITHI: Record<string, string> = {
   Pratipada: "प्रतिपदा", Dwitiya: "द्वितीया", Tritiya: "तृतीया", Chaturthi: "चतुर्थी", Panchami: "पंचमी",
@@ -66,16 +68,27 @@ const TABLES = {
 };
 export type NameKind = keyof typeof TABLES;
 
+const SOUTH = { te: TE, ta: TA } as const;
+
 /** Translate a single English/Sanskrit-transliterated name; returns the input if lang is "en" or unknown. */
-export function tr(lang: Lang, kind: NameKind, name: string): string {
-  return lang === "hi" ? (TABLES[kind][name] ?? name) : name;
+export function tr(lang: Lang, kind: NameKind | "samvatsara" | "tamilMonth", name: string): string {
+  if (lang === "en") return name;
+  if (lang === "hi") return (TABLES as Record<string, Record<string, string>>)[kind]?.[name] ?? name;
+  const t = (SOUTH[lang] as unknown as Record<string, Record<string, string>>)[kind];
+  return t?.[name] ?? name;
 }
 
-/** "Krishna Trayodashi" -> "कृष्ण त्रयोदशी". */
+export function gregMonths(lang: Lang): string[] | null {
+  return lang === "hi" ? HI_MONTHS_GREG : lang === "te" ? TE.greg : lang === "ta" ? TA.greg : null;
+}
+
+/** "Krishna Trayodashi" -> "कृष्ण त्रयोदशी" / "బహుళ త్రయోదశి" / "தேய்பிறை திரயோதசி". */
 export function trTithi(lang: Lang, full: string): string {
   if (lang === "en") return full;
   const [p, t] = full.split(" ");
-  return `${PAKSHA[p] ?? p} ${TITHI[t] ?? t}`;
+  if (lang === "hi") return `${PAKSHA[p] ?? p} ${TITHI[t] ?? t}`;
+  const tt = tr(lang, "tithi", t);
+  return t === "Purnima" || t === "Amavasya" ? tt : `${tr(lang, "paksha", p)} ${tt}`;
 }
 
 export const HI_CITY: Record<string, string> = {
@@ -126,4 +139,6 @@ export const L = {
     good: "शुभ", neutral: "सामान्य (यात्रा के लिए अच्छा)", bad: "अशुभ",
     h: "घंटे", min: "मिनट",
   },
+  te: L_TE,
+  ta: L_TA,
 } as const;
