@@ -2,7 +2,8 @@
  * Sankranti: the moment the Sun enters each sidereal (Lahiri) sign.
  * Observance date: the date of the moment, or the next date if the moment falls after local sunset.
  */
-import { julianDay, calculatePosition, setSiderealMode, Planet, RiseTransitFlag, SiderealMode } from "@swisseph/node";
+import { julianDay, calculatePosition, Planet, RiseTransitFlag } from "@swisseph/node";
+import { initAyanamsa } from "./ayanamsa";
 import { SIDEREAL_FLAGS } from "./astro-engine";
 import { riseSet, jdToLocalIso } from "./panchang";
 import { utcOffsetForLocalTime } from "./geocoder";
@@ -23,7 +24,7 @@ export interface Sankranti {
 let initialised = false;
 function init() {
   if (!initialised) {
-    setSiderealMode(SiderealMode.Lahiri);
+    initAyanamsa();
     initialised = true;
   }
 }

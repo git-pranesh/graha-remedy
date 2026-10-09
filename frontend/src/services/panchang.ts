@@ -19,13 +19,12 @@ import {
   julianDay,
   calculatePosition,
   calculateRiseTransitSet,
-  setSiderealMode,
   getAyanamsa,
   Planet,
   RiseTransitFlag,
-  SiderealMode,
   CalculationFlag,
 } from "@swisseph/node";
+import { initAyanamsa } from "./ayanamsa";
 import { SIDEREAL_FLAGS } from "./astro-engine";
 import { utcOffsetForLocalTime } from "./geocoder";
 
@@ -34,7 +33,7 @@ const TROPICAL_FLAGS = CalculationFlag.SwissEphemeris | CalculationFlag.Speed;
 let initialised = false;
 function init() {
   if (!initialised) {
-    setSiderealMode(SiderealMode.Lahiri);
+    initAyanamsa();
     initialised = true;
   }
 }

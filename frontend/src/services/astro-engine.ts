@@ -7,17 +7,16 @@ import {
   julianDay,
   calculatePosition,
   calculateHouses,
-  setSiderealMode,
   getAyanamsa,
   close,
   Planet,
   LunarPoint,
   HouseSystem,
   CalculationFlag,
-  SiderealMode,
   type PlanetaryPosition,
   type HouseData,
 } from "@swisseph/node";
+import { initAyanamsa } from "./ayanamsa";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -144,7 +143,7 @@ let initialised = false;
 
 function init() {
   if (!initialised) {
-    setSiderealMode(SiderealMode.Lahiri);
+    initAyanamsa();
     initialised = true;
   }
 }

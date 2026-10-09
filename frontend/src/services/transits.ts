@@ -9,7 +9,8 @@
  * Small Panoti / Dhaiya = Saturn in the 4th (Kantaka) or 8th (Ashtama) from the Moon.
  */
 
-import { julianDay, calculatePosition, setSiderealMode, Planet, SiderealMode } from "@swisseph/node";
+import { julianDay, calculatePosition, Planet } from "@swisseph/node";
+import { initAyanamsa } from "./ayanamsa";
 import { SIDEREAL_FLAGS } from "./astro-engine";
 
 const SIGNS = [
@@ -20,7 +21,7 @@ const SIGNS = [
 let initialised = false;
 function init() {
   if (!initialised) {
-    setSiderealMode(SiderealMode.Lahiri);
+    initAyanamsa();
     initialised = true;
   }
 }
