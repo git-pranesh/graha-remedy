@@ -84,6 +84,11 @@ export function CalendarHub({ kind }: { kind: EventKind }) {
             Tithi {fmtTime(next.begins)} {next.begins.slice(0, 10) !== next.date ? `(${next.begins.slice(8, 10)}/${next.begins.slice(5, 7)})` : ""} to{" "}
             {fmtTime(next.ends)} {next.ends.slice(0, 10) !== next.date ? `(${next.ends.slice(8, 10)}/${next.ends.slice(5, 7)})` : ""}, New Delhi
           </span>
+          {next.vratDate && next.vratDate !== next.date && (
+            <span className="pc-hero-status">
+              {kind === "amavasya" ? "Darsha Amavasya (shraddha)" : "Purnima vrat"}: {fmtDateLong(next.vratDate)} · snan-daan: {fmtDateLong(next.date)}
+            </span>
+          )}
         </div>
       )}
       <p className="tool-lead">{m.intro}</p>
