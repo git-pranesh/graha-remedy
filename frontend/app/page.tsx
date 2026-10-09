@@ -179,6 +179,8 @@ export default function Home() {
               <Link href="/hi/panchang" lang="hi">आज का पंचांग (हिन्दी)</Link>
               <Link href="/hi/ekadashi" lang="hi">एकादशी कब है?</Link>
               <Link href="/ekadashi">Next Ekadashi</Link>
+              <Link href="/makar-sankranti">Makar Sankranti</Link>
+              <Link href="/sankranti/2027">Sankranti 2027</Link>
               <Link href="/ekadashi/2026">Ekadashi 2026</Link>
               <Link href="/amavasya/2026">Amavasya 2026</Link>
               <Link href="/purnima/2026">Purnima 2026</Link>

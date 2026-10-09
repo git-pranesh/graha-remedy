@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ToolReport } from "../../services/tool-report";
+import { MAHADASHA_SLUG } from "../../lib/mahadasha-slugs";
 import {
   NAKSHATRAS,
   PLANET_REMEDY_PAGE,
@@ -207,6 +208,7 @@ function Dasha({ report }: { report: ToolReport }) {
         })}
       </div>
       <div className="tool-next">
+        <Link href={`/mahadasha/${MAHADASHA_SLUG[d.current.lord]}`} className="tool-remedy-link">About {d.current.lord} mahadasha →</Link>
         <RemedyLink planet={d.current.lord} />
         {d.currentAntardasha.lord !== d.current.lord && <RemedyLink planet={d.currentAntardasha.lord} />}
       </div>

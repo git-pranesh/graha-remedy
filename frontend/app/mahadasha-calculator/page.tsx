@@ -4,6 +4,7 @@ import ToolPage from "@/src/components/site/ToolPage";
 import ToolCalculator from "@/src/components/tools/ToolCalculator";
 import { toolBySlug } from "@/src/lib/tools";
 import { DASHA_ORDER, DASHA_YEARS, NAKSHATRAS, NAKSHATRA_SPAN, dms } from "@/src/lib/jyotish-data";
+import { MAHADASHA_PLANETS } from "@/src/lib/mahadasha";
 import { EXAMPLE_BIRTH, exampleReport } from "@/src/lib/examples";
 
 const SLUG = "mahadasha-calculator";
@@ -100,6 +101,11 @@ export default async function Page() {
         , with {d.currentAntardasha.lord} antardasha running from {fmt(d.currentAntardasha.start)} to{" "}
         {fmt(d.currentAntardasha.end)}.
       </p>
+
+      <h2>Read about each mahadasha</h2>
+      <ul className="pc-city-links">
+        {MAHADASHA_PLANETS.map((x) => <li key={x.slug}><Link href={`/mahadasha/${x.slug}`}>{x.lord} mahadasha</Link></li>)}
+      </ul>
 
       <h2>Remedies for the running dasha</h2>
       <p>

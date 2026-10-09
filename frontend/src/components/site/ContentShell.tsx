@@ -25,7 +25,7 @@ export default function ContentShell({ lang = "en", switchTo, crumbs, schema = [
   const hi = lang === "hi";
   const links: [string, string][] = hi
     ? [["/", "होम"], ["/hi/panchang", "पंचांग"], ["/hi/choghadiya", "चौघड़िया"], ["/hi/ekadashi", "एकादशी"], ["/hi/amavasya", "अमावस्या"], ["/hi/purnima", "पूर्णिमा"], ["/about", "About (English)"], ["/contact", "संपर्क / सुधार"]]
-    : [["/", "Home"], ["/panchang", "Panchang"], ["/rahu-kaal", "Rahu Kaal"], ["/choghadiya", "Choghadiya"], ["/ekadashi", "Ekadashi"], ["/calculators", "Calculators"], ["/about", "About & Methodology"], ["/contact", "Contact & Corrections"]];
+    : [["/", "Home"], ["/panchang", "Panchang"], ["/rahu-kaal", "Rahu Kaal"], ["/choghadiya", "Choghadiya"], ["/ekadashi", "Ekadashi"], ["/sankranti", "Sankranti"], ["/calculators", "Calculators"], ["/about", "About & Methodology"], ["/contact", "Contact & Corrections"]];
   const breadcrumb = {
     "@type": "BreadcrumbList",
     itemListElement: [{ name: hi ? "होम" : "Home", path: hi ? "/hi" : "" }, ...crumbs].map((c, i) => ({
