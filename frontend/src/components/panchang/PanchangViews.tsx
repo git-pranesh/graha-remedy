@@ -1,14 +1,17 @@
 import type { ChoghadiyaSlot, DayTimes, ElementSpan, HoraSlot, Panchang } from "../../services/panchang";
 import { fmtDuration, fmtRange, fmtTime, isNow } from "../../lib/panchang-format";
+import { L, tr, trTithi, type Lang, type NameKind } from "../../lib/hi";
 
-function Elements({ items, base }: { items: ElementSpan[]; base: string }) {
+function Elements({ items, base, lang, kind }: { items: ElementSpan[]; base: string; lang: Lang; kind: NameKind | "tithi-full" }) {
+  const l = L[lang];
+  const name = (n: string) => (kind === "tithi-full" ? trTithi(lang, n) : tr(lang, kind, n));
   return (
     <>
       {items.map((e, i) => (
         <span key={`${e.name}-${i}`} className="pc-el">
-          <strong>{e.name}</strong>
-          {e.end ? <> until {fmtTime(e.end, base)}</> : i > 0 ? <> thereafter</> : <> all day</>}
-          {i < items.length - 1 && <span className="pc-sep">, then </span>}
+          <strong>{name(e.name)}</strong>
+          {e.end ? (lang === "hi" ? <> {fmtTime(e.end, base, lang)} {l.until}</> : <> {l.until} {fmtTime(e.end, base, lang)}</>) : i > 0 ? <> {l.thereafter}</> : <> {l.allDay}</>}
+          {i < items.length - 1 && <span className="pc-sep">{l.then}</span>}
         </span>
       ))}
     </>
@@ -16,51 +19,53 @@ function Elements({ items, base }: { items: ElementSpan[]; base: string }) {
 }
 
 /** The five limbs and calendar details. */
-export function PanchangCore({ p }: { p: Panchang }) {
+export function PanchangCore({ p, lang = "en" }: { p: Panchang; lang?: Lang }) {
   const base = p.date;
+  const l = L[lang];
   return (
     <table className="tool-table pc-table">
       <tbody>
-        <tr><th>Tithi</th><td><Elements items={p.tithi} base={base} /></td></tr>
-        <tr><th>Nakshatra</th><td><Elements items={p.nakshatra} base={base} /></td></tr>
-        <tr><th>Yoga</th><td><Elements items={p.yoga} base={base} /></td></tr>
-        <tr><th>Karana</th><td><Elements items={p.karana} base={base} /></td></tr>
-        <tr><th>Vara (weekday)</th><td>{p.weekday.sanskrit} ({p.weekday.english})</td></tr>
-        <tr><th>Paksha</th><td>{p.paksha} Paksha</td></tr>
+        <tr><th>{l.tithi}</th><td><Elements items={p.tithi} base={base} lang={lang} kind="tithi-full" /></td></tr>
+        <tr><th>{l.nakshatra}</th><td><Elements items={p.nakshatra} base={base} lang={lang} kind="nakshatra" /></td></tr>
+        <tr><th>{l.yoga}</th><td><Elements items={p.yoga} base={base} lang={lang} kind="yoga" /></td></tr>
+        <tr><th>{l.karana}</th><td><Elements items={p.karana} base={base} lang={lang} kind="karana" /></td></tr>
+        <tr><th>{l.vara}</th><td>{lang === "hi" ? tr(lang, "weekday", p.weekday.english) : `${p.weekday.sanskrit} (${p.weekday.english})`}</td></tr>
+        <tr><th>{l.paksha}</th><td>{tr(lang, "paksha", p.paksha)} {l.pakshaWord}</td></tr>
         <tr>
-          <th>Lunar month</th>
+          <th>{l.lunarMonth}</th>
           <td>
-            {p.lunarMonth.adhika ? "Adhika " : ""}
-            {p.lunarMonth.amanta} (amanta) · {p.lunarMonth.adhika ? "Adhika " : ""}
-            {p.lunarMonth.purnimanta} (purnimanta)
+            {p.lunarMonth.adhika ? l.adhika : ""}{tr(lang, "month", p.lunarMonth.amanta)} ({l.amanta}) · {p.lunarMonth.adhika ? l.adhika : ""}
+            {tr(lang, "month", p.lunarMonth.purnimanta)} ({l.purnimanta})
           </td>
         </tr>
-        <tr><th>Samvat</th><td>Vikram Samvat {p.vikramSamvat} · Shaka {p.shakaSamvat}</td></tr>
-        <tr><th>Moon sign</th><td><Elements items={p.moonSign} base={base} /></td></tr>
-        <tr><th>Sun sign</th><td>{p.sunSign}</td></tr>
+        <tr><th>{l.samvat}</th><td>{l.vikram} {p.vikramSamvat} · {l.shaka} {p.shakaSamvat}</td></tr>
+        <tr><th>{l.moonSign}</th><td><Elements items={p.moonSign} base={base} lang={lang} kind="sign" /></td></tr>
+        <tr><th>{l.sunSign}</th><td>{tr(lang, "sign", p.sunSign)}</td></tr>
       </tbody>
     </table>
   );
 }
 
-export function SunMoon({ p }: { p: Panchang }) {
+export function SunMoon({ p, lang = "en" }: { p: Panchang; lang?: Lang }) {
   const base = p.date;
+  const l = L[lang];
   return (
     <table className="tool-table pc-table">
       <tbody>
-        <tr><th>Sunrise</th><td>{fmtTime(p.sunrise, base)}</td></tr>
-        <tr><th>Sunset</th><td>{fmtTime(p.sunset, base)}</td></tr>
-        <tr><th>Moonrise</th><td>{p.moonrise ? fmtTime(p.moonrise, base) : "No moonrise before next sunrise"}</td></tr>
-        <tr><th>Moonset</th><td>{p.moonset ? fmtTime(p.moonset, base) : "No moonset before next sunrise"}</td></tr>
-        <tr><th>Day length</th><td>{fmtDuration(p.dayLengthMinutes)}</td></tr>
-        <tr><th>Night length</th><td>{fmtDuration(p.nightLengthMinutes)}</td></tr>
+        <tr><th>{l.sunrise}</th><td>{fmtTime(p.sunrise, base, lang)}</td></tr>
+        <tr><th>{l.sunset}</th><td>{fmtTime(p.sunset, base, lang)}</td></tr>
+        <tr><th>{l.moonrise}</th><td>{p.moonrise ? fmtTime(p.moonrise, base, lang) : l.noMoonrise}</td></tr>
+        <tr><th>{l.moonset}</th><td>{p.moonset ? fmtTime(p.moonset, base, lang) : l.noMoonset}</td></tr>
+        <tr><th>{l.dayLen}</th><td>{fmtDuration(p.dayLengthMinutes, lang)}</td></tr>
+        <tr><th>{l.nightLen}</th><td>{fmtDuration(p.nightLengthMinutes, lang)}</td></tr>
       </tbody>
     </table>
   );
 }
 
-export function Muhurtas({ t, nowMs }: { t: Omit<DayTimes, "_jd">; nowMs?: number }) {
+export function Muhurtas({ t, nowMs, lang = "en" }: { t: Omit<DayTimes, "_jd">; nowMs?: number; lang?: Lang }) {
   const base = t.date;
+  const l = L[lang];
   const wed = t.weekday.english === "Wednesday";
   const row = (label: string, span: { start: string; end: string }, cls: string, note?: string) => (
     <tr className={nowMs !== undefined && isNow(span, nowMs) ? "current" : undefined}>
@@ -68,7 +73,7 @@ export function Muhurtas({ t, nowMs }: { t: Omit<DayTimes, "_jd">; nowMs?: numbe
         <span className={`pc-dot ${cls}`} /> {label}
       </th>
       <td>
-        {fmtRange(span, base)}
+        {fmtRange(span, base, lang)}
         {note && <span className="pc-note"> {note}</span>}
       </td>
     </tr>
@@ -76,37 +81,38 @@ export function Muhurtas({ t, nowMs }: { t: Omit<DayTimes, "_jd">; nowMs?: numbe
   return (
     <table className="tool-table pc-table">
       <tbody>
-        {row("Rahu Kalam", t.rahuKalam, "bad")}
-        {row("Yamaganda", t.yamaganda, "bad")}
-        {row("Gulika Kalam", t.gulikaKalam, "bad")}
+        {row(l.rahu, t.rahuKalam, "bad")}
+        {row(l.yama, t.yamaganda, "bad")}
+        {row(l.gulika, t.gulikaKalam, "bad")}
         {wed ? (
           <tr>
-            <th><span className="pc-dot good" /> Abhijit Muhurta</th>
-            <td>Not observed on Wednesdays</td>
+            <th><span className="pc-dot good" /> {l.abhijit}</th>
+            <td>{l.notWed}</td>
           </tr>
         ) : (
-          row("Abhijit Muhurta", t.abhijit, "good")
+          row(l.abhijit, t.abhijit, "good")
         )}
-        {row("Brahma Muhurta", t.brahmaMuhurta, "good")}
+        {row(l.brahma, t.brahmaMuhurta, "good")}
       </tbody>
     </table>
   );
 }
 
-export function ChoghadiyaTable({ slots, base, nowMs, label }: { slots: ChoghadiyaSlot[]; base: string; nowMs?: number; label: string }) {
+export function ChoghadiyaTable({ slots, base, nowMs, label, lang = "en" }: { slots: ChoghadiyaSlot[]; base: string; nowMs?: number; label: string; lang?: Lang }) {
+  const l = L[lang];
   return (
     <div className="tool-table-scroll">
       <table className="tool-table pc-chog">
         <caption>{label}</caption>
         <thead>
-          <tr><th>Choghadiya</th><th>Time</th><th>Nature</th></tr>
+          <tr><th>{l.chogCol}</th><th>{l.time}</th><th>{l.nature}</th></tr>
         </thead>
         <tbody>
           {slots.map((c) => (
             <tr key={c.start} className={nowMs !== undefined && isNow(c, nowMs) ? "current" : undefined}>
-              <td><span className={`pc-dot ${c.nature}`} /> {c.name} <span className="pc-note">({c.meaning})</span></td>
-              <td>{fmtRange(c, base)}</td>
-              <td>{c.nature === "good" ? "Auspicious" : c.nature === "neutral" ? "Neutral (good for travel)" : "Inauspicious"}</td>
+              <td><span className={`pc-dot ${c.nature}`} /> {tr(lang, "chog", c.name)} <span className="pc-note">({tr(lang, "chogMeaning", c.meaning)})</span></td>
+              <td>{fmtRange(c, base, lang)}</td>
+              <td>{l[c.nature]}</td>
             </tr>
           ))}
         </tbody>
@@ -115,19 +121,20 @@ export function ChoghadiyaTable({ slots, base, nowMs, label }: { slots: Choghadi
   );
 }
 
-export function HoraTable({ slots, base, nowMs, label }: { slots: HoraSlot[]; base: string; nowMs?: number; label: string }) {
+export function HoraTable({ slots, base, nowMs, label, lang = "en" }: { slots: HoraSlot[]; base: string; nowMs?: number; label: string; lang?: Lang }) {
+  const l = L[lang];
   return (
     <div className="tool-table-scroll">
       <table className="tool-table pc-chog">
         <caption>{label}</caption>
         <thead>
-          <tr><th>Hora (planet)</th><th>Time</th></tr>
+          <tr><th>{l.horaCol}</th><th>{l.time}</th></tr>
         </thead>
         <tbody>
           {slots.map((h) => (
             <tr key={h.start} className={nowMs !== undefined && isNow(h, nowMs) ? "current" : undefined}>
-              <td>{h.planet}</td>
-              <td>{fmtRange(h, base)}</td>
+              <td>{tr(lang, "planet", h.planet)}</td>
+              <td>{fmtRange(h, base, lang)}</td>
             </tr>
           ))}
         </tbody>

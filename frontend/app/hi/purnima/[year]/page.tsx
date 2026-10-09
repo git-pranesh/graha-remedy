@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { hreflang } from "@/src/lib/alternates";
 import { notFound } from "next/navigation";
-import { CalendarYearPage } from "@/src/components/calendar/CalendarPages";
+import { HiCalendarYear, HI_KIND } from "@/src/components/calendar/HiCalendarPages";
 import { CAL_YEARS } from "@/src/lib/calendar-pages";
+import { hreflang } from "@/src/lib/alternates";
 
 export const revalidate = 86400;
 export const dynamicParams = false;
@@ -17,15 +17,17 @@ interface Props { params: Promise<{ year: string }> }
 // oxlint-disable-next-line react/only-export-components -- App Router metadata belongs with the route.
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { year } = await params;
+  const l = HI_KIND.purnima.label;
   return {
-    title: { absolute: `Amavasya ${year} Dates – Full List with Tithi Timings` },
-    description: `All Amavasya dates in ${year} with tithi begin and end times for New Delhi, plus dates for any city worldwide.`,
-    alternates: hreflang(`/amavasya/${year}`, `/hi/amavasya/${year}`, "en"),
+    title: { absolute: `${l} ${year} की तारीखें – पूरी सूची, तिथि के समय सहित` },
+    description: `${year} की सभी ${l} तिथियाँ तिथि के प्रारंभ और समाप्ति समय के साथ (नई दिल्ली)।`,
+    alternates: hreflang(`/purnima/${year}`, `/hi/purnima/${year}`, "hi"),
+    openGraph: { locale: "hi_IN", url: `/hi/purnima/${year}`, type: "website" },
   };
 }
 
 export default async function Page({ params }: Props) {
   const year = Number((await params).year);
   if (!CAL_YEARS.includes(year)) notFound();
-  return <CalendarYearPage kind="amavasya" year={year} />;
+  return <HiCalendarYear kind="purnima" year={year} />;
 }

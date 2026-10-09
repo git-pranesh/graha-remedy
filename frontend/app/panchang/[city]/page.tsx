@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { hreflang } from "@/src/lib/alternates";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import StaleGuard from "@/src/components/panchang/StaleGuard";
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: `/panchang/${city.slug}` },
+    alternates: hreflang(`/panchang/${city.slug}`, `/hi/panchang/${city.slug}`, "en"),
     openGraph: { title, description, url: `/panchang/${city.slug}`, type: "website" },
   };
 }
@@ -68,6 +69,7 @@ export default async function CityPanchangPage({ params }: Props) {
 
   return (
     <ContentShell
+      switchTo={{ href: `/hi/panchang/${city.slug}`, label: "हिन्दी" }}
       crumbs={[
         { name: "Panchang", path: "/panchang" },
         { name: city.name, path: `/panchang/${city.slug}` },

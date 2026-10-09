@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { hreflang } from "@/src/lib/alternates";
 import Link from "next/link";
 import StaleGuard from "@/src/components/panchang/StaleGuard";
 import ContentShell, { PANCHANG_METHOD_NOTE } from "@/src/components/site/ContentShell";
@@ -19,7 +20,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
-  alternates: { canonical: "/panchang" },
+  alternates: hreflang("/panchang", "/hi/panchang", "en"),
   openGraph: { title: TITLE, description: DESCRIPTION, url: "/panchang", type: "website" },
 };
 
@@ -28,7 +29,7 @@ export default function PanchangHub() {
   const date = cityToday(delhi);
   const p = cityPanchang(delhi, date);
   return (
-    <ContentShell crumbs={[{ name: "Panchang", path: "/panchang" }]} footerNote={PANCHANG_METHOD_NOTE}>
+    <ContentShell switchTo={{ href: "/hi/panchang", label: "हिन्दी" }} crumbs={[{ name: "Panchang", path: "/panchang" }]} footerNote={PANCHANG_METHOD_NOTE}>
       <h1 className="seo-article-title">Today&apos;s Panchang</h1>
       <StaleGuard date={date} timezone={delhi.timezone} />
       <p className="tool-kicker">{fmtDateLong(date)} · shown for New Delhi</p>

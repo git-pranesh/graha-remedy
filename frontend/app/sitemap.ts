@@ -49,6 +49,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${SITE_URL}/${k}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
       ...CAL_YEARS.map((y) => ({ url: `${SITE_URL}/${k}/${y}`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 })),
     ]),
+    { url: `${SITE_URL}/hi`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
+    ...["panchang", "choghadiya"].flatMap((section) => [
+      { url: `${SITE_URL}/hi/${section}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
+      ...CITIES.map((c) => ({ url: `${SITE_URL}/hi/${section}/${c.slug}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.7 })),
+    ]),
+    ...CAL_KINDS.flatMap((k) => [
+      { url: `${SITE_URL}/hi/${k}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },
+      ...CAL_YEARS.map((y) => ({ url: `${SITE_URL}/hi/${k}/${y}`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 })),
+    ]),
     {
       url: `${SITE_URL}/about`,
       lastModified: new Date(),

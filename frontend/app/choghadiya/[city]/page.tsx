@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { hreflang } from "@/src/lib/alternates";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import StaleGuard from "@/src/components/panchang/StaleGuard";
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: `/choghadiya/${city.slug}` },
+    alternates: hreflang(`/choghadiya/${city.slug}`, `/hi/choghadiya/${city.slug}`, "en"),
     openGraph: { title, description, url: `/choghadiya/${city.slug}`, type: "website" },
   };
 }
@@ -52,6 +53,7 @@ export default async function ChoghadiyaCityPage({ params }: Props) {
 
   return (
     <ContentShell
+      switchTo={{ href: `/hi/choghadiya/${city.slug}`, label: "हिन्दी" }}
       crumbs={[
         { name: "Choghadiya", path: "/choghadiya" },
         { name: city.name, path: `/choghadiya/${city.slug}` },

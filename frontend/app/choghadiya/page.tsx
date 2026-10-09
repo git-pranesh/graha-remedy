@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { hreflang } from "@/src/lib/alternates";
 import Link from "next/link";
 import StaleGuard from "@/src/components/panchang/StaleGuard";
 import ContentShell, { PANCHANG_METHOD_NOTE } from "@/src/components/site/ContentShell";
@@ -18,7 +19,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   title: { absolute: TITLE },
   description: DESCRIPTION,
-  alternates: { canonical: "/choghadiya" },
+  alternates: hreflang("/choghadiya", "/hi/choghadiya", "en"),
   openGraph: { title: TITLE, description: DESCRIPTION, url: "/choghadiya", type: "website" },
 };
 
@@ -28,7 +29,7 @@ export default function ChoghadiyaHub() {
   const t = cityDayTimes(city, date);
   const now = Date.now();
   return (
-    <ContentShell crumbs={[{ name: "Choghadiya", path: "/choghadiya" }]} footerNote={PANCHANG_METHOD_NOTE}>
+    <ContentShell switchTo={{ href: "/hi/choghadiya", label: "हिन्दी" }} crumbs={[{ name: "Choghadiya", path: "/choghadiya" }]} footerNote={PANCHANG_METHOD_NOTE}>
       <h1 className="seo-article-title">Choghadiya Today</h1>
       <StaleGuard date={date} timezone={city.timezone} />
       <p className="tool-kicker">{fmtDateLong(date)} · shown for Ahmedabad</p>

@@ -42,7 +42,7 @@ export function CalendarYearPage({ kind, year }: { kind: EventKind; year: number
   const today = todayInTimezone(DELHI.timezone);
   const others = CAL_YEARS.filter((y) => y !== year);
   return (
-    <ContentShell crumbs={[{ name: m.label, path: `/${kind}` }, { name: String(year), path: `/${kind}/${year}` }]} footerNote={NOTE}>
+    <ContentShell switchTo={{ href: `/hi/${kind}/${year}`, label: "हिन्दी" }} crumbs={[{ name: m.label, path: `/${kind}` }, { name: String(year), path: `/${kind}/${year}` }]} footerNote={NOTE}>
       <h1 className="seo-article-title">{m.label} {year} Dates ({m.hindi} {year})</h1>
       <StaleGuard date={today} timezone={DELHI.timezone} />
       <p className="tool-lead">
@@ -73,7 +73,7 @@ export function CalendarHub({ kind }: { kind: EventKind }) {
   const upcoming = all.filter((e) => e.date >= today).slice(0, 6);
   const next = upcoming[0];
   return (
-    <ContentShell crumbs={[{ name: m.label, path: `/${kind}` }]} footerNote={NOTE}>
+    <ContentShell switchTo={{ href: `/hi/${kind}`, label: "हिन्दी" }} crumbs={[{ name: m.label, path: `/${kind}` }]} footerNote={NOTE}>
       <h1 className="seo-article-title">Next {m.label}: When Is {m.label}? ({m.hindi} कब है)</h1>
       <StaleGuard date={today} timezone={DELHI.timezone} />
       {next && (

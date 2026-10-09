@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { hreflang } from "@/src/lib/alternates";
 import { CalendarHub } from "@/src/components/calendar/CalendarPages";
 
 export const revalidate = 3600;
@@ -7,7 +8,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: { absolute: "Next Purnima Date – When Is Purnima? Tithi Timings" },
   description: "Date of the next Purnima with exact tithi start and end times, upcoming Purnima dates and how the observance day is decided.",
-  alternates: { canonical: "/purnima" },
+  alternates: hreflang("/purnima", "/hi/purnima", "en"),
 };
 
 export default function Page() {
