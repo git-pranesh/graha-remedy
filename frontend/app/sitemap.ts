@@ -3,6 +3,7 @@ import path from "node:path";
 import type { MetadataRoute } from "next";
 import { TOOLS } from "../src/lib/tools";
 import { CITIES } from "../src/lib/cities";
+import { CAL_KINDS, CAL_YEARS } from "../src/lib/calendar-pages";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
 const SEO_PAGES_DIR = path.resolve(process.cwd(), "../data/seo_pages");
@@ -43,6 +44,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "daily" as const,
         priority: 0.8,
       })),
+    ]),
+    ...CAL_KINDS.flatMap((k) => [
+      { url: `${SITE_URL}/${k}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
+      ...CAL_YEARS.map((y) => ({ url: `${SITE_URL}/${k}/${y}`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.8 })),
     ]),
     {
       url: `${SITE_URL}/about`,

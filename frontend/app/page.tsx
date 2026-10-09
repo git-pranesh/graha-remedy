@@ -176,6 +176,10 @@ export default function Home() {
               <Link href="/panchang">Today&apos;s Panchang</Link>
               <Link href="/rahu-kaal">Rahu Kaal Today</Link>
               <Link href="/choghadiya">Choghadiya Today</Link>
+              <Link href="/ekadashi">Next Ekadashi</Link>
+              <Link href="/ekadashi/2026">Ekadashi 2026</Link>
+              <Link href="/amavasya/2026">Amavasya 2026</Link>
+              <Link href="/purnima/2026">Purnima 2026</Link>
               <Link href="/panchang/delhi">Delhi Panchang</Link>
               <Link href="/panchang/mumbai">Mumbai Panchang</Link>
               <Link href="/rahu-kaal/bengaluru">Bengaluru Rahu Kaal</Link>

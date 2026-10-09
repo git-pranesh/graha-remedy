@@ -69,6 +69,8 @@ export default function ContentShell({ crumbs, schema = [], children, footerNote
               <span>•</span>
               <Link href="/choghadiya">Choghadiya</Link>
               <span>•</span>
+              <Link href="/ekadashi">Ekadashi</Link>
+              <span>•</span>
               <Link href="/calculators">Calculators</Link>
               <span>•</span>
               <Link href="/about">About &amp; Methodology</Link>

@@ -127,15 +127,15 @@ function elongation(jd: number): number {
   return norm360(tropicalLon(jd, Planet.Moon) - tropicalLon(jd, Planet.Sun));
 }
 
-const tithiIndex = (jd: number) => Math.floor(elongation(jd) / 12);
+export const tithiIndex = (jd: number) => Math.floor(elongation(jd) / 12);
 const karanaIndex = (jd: number) => Math.floor(elongation(jd) / 6);
 const nakshatraIndex = (jd: number) => Math.floor(siderealLon(jd, Planet.Moon) / (360 / 27));
 const yogaIndex = (jd: number) =>
   Math.floor(norm360(siderealLon(jd, Planet.Sun) + siderealLon(jd, Planet.Moon)) / (360 / 27));
-const sunSignIndex = (jd: number) => Math.floor(siderealLon(jd, Planet.Sun) / 30);
+export const sunSignIndex = (jd: number) => Math.floor(siderealLon(jd, Planet.Sun) / 30);
 const moonSignIndex = (jd: number) => Math.floor(siderealLon(jd, Planet.Moon) / 30);
 
-interface Segment {
+export interface Segment {
   index: number;
   /** End of this element (Julian day UT), or null if it continues past the panchang day. */
   endJd: number | null;
@@ -145,7 +145,7 @@ interface Segment {
  * Successive values of an index function between two instants, with the instant each one ends.
  * The step must be shorter than the shortest possible duration of a value.
  */
-function segments(fn: (jd: number) => number, startJd: number, endJd: number, stepDays: number): Segment[] {
+export function segments(fn: (jd: number) => number, startJd: number, endJd: number, stepDays: number): Segment[] {
   const out: Segment[] = [];
   let cur = fn(startJd);
   let prevJd = startJd;
@@ -177,7 +177,7 @@ function segments(fn: (jd: number) => number, startJd: number, endJd: number, st
 /** Rise/set flag bits (Swiss Ephemeris): geometric centre of the disc, no refraction. */
 const DISC_CENTER_NO_REFRACTION = 256 | 512;
 
-function riseSet(jd: number, body: Planet, event: number, lat: number, lon: number): number | null {
+export function riseSet(jd: number, body: Planet, event: number, lat: number, lon: number): number | null {
   try {
     const r = calculateRiseTransitSet(jd, body, event, lon, lat, 0);
     return Number.isFinite(r.time) && r.time > 0 ? r.time : null;
@@ -187,7 +187,7 @@ function riseSet(jd: number, body: Planet, event: number, lat: number, lon: numb
 }
 
 /** Most recent new moon (elongation = 0) before `jd`. */
-function previousNewMoon(jd: number): number {
+export function previousNewMoon(jd: number): number {
   let t = jd - elongation(jd) / 12.19; // mean relative speed ~12.19°/day
   // Refine with Newton steps on elongation (wrapping near 0/360).
   for (let i = 0; i < 8; i++) {
@@ -199,8 +199,16 @@ function previousNewMoon(jd: number): number {
   return t;
 }
 
-function nextNewMoon(jd: number): number {
+export function nextNewMoon(jd: number): number {
   return previousNewMoon(jd + 31);
+}
+
+/** Amanta month index (0 = Chaitra) and Adhika flag for the lunar month containing `jd`. */
+export function lunarMonthAt(jd: number): { amantaIdx: number; adhika: boolean } {
+  const nm1 = previousNewMoon(jd);
+  const nm2 = nextNewMoon(nm1 + 1);
+  const s1 = sunSignIndex(nm1);
+  return { amantaIdx: (s1 + 1) % 12, adhika: s1 === sunSignIndex(nm2) };
 }
 
 // ---------------------------------------------------------------------------
