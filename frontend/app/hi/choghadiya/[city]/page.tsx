@@ -7,7 +7,7 @@ import StaleGuard from "@/src/components/panchang/StaleGuard";
 import { ChoghadiyaTable } from "@/src/components/panchang/PanchangViews";
 import { CITIES, cityBySlug, relatedCities } from "@/src/lib/cities";
 import { cityDayTimes, cityToday } from "@/src/lib/panchang-data";
-import { fmtDateLong, fmtRange, fmtTime, isNow } from "@/src/lib/panchang-format";
+import { fmtDateLong, fmtRange, fmtTime, isNow, nowMs } from "@/src/lib/panchang-format";
 import { HI_CITY, tr } from "@/src/lib/hi";
 import { hreflang } from "@/src/lib/alternates";
 import type { ChoghadiyaSlot, TimeSpan } from "@/src/services/panchang";
@@ -40,7 +40,7 @@ export default async function Page({ params }: Props) {
   const n = HI_CITY[city.slug];
   const date = cityToday(city);
   const t = cityDayTimes(city, date);
-  const now = Date.now();
+  const now = nowMs();
   const all: ChoghadiyaSlot[] = [...t.choghadiya.day, ...t.choghadiya.night];
   const current = all.find((c) => isNow(c, now));
   const goodClear = t.choghadiya.day.filter((c) => c.nature === "good" && !overlaps(c, t.rahuKalam));

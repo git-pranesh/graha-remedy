@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/src/components/site/Breadcrumbs";
 import Link from "next/link";
-import { Mail, MessageSquare, Orbit, Sparkles } from "lucide-react";
+import {Mail, MessageSquare, Sparkles} from "lucide-react";
 
 // oxlint-disable-next-line react/only-export-components -- App Router metadata
 export const metadata: Metadata = {

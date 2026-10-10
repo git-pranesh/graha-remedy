@@ -7,10 +7,9 @@ import { tr, trTithi, gregMonths } from "../../lib/hi";
 import { calendarEvents } from "../../services/calendar";
 import { sankrantis } from "../../services/sankranti";
 import { tamilYearName } from "../panchang/PanchangViews";
-import { DEFAULT_CITY, type South } from "./RegionalPanchang";
 import { TA_CITY, TE_CITY } from "../../lib/i18n-south";
 
-export const CAL_YEARS_REGIONAL = [2026, 2027];
+import { CAL_YEARS_REGIONAL, DEFAULT_CITY, type South } from "../../lib/regional";
 
 const T = {
   te: {

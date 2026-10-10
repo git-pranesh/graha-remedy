@@ -7,7 +7,7 @@ import { Muhurtas } from "@/src/components/panchang/PanchangViews";
 import PanchangExplorer from "@/src/components/panchang/PanchangExplorer";
 import { CITIES, cityBySlug, relatedCities } from "@/src/lib/cities";
 import { cityDayTimes, cityToday } from "@/src/lib/panchang-data";
-import { addDays, fmtDateLong, fmtDateShort, fmtRange, fmtTime, isNow } from "@/src/lib/panchang-format";
+import { addDays, fmtDateLong, fmtDateShort, fmtRange, fmtTime, isNow, nowMs } from "@/src/lib/panchang-format";
 
 export const revalidate = 300;
 export const dynamicParams = false;
@@ -44,7 +44,7 @@ export default async function RahuKaalCityPage({ params }: Props) {
   if (!city) notFound();
   const date = cityToday(city);
   const t = cityDayTimes(city, date);
-  const now = Date.now();
+  const now = nowMs();
   const week = Array.from({ length: 7 }, (_, i) => cityDayTimes(city, addDays(date, i)));
   const status = isNow(t.rahuKalam, now)
     ? "Rahu Kalam is running now."

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import RegionalPanchang, { REGIONAL_CITIES, regionalCity } from "@/src/components/regional/RegionalPanchang";
+import RegionalPanchang from "@/src/components/regional/RegionalPanchang";
+import { REGIONAL_CITIES, regionalCity } from "@/src/lib/regional";
 import { TA_CITY } from "@/src/lib/i18n-south";
 
 export const revalidate = 300;

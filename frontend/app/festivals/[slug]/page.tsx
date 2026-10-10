@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { hreflang } from "@/src/lib/alternates";
 import { FEST_YEARS, FestivalPage, FestivalsYear } from "@/src/components/calendar/FestivalViews";
 import { FESTIVALS, festivalDates } from "@/src/services/festivals";
 import { DELHI } from "@/src/lib/calendar-pages";
@@ -19,7 +20,7 @@ interface Props { params: Promise<{ slug: string }> }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   if (/^\d{4}$/.test(slug)) {
-    return { title: { absolute: `Hindu Festivals ${slug} – Complete List with Dates` }, description: `All major Hindu festivals in ${slug} with dates and tithi timings: Holi, Navratri, Dussehra, Diwali, Janmashtami and more (New Delhi).`, alternates: { canonical: `/festivals/${slug}` } };
+    return { title: { absolute: `Hindu Festivals ${slug} – Complete List with Dates` }, description: `All major Hindu festivals in ${slug} with dates and tithi timings: Holi, Navratri, Dussehra, Diwali, Janmashtami and more (New Delhi).`, alternates: hreflang(`/festivals/${slug}`, `/hi/festivals/${slug}`, "en") };
   }
   const def = FESTIVALS.find((f) => f.slug === slug);
   if (!def) return {};
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { absolute: `${def.name} ${years} Date and Tithi Timings` },
     description: `${def.name} ${d[0]?.date.slice(0, 4)}: ${d[0] ? fmtDateLong(d[0].date) : ""}. Exact tithi timings and how the date is decided, with ${years} dates.`,
-    alternates: { canonical: `/festivals/${def.slug}` },
+    alternates: hreflang(`/festivals/${def.slug}`, `/hi/festivals/${def.slug}`, "en"),
   };
 }
 

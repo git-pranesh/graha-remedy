@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/src/components/site/Breadcrumbs";
-import {
-  ArrowRight,
-  BookOpen,
-  Calendar,
-  Compass,
-  Orbit,
-  Sparkles,
-} from "lucide-react";
+import {ArrowRight, BookOpen, Calendar, Compass, Sparkles} from "lucide-react";
 
 // oxlint-disable-next-line react/only-export-components -- App Router metadata belongs with the page.
 export const metadata: Metadata = {

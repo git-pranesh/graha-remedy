@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CAL_YEARS_REGIONAL, RegionalCalendarYear } from "@/src/components/regional/RegionalCalendar";
+import { RegionalCalendarYear } from "@/src/components/regional/RegionalCalendar";
+import { CAL_YEARS_REGIONAL } from "@/src/lib/regional";
 
 export const revalidate = 86400;
 export const dynamicParams = false;

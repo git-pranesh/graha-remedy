@@ -21,6 +21,7 @@ export default function SiteHeader() {
 
   // Close menus on navigation.
   useEffect(() => {
+    // oxlint-disable-next-line react/set-state-in-effect -- intentional reset when the route changes
     setOpen(null);
     setDrawer(false);
   }, [pathname]);

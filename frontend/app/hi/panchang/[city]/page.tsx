@@ -7,7 +7,7 @@ import StaleGuard from "@/src/components/panchang/StaleGuard";
 import { HoraTable, Muhurtas, PanchangCore, SunMoon } from "@/src/components/panchang/PanchangViews";
 import { CITIES, cityBySlug, relatedCities } from "@/src/lib/cities";
 import { cityPanchang, cityToday } from "@/src/lib/panchang-data";
-import { fmtDateLong, fmtTime, isNow } from "@/src/lib/panchang-format";
+import { fmtDateLong, fmtTime, isNow, nowMs } from "@/src/lib/panchang-format";
 import { HI_CITY, HI_COUNTRY, trTithi, tr } from "@/src/lib/hi";
 import { hreflang } from "@/src/lib/alternates";
 
@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
   const n = HI_CITY[city.slug];
   const date = cityToday(city);
   const p = cityPanchang(city, date);
-  const now = Date.now();
+  const now = nowMs();
   const t0 = p.tithi[0], k0 = p.nakshatra[0];
   const hora = p.hora.day.find((h) => isNow(h, now)) ?? p.hora.night.find((h) => isNow(h, now));
 

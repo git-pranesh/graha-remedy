@@ -182,7 +182,7 @@ export function longitudeToNakshatra(lon: number): { nakshatra: string; pada: nu
  * Determine which house a planet falls in given a sidereal longitude
  * and sidereal house cusps.
  */
-function whichHouse(planetLon: number, ascendantLon: number, cusps: number[]): number {
+function whichHouse(planetLon: number, ascendantLon: number, _cusps: number[]): number {
   // For whole-sign houses from ascendant
   const ascSign = Math.floor(((ascendantLon % 360) + 360) % 360 / 30);
   const planetSign = Math.floor(((planetLon % 360) + 360) % 360 / 30);
@@ -209,7 +209,7 @@ function detectVideshYoga(chart: { planets: PlanetPosition[]; ascendant: { sign:
 
   const rahu = chart.planets.find((p) => p.planet === "Rahu");
   const moon = chart.planets.find((p) => p.planet === "Moon");
-  const ketu = chart.planets.find((p) => p.planet === "Ketu");
+  const _ketu = chart.planets.find((p) => p.planet === "Ketu");
 
   // Rahu in key houses
   if (rahu) {
@@ -228,8 +228,8 @@ function detectVideshYoga(chart: { planets: PlanetPosition[]; ascendant: { sign:
   const ascIdx = signs.indexOf(chart.ascendant.sign);
   const house12Sign = signs[(ascIdx + 11) % 12];
   const house12Lord = SIGN_LORDS[house12Sign];
-  const planetsInHouse = (h: number) => chart.planets.filter((p) => p.house === h && !["Rahu","Ketu"].includes(p.planet));
-  const house1Lord = SIGN_LORDS[chart.ascendant.sign];
+  const _planetsInHouse = (h: number) => chart.planets.filter((p) => p.house === h && !["Rahu","Ketu"].includes(p.planet));
+  const _house1Lord = SIGN_LORDS[chart.ascendant.sign];
 
   if (house12Lord) {
     // Check if 12th lord is in 1st, 7th, or 9th
@@ -409,7 +409,7 @@ export function computeVimshottariDasha(
   const nakFraction = (moonNormLon % nakSpan) / nakSpan;
   const totalDashaYears = DASHA_YEARS[moonNakLord];
   const balanceFraction = 1 - nakFraction;
-  const balanceDays = balanceFraction * totalDashaYears * 365.25;
+  const _balanceDays = balanceFraction * totalDashaYears * 365.25;
 
   // Start of first (current) mahadasha = birth - elapsed portion
   const elapsedDays = nakFraction * totalDashaYears * 365.25;
@@ -461,7 +461,7 @@ export function computeVimshottariDasha(
   }
 
   // Find current mahadasha and antardasha based on today
-  const todayJD = julianDay(
+  const _todayJD = julianDay(
     new Date().getFullYear(),
     new Date().getMonth() + 1,
     new Date().getDate(),

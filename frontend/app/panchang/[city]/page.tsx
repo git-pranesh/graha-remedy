@@ -8,7 +8,7 @@ import { HoraTable, Muhurtas, PanchangCore, SunMoon } from "@/src/components/pan
 import PanchangExplorer from "@/src/components/panchang/PanchangExplorer";
 import { CITIES, cityBySlug, relatedCities } from "@/src/lib/cities";
 import { cityPanchang, cityToday } from "@/src/lib/panchang-data";
-import { fmtDateLong, fmtTime, isNow } from "@/src/lib/panchang-format";
+import { fmtDateLong, fmtTime, isNow, nowMs } from "@/src/lib/panchang-format";
 
 export const revalidate = 300;
 export const dynamicParams = false;
@@ -46,7 +46,7 @@ export default async function CityPanchangPage({ params }: Props) {
 
   const date = cityToday(city);
   const p = cityPanchang(city, date);
-  const now = Date.now();
+  const now = nowMs();
   const tithiNow = p.tithi[0];
   const nakNow = p.nakshatra[0];
 

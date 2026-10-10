@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ContentShell from "../site/ContentShell";
-import { HI_METHOD_NOTE } from "../site/hi-notes";
 import EventTable from "./EventTable";
 import StaleGuard from "../panchang/StaleGuard";
 import { calendarEvents, type EventKind } from "../../services/calendar";

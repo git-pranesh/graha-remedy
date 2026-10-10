@@ -7,7 +7,7 @@ import { ChoghadiyaTable } from "@/src/components/panchang/PanchangViews";
 import CityIndex from "@/src/components/panchang/CityIndex";
 import { cityBySlug } from "@/src/lib/cities";
 import { cityDayTimes, cityToday } from "@/src/lib/panchang-data";
-import { fmtDateLong } from "@/src/lib/panchang-format";
+import { fmtDateLong, nowMs } from "@/src/lib/panchang-format";
 
 export const revalidate = 300;
 
@@ -27,7 +27,7 @@ export default function ChoghadiyaHub() {
   const city = cityBySlug("ahmedabad")!;
   const date = cityToday(city);
   const t = cityDayTimes(city, date);
-  const now = Date.now();
+  const now = nowMs();
   return (
     <ContentShell switchTo={{ href: "/hi/choghadiya", label: "हिन्दी" }} crumbs={[{ name: "Choghadiya", path: "/choghadiya" }]} footerNote={PANCHANG_METHOD_NOTE}>
       <h1 className="seo-article-title">Choghadiya Today</h1>

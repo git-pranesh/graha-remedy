@@ -24,6 +24,7 @@ export default function Page() {
       <ul className="tool-hub">
         <li><Link href="/hi/panchang" className="tool-hub-card"><strong>आज का पंचांग</strong><span>तिथि, नक्षत्र, योग, करण, राहु काल और शुभ मुहूर्त — 80+ शहरों के लिए।</span></Link></li>
         <li><Link href="/hi/choghadiya" className="tool-hub-card"><strong>आज का चौघड़िया</strong><span>दिन और रात के चौघड़िया का सटीक समय और अभी चल रहा चौघड़िया।</span></Link></li>
+        <li><Link href="/hi/festivals" className="tool-hub-card"><strong>हिंदू त्योहार 2026–2027</strong><span>दिवाली, होली, नवरात्रि, दशहरा, जन्माष्टमी और 25+ त्योहार — तारीख और पूजा मुहूर्त सहित।</span></Link></li>
         {CAL_KINDS.map((k) => (
           <li key={k}><Link href={`/hi/${k}`} className="tool-hub-card"><strong>{HI_KIND[k].label} कब है?</strong><span>अगली {HI_KIND[k].label} की तारीख और 2026–2027 की पूरी सूची।</span></Link></li>
         ))}

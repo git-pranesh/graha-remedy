@@ -6,7 +6,7 @@ import StaleGuard from "@/src/components/panchang/StaleGuard";
 import { ChoghadiyaTable } from "@/src/components/panchang/PanchangViews";
 import { INDIAN_CITIES, WORLD_CITIES, cityBySlug } from "@/src/lib/cities";
 import { cityDayTimes, cityToday } from "@/src/lib/panchang-data";
-import { fmtDateLong } from "@/src/lib/panchang-format";
+import { fmtDateLong, nowMs } from "@/src/lib/panchang-format";
 import { HI_CITY } from "@/src/lib/hi";
 import { hreflang } from "@/src/lib/alternates";
 
@@ -26,7 +26,7 @@ export default function Page() {
   const city = cityBySlug("ahmedabad")!;
   const date = cityToday(city);
   const t = cityDayTimes(city, date);
-  const now = Date.now();
+  const now = nowMs();
   return (
     <ContentShell switchTo={{ href: "/choghadiya", label: "English" }} lang="hi" crumbs={[{ name: "चौघड़िया", path: "/hi/choghadiya" }]} footerNote={HI_METHOD_NOTE}>
       <h1 className="seo-article-title">आज का चौघड़िया</h1>

@@ -62,7 +62,7 @@ export function FestivalsHub() {
   const y = Number(today.slice(0, 4));
   const upcoming = [...allDates(y), ...allDates(y + 1)].filter((r) => r.date >= today).slice(0, 12);
   return (
-    <ContentShell crumbs={[{ name: "Festivals", path: "/festivals" }]} footerNote={FEST_NOTE}>
+    <ContentShell switchTo={{ href: "/hi/festivals", label: "हिन्दी" }} crumbs={[{ name: "Festivals", path: "/festivals" }]} footerNote={FEST_NOTE}>
       <h1 className="seo-article-title">Upcoming Hindu Festivals and Dates</h1>
       <StaleGuard date={today} timezone={DELHI.timezone} />
       {upcoming[0] && (
@@ -87,7 +87,7 @@ export function FestivalsYear({ year }: { year: number }) {
   const rows = allDates(year);
   const today = todayInTimezone(DELHI.timezone);
   return (
-    <ContentShell crumbs={[{ name: "Festivals", path: "/festivals" }, { name: String(year), path: `/festivals/${year}` }]} footerNote={FEST_NOTE}>
+    <ContentShell switchTo={{ href: `/hi/festivals/${year}`, label: "हिन्दी" }} crumbs={[{ name: "Festivals", path: "/festivals" }, { name: String(year), path: `/festivals/${year}` }]} footerNote={FEST_NOTE}>
       <h1 className="seo-article-title">Hindu Festivals {year}: Complete List with Dates</h1>
       <StaleGuard date={today} timezone={DELHI.timezone} />
       <p className="tool-lead">{rows.length} major Hindu festivals in {year} with dates and tithi start and end times (New Delhi, IST). Makar Sankranti and other Sankrantis are on the <Link href={`/sankranti/${year}`}>Sankranti {year}</Link> page; Ekadashi dates on <Link href={`/ekadashi/${year}`}>Ekadashi {year}</Link>.</p>
@@ -132,7 +132,7 @@ export function FestivalPage({ def }: { def: FestivalDef }) {
     url: `${base}/festivals/${def.slug}`,
   }));
   return (
-    <ContentShell crumbs={[{ name: "Festivals", path: "/festivals" }, { name: def.name, path: `/festivals/${def.slug}` }]} schema={schema} footerNote={FEST_NOTE}>
+    <ContentShell switchTo={{ href: `/hi/festivals/${def.slug}`, label: "हिन्दी" }} crumbs={[{ name: "Festivals", path: "/festivals" }, { name: def.name, path: `/festivals/${def.slug}` }]} schema={schema} footerNote={FEST_NOTE}>
       <h1 className="seo-article-title">{def.name} {next.date.slice(0, 4)}: Date and Tithi Timings ({def.hindi})</h1>
       <StaleGuard date={today} timezone={DELHI.timezone} />
       <div className="pc-hero">

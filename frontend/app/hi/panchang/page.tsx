@@ -6,7 +6,7 @@ import StaleGuard from "@/src/components/panchang/StaleGuard";
 import { Muhurtas, PanchangCore, SunMoon } from "@/src/components/panchang/PanchangViews";
 import { CITIES, INDIAN_CITIES, WORLD_CITIES, cityBySlug } from "@/src/lib/cities";
 import { cityPanchang, cityToday } from "@/src/lib/panchang-data";
-import { fmtDateLong, fmtTime } from "@/src/lib/panchang-format";
+import { fmtDateLong, fmtTime, nowMs } from "@/src/lib/panchang-format";
 import { HI_CITY, trTithi, tr } from "@/src/lib/hi";
 import { hreflang } from "@/src/lib/alternates";
 
@@ -42,7 +42,7 @@ export default function Page() {
         <h2>नई दिल्ली का पंचांग</h2>
         <PanchangCore p={p} lang="hi" />
         <SunMoon p={p} lang="hi" />
-        <Muhurtas t={p} nowMs={Date.now()} lang="hi" />
+        <Muhurtas t={p} nowMs={nowMs()} lang="hi" />
         <p><Link href="/hi/panchang/delhi">दिल्ली का पूरा पंचांग (होरा सहित)</Link> · <Link href="/hi/choghadiya/delhi">दिल्ली का चौघड़िया</Link></p>
         <h2>भारतीय शहरों का आज का पंचांग</h2>
         <ul className="pc-city-links">

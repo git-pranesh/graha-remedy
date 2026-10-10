@@ -4,16 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/src/components/site/Breadcrumbs";
 import { notFound } from "next/navigation";
-import {
-  ArrowRight,
-  Calendar,
-  Check,
-  Compass,
-  Orbit,
-  RotateCcw,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import {ArrowRight, Calendar, Check, Compass, RotateCcw, ShieldCheck, Sparkles} from "lucide-react";
 
 interface SeoPage {
   seo_title: string;

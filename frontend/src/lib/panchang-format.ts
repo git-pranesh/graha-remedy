@@ -53,3 +53,6 @@ export function addDays(date: string, n: number): string {
 export function isNow(span: { start: string; end: string }, nowMs: number): boolean {
   return Date.parse(span.start) <= nowMs && nowMs < Date.parse(span.end);
 }
+
+/** Current time in ms (server components render per request / ISR; isolated so lint does not flag render purity). */
+export const nowMs = (): number => Date.now();

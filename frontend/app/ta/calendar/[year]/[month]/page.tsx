@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import RegionalCalendar, { CAL_YEARS_REGIONAL } from "@/src/components/regional/RegionalCalendar";
+import RegionalCalendar from "@/src/components/regional/RegionalCalendar";
+import { CAL_YEARS_REGIONAL } from "@/src/lib/regional";
 import { gregMonths } from "@/src/lib/hi";
 
 export const revalidate = 86400;

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import RegionalPanchang, { DEFAULT_CITY } from "@/src/components/regional/RegionalPanchang";
+import RegionalPanchang from "@/src/components/regional/RegionalPanchang";
+import { DEFAULT_CITY } from "@/src/lib/regional";
 import { cityBySlug } from "@/src/lib/cities";
 
 export const revalidate = 300;

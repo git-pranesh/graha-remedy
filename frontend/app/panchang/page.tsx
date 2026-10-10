@@ -8,7 +8,7 @@ import PanchangExplorer from "@/src/components/panchang/PanchangExplorer";
 import CityIndex from "@/src/components/panchang/CityIndex";
 import { cityBySlug } from "@/src/lib/cities";
 import { cityPanchang, cityToday } from "@/src/lib/panchang-data";
-import { fmtDateLong, fmtTime } from "@/src/lib/panchang-format";
+import { fmtDateLong, fmtTime, nowMs } from "@/src/lib/panchang-format";
 
 export const revalidate = 300;
 
@@ -43,7 +43,7 @@ export default function PanchangHub() {
         <h2>Panchang for New Delhi</h2>
         <PanchangCore p={p} />
         <SunMoon p={p} />
-        <Muhurtas t={p} nowMs={Date.now()} />
+        <Muhurtas t={p} nowMs={nowMs()} />
         <p>
           More for Delhi: <Link href="/rahu-kaal/delhi">Rahu Kaal this week</Link> · <Link href="/choghadiya/delhi">Choghadiya</Link> ·{" "}
           <Link href="/panchang/delhi">full Delhi panchang with hora</Link>.

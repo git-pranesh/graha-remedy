@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/src/components/site/Breadcrumbs";
 import Link from "next/link";
-import { Orbit, ShieldCheck } from "lucide-react";
+import {ShieldCheck} from "lucide-react";
 
 // oxlint-disable-next-line react/only-export-components -- App Router metadata
 export const metadata: Metadata = {

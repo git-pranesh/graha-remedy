@@ -2,19 +2,14 @@ import Link from "next/link";
 import ContentShell from "../site/ContentShell";
 import StaleGuard from "../panchang/StaleGuard";
 import { HoraTable, Muhurtas, PanchangCore, SunMoon, tamilYearName } from "../panchang/PanchangViews";
-import { cityBySlug, type City } from "../../lib/cities";
+import type { City } from "../../lib/cities";
 import { cityPanchang, cityToday } from "../../lib/panchang-data";
-import { fmtDateLong, fmtRange, fmtTime } from "../../lib/panchang-format";
+import { fmtDateLong, fmtRange, fmtTime, nowMs } from "../../lib/panchang-format";
 import { tr, trTithi } from "../../lib/hi";
 import { TA_CITY, TE_CITY } from "../../lib/i18n-south";
 
-export type South = "te" | "ta";
+import { REGIONAL_CITIES, type South } from "../../lib/regional";
 
-export const REGIONAL_CITIES: Record<South, string[]> = {
-  te: ["hyderabad", "visakhapatnam", "vijayawada", "bengaluru", "chennai", "mumbai", "pune", "delhi", "dallas", "san-jose", "edison", "chicago", "atlanta", "seattle", "houston", "austin", "fremont", "new-york", "toronto", "london", "sydney", "melbourne", "singapore", "dubai"],
-  ta: ["chennai", "coimbatore", "madurai", "bengaluru", "kochi", "thiruvananthapuram", "hyderabad", "mumbai", "delhi", "singapore", "london", "toronto", "sydney", "melbourne", "dubai", "new-york", "edison", "san-jose", "dallas", "houston", "chicago", "atlanta"],
-};
-export const DEFAULT_CITY: Record<South, string> = { te: "hyderabad", ta: "chennai" };
 const CITY_NAME: Record<South, Record<string, string>> = { te: TE_CITY, ta: TA_CITY };
 const BASE: Record<South, string> = { te: "/te/panchangam", ta: "/ta/panchangam" };
 
@@ -39,16 +34,12 @@ const T = {
   },
 };
 
-export function regionalCity(lang: South, slug: string): City | undefined {
-  return REGIONAL_CITIES[lang].includes(slug) ? cityBySlug(slug) : undefined;
-}
-
 export default function RegionalPanchang({ lang, city, hub = false }: { lang: South; city: City; hub?: boolean }) {
   const t = T[lang];
   const name = CITY_NAME[lang][city.slug] ?? city.name;
   const date = cityToday(city);
   const p = cityPanchang(city, date);
-  const now = Date.now();
+  const now = nowMs();
   const t0 = p.tithi[0], n0 = p.nakshatra[0];
   const year = tr(lang, "samvatsara", lang === "ta" ? tamilYearName(p) : p.samvatsara);
   const ta = lang === "ta";

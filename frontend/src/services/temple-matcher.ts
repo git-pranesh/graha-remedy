@@ -126,7 +126,7 @@ function buildFallback(deityLabel: string, totalInArea: number): string {
   // Handle multi-word parenthetical names like "Surya (Sun God)"
   const parenMatch = deityLabel.match(/^(\w+)\s*\((.+)\)$/);
   const sanskrit = parenMatch ? parenMatch[1] : deityLabel;
-  const english = parenMatch ? parenMatch[2] : deityLabel;
+  const _english = parenMatch ? parenMatch[2] : deityLabel;
 
   if (totalInArea > 0) {
     return `${totalInArea} Hindu temple${totalInArea !== 1 ? "s" : ""} found in your area, ` +

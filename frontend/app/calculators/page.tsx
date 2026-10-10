@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Breadcrumbs from "@/src/components/site/Breadcrumbs";
 import Link from "next/link";
-import { ArrowRight, Orbit, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { TOOLS } from "@/src/lib/tools";
 
 const TITLE = "Free Vedic Astrology Calculators — Nakshatra, Rashi, Lagna, Dasha & Doshas";
