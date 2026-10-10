@@ -1,8 +1,20 @@
-# Graha Remedy App
+# Graha Remedy
 
-A **free Vedic astrology application** that provides personalized spiritual remedies based on birth details and life problems — with **zero AI involved** in the output logic.
+**Live site: [www.graharemedy.com](https://www.graharemedy.com)** — free Vedic astrology: daily panchang, festival dates, birth-chart calculators and classical remedies. All results are calculated with the Swiss Ephemeris; no AI-written readings.
 
-## What It Does
+| Section | Link |
+|---|---|
+| Today's panchang for 82 cities | [graharemedy.com/panchang](https://www.graharemedy.com/panchang) |
+| Rahu Kaal and Choghadiya | [Rahu Kaal](https://www.graharemedy.com/rahu-kaal) · [Choghadiya](https://www.graharemedy.com/choghadiya) |
+| Hindu festivals 2026–2027 | [graharemedy.com/festivals](https://www.graharemedy.com/festivals) |
+| Ekadashi, Amavasya, Purnima, Sankranti | [Ekadashi](https://www.graharemedy.com/ekadashi) · [Amavasya](https://www.graharemedy.com/amavasya) · [Purnima](https://www.graharemedy.com/purnima) · [Sankranti](https://www.graharemedy.com/sankranti) |
+| Birth-chart calculators | [graharemedy.com/calculators](https://www.graharemedy.com/calculators) |
+| Mantra and remedy library | [graharemedy.com/remedies](https://www.graharemedy.com/remedies) |
+| Hindi, Telugu, Tamil | [हिन्दी](https://www.graharemedy.com/hi) · [తెలుగు](https://www.graharemedy.com/te/panchangam) · [தமிழ்](https://www.graharemedy.com/ta/panchangam) |
+
+The panchang, calendar and festival engines are validated against independently published panchang data (see [About & Methodology](https://www.graharemedy.com/about)).
+
+## Personalised remedy finder
 
 1. **User enters birth details** — date, time, and place of birth
 2. **User selects life problems** from checkboxes and dropdowns — career, health, relationships, finances, education, etc.
