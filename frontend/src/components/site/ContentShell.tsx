@@ -31,7 +31,7 @@ export default function ContentShell({ lang = "en", switchTo, crumbs, schema = [
     ? [["/ta/panchangam", "தமிழ் பஞ்சாங்கம்"], ["/te/panchangam", "తెలుగు పంచాంగం"], ["/panchang", "Panchang (English)"], ["/rahu-kaal", "Rahu Kaal"], ["/ekadashi", "Ekadashi"], ["/about", "About"], ["/contact", "Contact"]]
     : hi
     ? [["/", "होम"], ["/hi/panchang", "पंचांग"], ["/hi/choghadiya", "चौघड़िया"], ["/hi/ekadashi", "एकादशी"], ["/hi/amavasya", "अमावस्या"], ["/hi/purnima", "पूर्णिमा"], ["/about", "About (English)"], ["/contact", "संपर्क / सुधार"]]
-    : [["/", "Home"], ["/panchang", "Panchang"], ["/rahu-kaal", "Rahu Kaal"], ["/choghadiya", "Choghadiya"], ["/ekadashi", "Ekadashi"], ["/sankranti", "Sankranti"], ["/calculators", "Calculators"], ["/about", "About & Methodology"], ["/contact", "Contact & Corrections"]];
+    : [["/", "Home"], ["/panchang", "Panchang"], ["/rahu-kaal", "Rahu Kaal"], ["/choghadiya", "Choghadiya"], ["/ekadashi", "Ekadashi"], ["/festivals", "Festivals"], ["/calculators", "Calculators"], ["/about", "About & Methodology"], ["/contact", "Contact & Corrections"]];
   const breadcrumb = {
     "@type": "BreadcrumbList",
     itemListElement: [{ name: homeLabel, path: homePath }, ...crumbs].map((c, i) => ({

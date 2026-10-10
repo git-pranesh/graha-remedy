@@ -17,19 +17,19 @@ import { utcOffsetForLocalTime } from "./geocoder";
 export interface Place { latitude: number; longitude: number; timezone: string }
 
 const localDate = (jd: number, tz: string) => jdToLocalIso(jd, tz).slice(0, 10);
-function addDays(date: string, n: number) {
+export function addDays(date: string, n: number) {
   const [y, m, d] = date.split("-").map(Number);
   return new Date(Date.UTC(y, m - 1, d + n)).toISOString().slice(0, 10);
 }
-function localMidnightJd(date: string, tz: string) {
+export function localMidnightJd(date: string, tz: string) {
   const [y, m, d] = date.split("-").map(Number);
   return julianDay(y, m, d, 0) - utcOffsetForLocalTime(tz, y, m, d, 0, 0) / 24;
 }
-function sunrise(date: string, p: Place) {
+export function sunrise(date: string, p: Place) {
   return riseSet(localMidnightJd(date, p.timezone), Planet.Sun, RiseTransitFlag.Rise, p.latitude, p.longitude)
     ?? localMidnightJd(date, p.timezone) + 0.25;
 }
-function sunset(date: string, p: Place) {
+export function sunset(date: string, p: Place) {
   return riseSet(sunrise(date, p), Planet.Sun, RiseTransitFlag.Set, p.latitude, p.longitude) ?? localMidnightJd(date, p.timezone) + 0.75;
 }
 

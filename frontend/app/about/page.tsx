@@ -100,7 +100,7 @@ export default function AboutPage() {
               2027, sunrise, sunset, moonrise, moonset, nakshatra and yoga end times, Moon-sign change, Rahu Kalam, Yamaganda, Gulika, Abhijit
               and Brahma Muhurta matched to the minute; tithi and karana end times differed by one to two minutes. Our choghadiya for Dallas
               matched in 15 of 16 periods, the sixteenth by one minute. Saturn&apos;s sign changes from 2020 to 2028 match published transit
-              dates, and the 2026 Adhika Jyeshtha month is detected correctly. Times are rounded to the nearest minute.
+              dates, and the 2026 Adhika Jyeshtha month is detected correctly. All 48 Ekadashi, 12 Amavasya and 13 Purnima dates for 2026–2027, and all 57 festival dates we could check (Diwali, Holi, Navratri, Dussehra, Janmashtami, Raksha Bandhan, Karwa Chauth and others), match published panchang dates for New Delhi. Times are rounded to the nearest minute.
             </p>
             <p>
               Found a result that looks wrong? Please <Link href="/contact">tell us</Link> with the date, time and place — we check every report.

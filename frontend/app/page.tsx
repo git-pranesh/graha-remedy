@@ -181,6 +181,9 @@ export default function Home() {
               <Link href="/ta/panchangam" lang="ta">தமிழ் பஞ்சாங்கம்</Link>
               <Link href="/hi/ekadashi" lang="hi">एकादशी कब है?</Link>
               <Link href="/ekadashi">Next Ekadashi</Link>
+              <Link href="/festivals">Upcoming Festivals</Link>
+              <Link href="/festivals/diwali">Diwali</Link>
+              <Link href="/festivals/2027">Festivals 2027</Link>
               <Link href="/makar-sankranti">Makar Sankranti</Link>
               <Link href="/sankranti/2027">Sankranti 2027</Link>
               <Link href="/ekadashi/2026">Ekadashi 2026</Link>
