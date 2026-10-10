@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
 import "../src/index.css";
+import SiteHeader from "../src/components/site/SiteHeader";
+import SiteFooter from "../src/components/site/SiteFooter";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
 const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
-const SOURCE_URL = "https://github.com/git-pranesh/graha-remedy";
 
 // oxlint-disable-next-line react/only-export-components -- App Router metadata belongs in the layout.
 export const metadata: Metadata = {
@@ -90,26 +91,11 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         )}
       </head>
       <body>
-        {children}
-        <div className="site-license-bar">
-          Graha Remedy is free and open-source software licensed under the{" "}
-          <a href="https://www.gnu.org/licenses/agpl-3.0.html" rel="license noopener" target="_blank">
-            GNU AGPL-3.0
-          </a>
-          .{" "}
-          <a href={SOURCE_URL} rel="noopener" target="_blank">
-            Source code
-          </a>
-          . Astronomical calculations use the Swiss Ephemeris. Place data from{" "}
-          <a href="https://www.geonames.org" rel="noopener" target="_blank">
-            GeoNames
-          </a>{" "}
-          (
-          <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">
-            CC BY 4.0
-          </a>
-          ).
+        <SiteHeader />
+        <div id="content" className="site-content" tabIndex={-1}>
+          {children}
         </div>
+        <SiteFooter />
       </body>
     </html>
   );

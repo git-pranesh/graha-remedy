@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/src/components/site/Breadcrumbs";
 import {
   ArrowRight,
   BookOpen,
@@ -271,27 +272,10 @@ export default function RemediesDirectoryPage() {
   return (
     <div className="seo-page-wrapper">
       {/* Top Navigation */}
-      <header className="seo-header-bar">
-        <div className="seo-header-inner">
-          <Link href="/" className="seo-brand">
-            <Orbit size={24} strokeWidth={1.8} className="seo-brand-icon" />
-            <span className="seo-brand-text">Graha Remedy</span>
-          </Link>
-
-          <nav className="seo-breadcrumbs" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
-            <span className="crumb-sep">/</span>
-            <span className="crumb-current">Remedies Library</span>
-          </nav>
-
-          <Link href="/" className="btn btn-primary btn-sm seo-nav-cta">
-            <Compass size={14} /> Birth Chart Calculator
-          </Link>
-        </div>
-      </header>
 
       {/* Hero Directory Header */}
       <main className="directory-main">
+        <div className="crumbs-bar"><Breadcrumbs items={[{ name: "Remedies", path: "/remedies" }]} /></div>
         <section className="directory-hero">
           <div className="directory-badge">
             <BookOpen size={15} /> Authentic Vedic Knowledge Base · 18 Comprehensive Guides
@@ -501,24 +485,6 @@ export default function RemediesDirectoryPage() {
       </main>
 
       {/* Footer */}
-      <footer className="seo-article-footer" style={{ maxWidth: 1080, margin: "0 auto", padding: "32px 20px" }}>
-        <p className="seo-disclaimer">
-          Disclaimer: Vedic mantras and astrology remedies are spiritual practices for personal self-discipline and meditation. They are not substitutes for medical, psychological, legal, or financial professional care.
-        </p>
-        <div className="seo-footer-nav">
-          <Link href="/">Home</Link>
-          <span>•</span>
-          <Link href="/remedies">All Remedies</Link>
-          <span>•</span>
-          <Link href="/remedies/vedic-astrology-remedies">Vedic Remedies Guide</Link>
-          <span>•</span>
-          <Link href="/remedies/career-astrology">Career Astrology</Link>
-          <span>•</span>
-          <Link href="/remedies/shani-mantra">Shani Mantra</Link>
-          <span>•</span>
-          <Link href="/remedies/rahu-mantra">Rahu Mantra</Link>
-        </div>
-      </footer>
     </div>
   );
 }

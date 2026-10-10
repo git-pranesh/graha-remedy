@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Breadcrumbs from "@/src/components/site/Breadcrumbs";
 import Link from "next/link";
 import { Orbit, Scale } from "lucide-react";
 
@@ -11,24 +12,9 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="seo-page-wrapper">
-      <header className="seo-header-bar">
-        <div className="seo-header-inner">
-          <Link href="/" className="seo-brand">
-            <Orbit size={24} strokeWidth={1.8} className="seo-brand-icon" />
-            <span className="seo-brand-text">Graha Remedy</span>
-          </Link>
-          <nav className="seo-breadcrumbs">
-            <Link href="/">Home</Link>
-            <span className="crumb-sep">/</span>
-            <span className="crumb-current">Terms of Service</span>
-          </nav>
-          <Link href="/" className="btn btn-secondary btn-sm seo-nav-cta">
-            Calculator
-          </Link>
-        </div>
-      </header>
 
       <main className="seo-page-main">
+        <div className="crumbs-bar"><Breadcrumbs items={[{ name: "Terms of Service", path: "/terms" }]} /></div>
         <article className="seo-article">
           <div style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--turquoise-dark)", fontWeight: 700, fontSize: "0.8rem", textTransform: "uppercase", marginBottom: 12 }}>
             <Scale size={16} /> Legal &amp; Spiritual Terms

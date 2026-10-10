@@ -48,15 +48,15 @@ export default function SavedReportView({
 
   return (
     <div className="wizard">
-      <header className="wizard-header">
+      <div className="wizard-header">
         <div className="wizard-logo"><Orbit size={44} strokeWidth={1.4} /></div>
         <h1 className="wizard-title">Graha Remedy</h1>
         <p className="wizard-subtitle">
           {report ? "Saved reading" : "Shared reading"}
         </p>
-      </header>
+      </div>
 
-      <main className="wizard-content">
+      <div className="wizard-content">
         {loading && (
           <div style={{ textAlign: "center", padding: "40px 0", color: "var(--text-muted)" }}>
             Loading your reading…
@@ -95,7 +95,7 @@ export default function SavedReportView({
             </button>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }

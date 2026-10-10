@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/src/components/site/Breadcrumbs";
 import { notFound } from "next/navigation";
 import {
   ArrowRight,
@@ -177,29 +178,10 @@ export default async function RemedyPage({ params }: PageProps) {
       />
 
       {/* Top Navigation & Breadcrumb (Touchpoint 1) */}
-      <header className="seo-header-bar">
-        <div className="seo-header-inner">
-          <Link href="/" className="seo-brand">
-            <Orbit size={24} strokeWidth={1.8} className="seo-brand-icon" />
-            <span className="seo-brand-text">Graha Remedy</span>
-          </Link>
-
-          <nav className="seo-breadcrumbs" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
-            <span className="crumb-sep">/</span>
-            <Link href="/remedies">Remedies</Link>
-            <span className="crumb-sep">/</span>
-            <span className="crumb-current">{titleDisplay}</span>
-          </nav>
-
-          <Link href="/" className="btn btn-secondary btn-sm seo-nav-cta">
-            <Sparkles size={14} /> Free Calculator
-          </Link>
-        </div>
-      </header>
 
       {/* Main Content Area */}
       <main className="seo-page-main">
+        <div className="crumbs-bar"><Breadcrumbs items={[{ name: "Remedies", path: "/remedies" }, { name: titleDisplay, path: `/remedies/${canonicalSlug}` }]} /></div>
         <article className="seo-article">
           <h1 className="seo-article-title">{page.seo_title}</h1>
 
@@ -324,17 +306,6 @@ export default async function RemedyPage({ params }: PageProps) {
             <p className="seo-disclaimer">
               Spiritual Disclaimer: Vedic mantras and remedies are devotional and introspective disciplines rooted in classical Jyotish tradition. They are intended for self-cultivation and should never replace qualified professional medical, psychiatric, legal, or financial assistance.
             </p>
-            <div className="seo-footer-nav">
-              <Link href="/">Home</Link>
-              <span>•</span>
-              <Link href="/remedies">Remedies Library</Link>
-              <span>•</span>
-              <Link href="/about">About Us</Link>
-              <span>•</span>
-              <Link href="/privacy-policy">Privacy Policy</Link>
-              <span>•</span>
-              <Link href="/terms">Terms of Service</Link>
-            </div>
           </footer>
         </article>
       </main>

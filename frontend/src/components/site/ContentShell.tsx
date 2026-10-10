@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { Orbit, Sparkles } from "lucide-react";
+import Breadcrumbs from "./Breadcrumbs";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
 
@@ -13,28 +13,25 @@ interface Props {
   lang?: "en" | "hi" | "te" | "ta";
   /** Link to the same page in the other language. */
   switchTo?: { href: string; label: string };
-  /** Path prefix for breadcrumb/footer links (e.g. "/hi"). */
   crumbs: Crumb[]; // excluding Home; last item is the current page
   schema?: Record<string, unknown>[];
   children: ReactNode;
   footerNote?: ReactNode;
 }
 
-/** Header with breadcrumbs, article container and footer for content pages. */
+const HOME = {
+  en: { label: "Home", path: "/" },
+  hi: { label: "होम", path: "/hi" },
+  te: { label: "హోమ్", path: "/te/panchangam" },
+  ta: { label: "முகப்பு", path: "/ta/panchangam" },
+};
+
+/** Breadcrumbs, article container and method note for content pages. Site header/footer come from the root layout. */
 export default function ContentShell({ lang = "en", switchTo, crumbs, schema = [], children, footerNote }: Props) {
-  const hi = lang === "hi";
-  const homeLabel = { en: "Home", hi: "होम", te: "హోమ్", ta: "முகப்பு" }[lang];
-  const homePath = { en: "", hi: "/hi", te: "/te/panchangam", ta: "/ta/panchangam" }[lang];
-  const links: [string, string][] = lang === "te"
-    ? [["/te/panchangam", "తెలుగు పంచాంగం"], ["/ta/panchangam", "தமிழ் பஞ்சாங்கம்"], ["/panchang", "Panchang (English)"], ["/rahu-kaal", "Rahu Kaal"], ["/ekadashi", "Ekadashi"], ["/about", "About"], ["/contact", "Contact"]]
-    : lang === "ta"
-    ? [["/ta/panchangam", "தமிழ் பஞ்சாங்கம்"], ["/te/panchangam", "తెలుగు పంచాంగం"], ["/panchang", "Panchang (English)"], ["/rahu-kaal", "Rahu Kaal"], ["/ekadashi", "Ekadashi"], ["/about", "About"], ["/contact", "Contact"]]
-    : hi
-    ? [["/", "होम"], ["/hi/panchang", "पंचांग"], ["/hi/choghadiya", "चौघड़िया"], ["/hi/ekadashi", "एकादशी"], ["/hi/amavasya", "अमावस्या"], ["/hi/purnima", "पूर्णिमा"], ["/about", "About (English)"], ["/contact", "संपर्क / सुधार"]]
-    : [["/", "Home"], ["/panchang", "Panchang"], ["/rahu-kaal", "Rahu Kaal"], ["/choghadiya", "Choghadiya"], ["/ekadashi", "Ekadashi"], ["/festivals", "Festivals"], ["/calculators", "Calculators"], ["/about", "About & Methodology"], ["/contact", "Contact & Corrections"]];
+  const home = HOME[lang];
   const breadcrumb = {
     "@type": "BreadcrumbList",
-    itemListElement: [{ name: homeLabel, path: homePath }, ...crumbs].map((c, i) => ({
+    itemListElement: [{ name: home.label, path: home.path === "/" ? "" : home.path }, ...crumbs].map((c, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: c.name,
@@ -42,52 +39,26 @@ export default function ContentShell({ lang = "en", switchTo, crumbs, schema = [
     })),
   };
   const graph = { "@context": "https://schema.org", "@graph": [breadcrumb, ...schema] };
-  const current = crumbs[crumbs.length - 1];
 
   return (
     <div className="seo-page-wrapper" lang={lang}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
-      <header className="seo-header-bar">
-        <div className="seo-header-inner">
-          <Link href="/" className="seo-brand">
-            <Orbit size={24} strokeWidth={1.8} className="seo-brand-icon" />
-            <span className="seo-brand-text">Graha Remedy</span>
-          </Link>
-          <nav className="seo-breadcrumbs" aria-label="Breadcrumb">
-            <Link href={homePath || "/"}>{homeLabel}</Link>
-            {crumbs.slice(0, -1).map((c) => (
-              <span key={c.path}>
-                <span className="crumb-sep">/</span>
-                <Link href={c.path}>{c.name}</Link>
-              </span>
-            ))}
-            <span className="crumb-sep">/</span>
-            <span className="crumb-current">{current.name}</span>
-          </nav>
+      <main className="seo-page-main">
+        <div className="crumbs-bar">
+          <Breadcrumbs items={crumbs} homeLabel={home.label} homeHref={home.path} />
           {switchTo && (
-            <Link href={switchTo.href} className="nav-link" hrefLang={lang === "hi" ? "en" : "hi"} lang={lang === "hi" ? "en" : "hi"}>
+            <Link href={switchTo.href} className="crumbs-switch" hrefLang={lang === "en" ? undefined : "en"}>
               {switchTo.label}
             </Link>
           )}
-          <Link href="/" className="btn btn-secondary btn-sm seo-nav-cta">
-            <Sparkles size={14} /> {hi ? "उपाय खोजें" : lang === "te" ? "పరిహారాలు" : lang === "ta" ? "பரிகாரங்கள்" : "Remedy Finder"}
-          </Link>
         </div>
-      </header>
-      <main className="seo-page-main">
         <article className="seo-article tool-article">
           {children}
-          <footer className="seo-article-footer">
-            {footerNote && <p className="seo-disclaimer">{footerNote}</p>}
-            <div className="seo-footer-nav">
-              {links.map(([href, label], i) => (
-                <span key={href}>
-                  {i > 0 && <span> • </span>}
-                  <Link href={href}>{label}</Link>
-                </span>
-              ))}
-            </div>
-          </footer>
+          {footerNote && (
+            <footer className="seo-article-footer">
+              <p className="seo-disclaimer">{footerNote}</p>
+            </footer>
+          )}
         </article>
       </main>
     </div>

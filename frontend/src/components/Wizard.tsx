@@ -97,11 +97,11 @@ export default function Wizard() {
   return (
     <div className="wizard">
       {/* Header */}
-      <header className="wizard-header">
+      <div className="wizard-header">
         <div className="wizard-logo"><Orbit size={44} strokeWidth={1.4} /></div>
         <h1 className="wizard-title">Graha Remedy</h1>
         <p className="wizard-subtitle">Vedic spiritual remedies for life's challenges</p>
-      </header>
+      </div>
 
       {/* Step indicator */}
       <nav className="wizard-steps">
@@ -135,7 +135,7 @@ export default function Wizard() {
       )}
 
       {/* Step content */}
-      <main className="wizard-content">
+      <div className="wizard-content">
         {state.step === 1 && (
           <Step1BirthDetails
             onSubmit={handleBirthSubmit}
@@ -159,7 +159,7 @@ export default function Wizard() {
             onRestart={handleRestart}
           />
         )}
-      </main>
+      </div>
     </div>
   );
 }

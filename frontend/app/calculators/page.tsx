@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Breadcrumbs from "@/src/components/site/Breadcrumbs";
 import Link from "next/link";
 import { ArrowRight, Orbit, Sparkles } from "lucide-react";
 import { TOOLS } from "@/src/lib/tools";
@@ -18,23 +19,8 @@ export const metadata: Metadata = {
 export default function CalculatorsPage() {
   return (
     <div className="seo-page-wrapper">
-      <header className="seo-header-bar">
-        <div className="seo-header-inner">
-          <Link href="/" className="seo-brand">
-            <Orbit size={24} strokeWidth={1.8} className="seo-brand-icon" />
-            <span className="seo-brand-text">Graha Remedy</span>
-          </Link>
-          <nav className="seo-breadcrumbs" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
-            <span className="crumb-sep">/</span>
-            <span className="crumb-current">Calculators</span>
-          </nav>
-          <Link href="/" className="btn btn-secondary btn-sm seo-nav-cta">
-            <Sparkles size={14} /> Remedy Finder
-          </Link>
-        </div>
-      </header>
       <main className="seo-page-main">
+        <div className="crumbs-bar"><Breadcrumbs items={[{ name: "Calculators", path: "/calculators" }]} /></div>
         <article className="seo-article">
           <h1 className="seo-article-title">Free Vedic Astrology Calculators</h1>
           <p className="tool-lead">

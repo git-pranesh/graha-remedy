@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { Orbit, Sparkles } from "lucide-react";
+import Breadcrumbs from "./Breadcrumbs";
 import { TOOLS, toolBySlug } from "../../lib/tools";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
@@ -62,26 +62,11 @@ export default function ToolPage({ slug, h1, lead, calculator, children, faqs, u
   return (
     <div className="seo-page-wrapper">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <header className="seo-header-bar">
-        <div className="seo-header-inner">
-          <Link href="/" className="seo-brand">
-            <Orbit size={24} strokeWidth={1.8} className="seo-brand-icon" />
-            <span className="seo-brand-text">Graha Remedy</span>
-          </Link>
-          <nav className="seo-breadcrumbs" aria-label="Breadcrumb">
-            <Link href="/">Home</Link>
-            <span className="crumb-sep">/</span>
-            <Link href="/calculators">Calculators</Link>
-            <span className="crumb-sep">/</span>
-            <span className="crumb-current">{tool.name}</span>
-          </nav>
-          <Link href="/" className="btn btn-secondary btn-sm seo-nav-cta">
-            <Sparkles size={14} /> Remedy Finder
-          </Link>
-        </div>
-      </header>
 
       <main className="seo-page-main">
+        <div className="crumbs-bar">
+          <Breadcrumbs items={[{ name: "Calculators", path: "/calculators" }, { name: tool.name, path: `/${slug}` }]} />
+        </div>
         <article className="seo-article tool-article">
           <h1 className="seo-article-title">{h1}</h1>
           <div className="tool-lead">{lead}</div>
@@ -120,19 +105,6 @@ export default function ToolPage({ slug, h1, lead, calculator, children, faqs, u
               houses, Vimshottari years of 365.25 days. Planetary positions from the Swiss Ephemeris. Last reviewed{" "}
               {updated}. Astrology is a traditional belief system; results are not medical, legal or financial advice.
             </p>
-            <div className="seo-footer-nav">
-              <Link href="/">Home</Link>
-              <span>•</span>
-              <Link href="/calculators">Calculators</Link>
-              <span>•</span>
-              <Link href="/remedies">Remedies Library</Link>
-              <span>•</span>
-              <Link href="/about">About &amp; Methodology</Link>
-              <span>•</span>
-              <Link href="/contact">Contact &amp; Corrections</Link>
-              <span>•</span>
-              <Link href="/privacy-policy">Privacy Policy</Link>
-            </div>
           </footer>
         </article>
       </main>
