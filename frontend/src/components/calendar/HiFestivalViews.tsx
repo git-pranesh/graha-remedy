@@ -17,7 +17,7 @@ function tithiHi(f: FestivalDef): string {
   const paksha = tr("hi", "paksha", f.tithi < 15 ? "Shukla" : "Krishna");
   const t = tr("hi", "tithi", TITHI_NAMES[f.tithi]);
   const amanta = tr("hi", "month", LUNAR_MONTHS[f.month]);
-  if (f.tithi === 14 || f.tithi === 29) return `${amanta} ${t}`;
+  if (f.tithi === 14) return `${amanta} ${t}`;
   const purn = tr("hi", "month", LUNAR_MONTHS[f.tithi >= 15 ? (f.month + 1) % 12 : f.month]);
   return f.tithi >= 15 && purn !== amanta ? `${purn} ${paksha} ${t} (अमांत में ${amanta})` : `${amanta} ${paksha} ${t}`;
 }
@@ -152,7 +152,7 @@ export function HiFestivalPage({ def }: { def: FestivalDef }) {
 
         <h2>तारीख कैसे तय होती है</h2>
         <p>
-          {def.hindi} {tithiHi(def)} को आता है। तिथि शायद ही कभी कैलेंडर के दिन से मेल खाती है, इसलिए पर्व उस दिन मनाया जाता है जिस दिन तिथि {KALA_HI[def.kala]} रहती है।
+          {def.hindi} की तिथि: {tithiHi(def)}। तिथि शायद ही कभी कैलेंडर के दिन से मेल खाती है, इसलिए पर्व उस दिन मनाया जाता है जिस दिन तिथि {KALA_HI[def.kala]} रहती है।
           {def.rule && RULE_HI[def.rule]}
           {def.offset === 1 && " यहाँ दी गई तारीख होलिका दहन के अगले दिन की है।"}
         </p>
