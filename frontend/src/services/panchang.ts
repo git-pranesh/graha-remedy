@@ -25,6 +25,7 @@ import {
   CalculationFlag,
 } from "@swisseph/node";
 import { initAyanamsa } from "./ayanamsa";
+import { GOWRI_DAY, GOWRI_INFO, GOWRI_NIGHT } from "../lib/gowri";
 import { SIDEREAL_FLAGS } from "./astro-engine";
 import { utcOffsetForLocalTime } from "./geocoder";
 
@@ -288,6 +289,11 @@ export interface ChoghadiyaSlot extends TimeSpan {
   meaning: string;
 }
 
+export interface GowriSlot extends TimeSpan {
+  name: string;
+  good: boolean;
+}
+
 export interface HoraSlot extends TimeSpan {
   planet: string;
 }
@@ -330,6 +336,7 @@ export interface Panchang {
   brahmaMuhurta: TimeSpan;
   choghadiya: { day: ChoghadiyaSlot[]; night: ChoghadiyaSlot[] };
   hora: { day: HoraSlot[]; night: HoraSlot[] };
+  gowri: { day: GowriSlot[]; night: GowriSlot[] };
 }
 
 // ---------------------------------------------------------------------------
@@ -387,6 +394,7 @@ export interface DayTimes {
   brahmaMuhurta: TimeSpan;
   choghadiya: { day: ChoghadiyaSlot[]; night: ChoghadiyaSlot[] };
   hora: { day: HoraSlot[]; night: HoraSlot[] };
+  gowri: { day: GowriSlot[]; night: GowriSlot[] };
   /** internal: Julian days used by computePanchang */
   _jd: { localMidnight: number; dayStart: number; dayEnd: number; panchangEnd: number };
 }
@@ -438,6 +446,9 @@ export function computeDayTimes(date: string, latitude: number, longitude: numbe
     horaNight.push({ planet: HORA_ORDER[(dayLordIdx + 12 + i) % 7], ...tspan(part(dayEnd, nightLen, 12, i), part(dayEnd, nightLen, 12, i + 1)) });
   }
 
+  const gowriDay: GowriSlot[] = GOWRI_DAY[weekdayIdx].map((n, i) => ({ name: n, good: GOWRI_INFO[n].good, ...tspan(part(dayStart, dayLen, 8, i), part(dayStart, dayLen, 8, i + 1)) }));
+  const gowriNight: GowriSlot[] = GOWRI_NIGHT[weekdayIdx].map((n, i) => ({ name: n, good: GOWRI_INFO[n].good, ...tspan(part(dayEnd, nightLen, 8, i), part(dayEnd, nightLen, 8, i + 1)) }));
+
   const prevNightLen = prevSunset !== null ? dayStart - prevSunset : nightLen;
 
   return {
@@ -456,6 +467,7 @@ export function computeDayTimes(date: string, latitude: number, longitude: numbe
     brahmaMuhurta: tspan(dayStart - (prevNightLen * 2) / 15, dayStart - prevNightLen / 15),
     choghadiya: { day: chogDay, night: chogNight },
     hora: { day: horaDay, night: horaNight },
+    gowri: { day: gowriDay, night: gowriNight },
     _jd: { localMidnight: localMidnightJd, dayStart, dayEnd, panchangEnd },
   };
 }

@@ -70,6 +70,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...Array.from({ length: 12 }, (_, i) => ({ url: `${SITE_URL}/${l}/calendar/${y}/${i + 1}`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 })),
       ]),
     ]),
+    { url: `${SITE_URL}/nalla-neram`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
+    ...REGIONAL_CITIES.ta.map((c) => ({ url: `${SITE_URL}/nalla-neram/${c}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 })),
     { url: `${SITE_URL}/hi`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
     ...["panchang", "choghadiya"].flatMap((section) => [
       { url: `${SITE_URL}/hi/${section}`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.8 },

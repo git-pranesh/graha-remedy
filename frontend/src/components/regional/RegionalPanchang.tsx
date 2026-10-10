@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ContentShell from "../site/ContentShell";
 import StaleGuard from "../panchang/StaleGuard";
+import GowriTable from "./GowriTable";
 import { HoraTable, Muhurtas, PanchangCore, SunMoon, tamilYearName } from "../panchang/PanchangViews";
 import type { City } from "../../lib/cities";
 import { cityPanchang, cityToday } from "../../lib/panchang-data";
@@ -85,6 +86,14 @@ export default function RegionalPanchang({ lang, city, hub = false }: { lang: So
         {city.countryCode !== "IN" && <p className="tool-note">{t.local(name, p.timezone)}</p>}
         <h2>{t.sec.times}</h2>
         <Muhurtas t={p} nowMs={now} lang={lang} />
+        {ta && (
+          <>
+            <h2>கௌரி பஞ்சாங்கம் (கௌரி நல்ல நேரம்)</h2>
+            <GowriTable slots={p.gowri.day} base={date} now={now} label="பகல் கௌரி (சூரிய உதயம் முதல் அஸ்தமனம் வரை)" tamil />
+            <GowriTable slots={p.gowri.night} base={date} now={now} label="இரவு கௌரி (அஸ்தமனம் முதல் அடுத்த உதயம் வரை)" tamil />
+            <p><Link href={`/nalla-neram/${city.slug}`}>Nalla Neram today in {city.name} (English, 7-day table)</Link></p>
+          </>
+        )}
         <h2>{t.sec.hora}</h2>
         <HoraTable slots={p.hora.day} base={date} nowMs={now} label={t.sec.dayHora} lang={lang} />
         <HoraTable slots={p.hora.night} base={date} nowMs={now} label={t.sec.nightHora} lang={lang} />
