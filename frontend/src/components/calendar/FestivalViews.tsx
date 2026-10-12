@@ -119,20 +119,8 @@ export function FestivalPage({ def }: { def: FestivalDef }) {
   const today = todayInTimezone(DELHI.timezone);
   const rows = FEST_YEARS.map((y) => festivalDates(y, DELHI, [def])[0]).filter(Boolean);
   const next = rows.find((r) => r.date >= today) ?? rows[rows.length - 1];
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.com";
-  const schema = rows.map((r) => ({
-    "@type": "Event",
-    name: `${def.name} ${r.date.slice(0, 4)}`,
-    startDate: r.date,
-    endDate: r.date,
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    eventStatus: "https://schema.org/EventScheduled",
-    location: { "@type": "Place", name: "India", address: { "@type": "PostalAddress", addressCountry: "IN" } },
-    description: def.desc,
-    url: `${base}/festivals/${def.slug}`,
-  }));
   return (
-    <ContentShell switchTo={{ href: `/hi/festivals/${def.slug}`, label: "हिन्दी" }} crumbs={[{ name: "Festivals", path: "/festivals" }, { name: def.name, path: `/festivals/${def.slug}` }]} schema={schema} footerNote={FEST_NOTE}>
+    <ContentShell switchTo={{ href: `/hi/festivals/${def.slug}`, label: "हिन्दी" }} crumbs={[{ name: "Festivals", path: "/festivals" }, { name: def.name, path: `/festivals/${def.slug}` }]} footerNote={FEST_NOTE}>
       <h1 className="seo-article-title">{def.name} {next.date.slice(0, 4)}: Date and Tithi Timings ({def.hindi})</h1>
       <StaleGuard date={today} timezone={DELHI.timezone} />
       <div className="pc-hero">
