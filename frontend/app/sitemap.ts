@@ -12,8 +12,16 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.graharemedy.co
 const SEO_PAGES_DIR = path.resolve(process.cwd(), "../data/seo_pages");
 
 export const dynamic = "force-static";
+export const revalidate = 3600;
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+/**
+ * lastmod policy (Google ignores lastmod when it is not reliably accurate):
+ *  - pages marked changeFrequency "daily" are regenerated every few minutes with that day's data, so lastmod = today (IST);
+ *  - all other pages use CONTENT_UPDATED, the date their content last materially changed. Bump it when content changes.
+ */
+const CONTENT_UPDATED = "2026-10-22";
+
+async function build(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${SITE_URL}`,
@@ -128,4 +136,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch {
     return staticPages;
   }
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const today = new Date(Date.now() + 5.5 * 3600_000).toISOString().slice(0, 10);
+  return (await build()).map((e) => ({ ...e, lastModified: e.changeFrequency === "daily" ? today : CONTENT_UPDATED }));
 }
