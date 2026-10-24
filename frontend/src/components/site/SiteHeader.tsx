@@ -88,8 +88,8 @@ export default function SiteHeader() {
                   {s.label}
                   <ChevronDown size={14} className="sh-chev" aria-hidden />
                 </button>
-                {expanded && (
-                  <div className="sh-panel" id={`menu-${s.id}`}>
+                {(
+                  <div className="sh-panel" id={`menu-${s.id}`} hidden={!expanded}>
                     <div className="sh-cols">
                       {s.columns.map((c) => (
                         <div key={c.title} className="sh-col">
@@ -129,8 +129,8 @@ export default function SiteHeader() {
               <span className="sh-lang-text">Language</span>
               <ChevronDown size={14} className="sh-chev" aria-hidden />
             </button>
-            {open === "lang" && (
-              <div className="sh-panel sh-panel-lang">
+            {(
+              <div className="sh-panel sh-panel-lang" hidden={open !== "lang"}>
                 <ul>
                   {LANGUAGES.map((l) => (
                     <li key={l.href}>
