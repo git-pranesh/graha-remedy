@@ -1,0 +1,185 @@
+{
+  "_note": "Content for the daily social posts. Beej and naam mantras are copied from our /remedies pages; Navagraha verses are the standard Vyasa Navagraha Stotram. Have a pandit proof-read new entries before they are posted.",
+  "site": "https://www.graharemedy.com",
+  "planets": {
+    "surya": {
+      "name": "Surya", "english": "Sun", "weekday": "Sunday", "accent": "#E8873A",
+      "page": "/remedies/surya-mantra",
+      "tool": { "label": "See which planet period you are running", "path": "/mahadasha-calculator" },
+      "hook": "Career stuck? Working hard but no recognition?",
+      "about": "Surya rules authority, confidence, health and your standing at work.",
+      "hashtags": ["#SuryaMantra", "#Sunday", "#Surya", "#VedicAstrology", "#Mantra", "#Jyotish"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः", "translit": "Om Hraam Hreem Hraum Sah Suryaya Namah",
+          "meaning": "Om, with the seed sounds of the Sun, salutations to Surya." },
+        { "kind": "verse from the Navagraha Stotram", "text": "जपाकुसुमसंकाशं काश्यपेयं महाद्युतिम् ।\nतमोऽरिं सर्वपापघ्नं प्रणतोऽस्मि दिवाकरम् ॥",
+          "translit": "Japakusuma sankasham kashyapeyam mahadyutim\nTamorim sarvapapaghnam pranato'smi divakaram",
+          "meaning": "I bow to the Sun, red like the hibiscus flower, son of Kashyapa, of great radiance, the enemy of darkness who destroys all sins." }
+      ]
+    },
+    "chandra": {
+      "name": "Chandra", "english": "Moon", "weekday": "Monday", "accent": "#B9C7D6",
+      "page": "/remedies/chandra-mantra",
+      "tool": { "label": "Find your Moon sign (Rashi)", "path": "/rashi-calculator" },
+      "hook": "Restless mind? Overthinking? Can't sleep?",
+      "about": "Chandra rules the mind, emotions, sleep and your mother.",
+      "hashtags": ["#ChandraMantra", "#Monday", "#Chandra", "#VedicAstrology", "#Mantra", "#Jyotish"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ श्रां श्रीं श्रौं सः चन्द्राय नमः", "translit": "Om Shraam Shreem Shraum Sah Chandraya Namah",
+          "meaning": "Om, with the seed sounds of the Moon, salutations to Chandra." },
+        { "kind": "verse from the Navagraha Stotram", "text": "दधिशङ्खतुषाराभं क्षीरोदार्णवसम्भवम् ।\nनमामि शशिनं सोमं शम्भोर्मुकुटभूषणम् ॥",
+          "translit": "Dadhi shankha tusharabham kshirodarnava sambhavam\nNamami shashinam somam shambhor mukuta bhushanam",
+          "meaning": "I bow to the Moon, white as curd, conch and snow, born of the ocean of milk, the jewel on Shiva's crown." }
+      ]
+    },
+    "mangal": {
+      "name": "Mangal", "english": "Mars", "weekday": "Tuesday", "accent": "#D9534A",
+      "page": "/remedies/mangal-mantra",
+      "tool": { "label": "Check if you are Manglik", "path": "/manglik-dosha-calculator" },
+      "hook": "Anger, fights at home, debts piling up?",
+      "about": "Mangal rules courage, energy, property, debts and conflict.",
+      "hashtags": ["#MangalMantra", "#Tuesday", "#Mangal", "#Manglik", "#VedicAstrology", "#Mantra"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ क्रां क्रीं क्रौं सः भौमाय नमः", "translit": "Om Kraam Kreem Kraum Sah Bhaumaya Namah",
+          "meaning": "Om, with the seed sounds of Mars, salutations to Bhauma, the son of the Earth." },
+        { "kind": "verse from the Navagraha Stotram", "text": "धरणीगर्भसम्भूतं विद्युत्कान्तिसमप्रभम् ।\nकुमारं शक्तिहस्तं तं मङ्गलं प्रणमाम्यहम् ॥",
+          "translit": "Dharani garbha sambhutam vidyut kanti samaprabham\nKumaram shakti hastam tam mangalam pranamamyaham",
+          "meaning": "I bow to Mangal, born from the womb of the Earth, shining like lightning, the youth who holds a spear." }
+      ]
+    },
+    "budh": {
+      "name": "Budh", "english": "Mercury", "weekday": "Wednesday", "accent": "#5DB37E",
+      "page": "/remedies/budh-mantra",
+      "tool": { "label": "Find your birth Nakshatra", "path": "/nakshatra-calculator" },
+      "hook": "Exams, interviews or a big business deal coming up?",
+      "about": "Budh rules intellect, speech, learning, trade and communication.",
+      "hashtags": ["#BudhMantra", "#Wednesday", "#Budh", "#VedicAstrology", "#Mantra", "#Jyotish"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ ब्रां ब्रीं ब्रौं सः बुधाय नमः", "translit": "Om Braam Breem Braum Sah Budhaya Namah",
+          "meaning": "Om, with the seed sounds of Mercury, salutations to Budh." },
+        { "kind": "verse from the Navagraha Stotram", "text": "प्रियङ्गुकलिकाश्यामं रूपेणाप्रतिमं बुधम् ।\nसौम्यं सौम्यगुणोपेतं तं बुधं प्रणमाम्यहम् ॥",
+          "translit": "Priyangu kalika shyamam rupenapratimam budham\nSaumyam saumya gunopetam tam budham pranamamyaham",
+          "meaning": "I bow to Budh, dark like the priyangu bud, of matchless form, gentle and full of gentle qualities." }
+      ]
+    },
+    "brihaspati": {
+      "name": "Brihaspati", "english": "Jupiter", "weekday": "Thursday", "accent": "#E8C24A",
+      "page": "/remedies/brihaspati-mantra",
+      "tool": { "label": "See your Mahadasha timeline", "path": "/mahadasha-calculator" },
+      "hook": "Marriage delayed? Waiting for a child or a good teacher?",
+      "about": "Guru rules wisdom, marriage, children, wealth and blessings.",
+      "hashtags": ["#GuruMantra", "#BrihaspatiMantra", "#Thursday", "#VedicAstrology", "#Mantra", "#Jyotish"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ ग्रां ग्रीं ग्रौं सः गुरवे नमः", "translit": "Om Graam Greem Graum Sah Gurave Namah",
+          "meaning": "Om, with the seed sounds of Jupiter, salutations to Guru." },
+        { "kind": "verse from the Navagraha Stotram", "text": "देवानां च ऋषीणां च गुरुं काञ्चनसन्निभम् ।\nबुद्धिभूतं त्रिलोकेशं तं नमामि बृहस्पतिम् ॥",
+          "translit": "Devanam cha rishinam cha gurum kanchana sannibham\nBuddhi bhutam trilokesham tam namami brihaspatim",
+          "meaning": "I bow to Brihaspati, teacher of the gods and sages, golden in colour, wisdom itself, lord of the three worlds." }
+      ]
+    },
+    "shukra": {
+      "name": "Shukra", "english": "Venus", "weekday": "Friday", "accent": "#E7A6C4",
+      "page": "/remedies/shukra-mantra",
+      "tool": { "label": "Find your Moon sign (Rashi)", "path": "/rashi-calculator" },
+      "hook": "Relationship strain? Life feels dull and joyless?",
+      "about": "Shukra rules love, marriage, comforts, beauty and the arts.",
+      "hashtags": ["#ShukraMantra", "#Friday", "#Shukra", "#VedicAstrology", "#Mantra", "#Jyotish"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ द्रां द्रीं द्रौं सः शुक्राय नमः", "translit": "Om Draam Dreem Draum Sah Shukraya Namah",
+          "meaning": "Om, with the seed sounds of Venus, salutations to Shukra.", "page": "/remedies/shukra-beej-mantra" },
+        { "kind": "verse from the Navagraha Stotram", "text": "हिमकुन्दमृणालाभं दैत्यानां परमं गुरुम् ।\nसर्वशास्त्रप्रवक्तारं भार्गवं प्रणमाम्यहम् ॥",
+          "translit": "Hima kunda mrinalabham daityanam paramam gurum\nSarva shastra pravaktaram bhargavam pranamamyaham",
+          "meaning": "I bow to Shukra, white as snow, jasmine and the lotus stalk, the great teacher of the Daityas, who explains all the scriptures." }
+      ]
+    },
+    "shani": {
+      "name": "Shani", "english": "Saturn", "weekday": "Saturday", "accent": "#7F8FCF",
+      "page": "/remedies/shani-mantra",
+      "tool": { "label": "Check if Sade Sati is running for you", "path": "/sade-sati-calculator" },
+      "hook": "Sade Sati? Delays at every step, however hard you try?",
+      "about": "Shani rules karma, discipline, delays, hard work and justice.",
+      "hashtags": ["#ShaniMantra", "#Saturday", "#Shani", "#SadeSati", "#VedicAstrology", "#Mantra"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः", "translit": "Om Praam Preem Praum Sah Shanaishcharaya Namah",
+          "meaning": "Om, with the seed sounds of Saturn, salutations to Shanaishchara, the slow-moving one.", "page": "/remedies/shani-beej-mantra" },
+        { "kind": "verse from the Navagraha Stotram", "text": "नीलाञ्जनसमाभासं रविपुत्रं यमाग्रजम् ।\nछायामार्तण्डसम्भूतं तं नमामि शनैश्चरम् ॥",
+          "translit": "Nilanjana samabhasam ravi putram yamagrajam\nChhaya martanda sambhutam tam namami shanaishcharam",
+          "meaning": "I bow to Shani, dark like blue kohl, son of the Sun and elder brother of Yama, born of Chhaya and Surya." }
+      ]
+    },
+    "rahu": {
+      "name": "Rahu", "english": "North Node", "weekday": "Saturday", "accent": "#8C7BB8",
+      "page": "/remedies/rahu-mantra",
+      "tool": { "label": "Check for Kaal Sarp Dosh", "path": "/kaal-sarp-dosh-calculator" },
+      "hook": "Confusion, sudden setbacks, running Rahu dasha?",
+      "about": "Rahu rules obsession, illusion, foreign lands and sudden events.",
+      "hashtags": ["#RahuMantra", "#Rahu", "#RahuDasha", "#VedicAstrology", "#Mantra", "#Jyotish"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ भ्रां भ्रीं भ्रौं सः राहवे नमः", "translit": "Om Bhraam Bhreem Bhraum Sah Rahave Namah",
+          "meaning": "Om, with the seed sounds of Rahu, salutations to Rahu." },
+        { "kind": "verse from the Navagraha Stotram", "text": "अर्धकायं महावीर्यं चन्द्रादित्यविमर्दनम् ।\nसिंहिकागर्भसम्भूतं तं राहुं प्रणमाम्यहम् ॥",
+          "translit": "Ardhakayam mahaviryam chandraditya vimardanam\nSimhika garbha sambhutam tam rahum pranamamyaham",
+          "meaning": "I bow to Rahu, the half-bodied one of great strength, who eclipses the Moon and the Sun, born of Simhika." }
+      ]
+    },
+    "ketu": {
+      "name": "Ketu", "english": "South Node", "weekday": "Saturday", "accent": "#C97C5D",
+      "page": "/remedies/ketu-mantra",
+      "tool": { "label": "Check for Kaal Sarp Dosh", "path": "/kaal-sarp-dosh-calculator" },
+      "hook": "Feeling lost, detached, nothing seems to stick?",
+      "about": "Ketu rules detachment, past karma, intuition and moksha.",
+      "hashtags": ["#KetuMantra", "#Ketu", "#KetuDasha", "#VedicAstrology", "#Mantra", "#Jyotish"],
+      "variants": [
+        { "kind": "beej mantra", "text": "ॐ स्रां स्रीं स्रौं सः केतवे नमः", "translit": "Om Sraam Sreem Sraum Sah Ketave Namah",
+          "meaning": "Om, with the seed sounds of Ketu, salutations to Ketu." },
+        { "kind": "verse from the Navagraha Stotram", "text": "पलाशपुष्पसंकाशं तारकाग्रहमस्तकम् ।\nरौद्रं रौद्रात्मकं घोरं तं केतुं प्रणमाम्यहम् ॥",
+          "translit": "Palasha pushpa sankasham taraka graha mastakam\nRaudram raudratmakam ghoram tam ketum pranamamyaham",
+          "meaning": "I bow to Ketu, red like the palasha flower, head of the stars and planets, fierce and formidable." }
+      ]
+    }
+  },
+  "_rotation_note": "Saturday cycles through Shani, Rahu, Shani, Ketu so the shadow planets get a day too. Variants alternate week by week.",
+  "weekday_rotation": {
+    "Sunday": ["surya"], "Monday": ["chandra"], "Tuesday": ["mangal"], "Wednesday": ["budh"],
+    "Thursday": ["brihaspati"], "Friday": ["shukra"], "Saturday": ["shani", "rahu", "shani", "ketu"]
+  },
+  "festivals": {
+    "Dhanteras": {
+      "slug": "dhanteras", "accent": "#E8C24A",
+      "hook": "Dhanteras is on {date}. Before you buy gold or utensils, start with this.",
+      "about": "Dhanteras honours Dhanvantari, the physician of the gods, who rose from the churning of the ocean with the pot of amrit.",
+      "kind": "Dhanvantari mantra", "text": "ॐ धन्वन्तरये नमः", "translit": "Om Dhanvantaraye Namah",
+      "meaning": "Om, salutations to Dhanvantari, giver of health.",
+      "cta": "Dhanteras puja muhurat and timings for your city",
+      "hashtags": ["#Dhanteras", "#Dhanteras2026", "#Diwali2026", "#Dhanvantari", "#Mantra"]
+    },
+    "Diwali (Lakshmi Puja)": {
+      "slug": "diwali", "accent": "#F0B44C",
+      "hook": "Diwali is on {date}. Light the diya and chant this during Lakshmi Puja.",
+      "about": "On Kartika Amavasya, Goddess Lakshmi is worshipped at Pradosh kaal for wealth, peace and prosperity in the home.",
+      "kind": "Mahalakshmi mantra", "text": "ॐ श्रीं महालक्ष्म्यै नमः", "translit": "Om Shreem Mahalakshmyai Namah",
+      "meaning": "Om, with the seed sound Shreem, salutations to Mahalakshmi.",
+      "cta": "Lakshmi Puja muhurat for your city",
+      "hashtags": ["#Diwali", "#Diwali2026", "#LakshmiPuja", "#Lakshmi", "#Mantra"]
+    },
+    "Chhath Puja": {
+      "slug": "chhath-puja", "accent": "#E8873A",
+      "hook": "Chhath Puja is on {date}. Offer arghya to the setting Sun with this verse.",
+      "about": "Chhath honours Surya and Chhathi Maiya, with arghya offered to the setting and rising Sun.",
+      "kind": "verse from the Navagraha Stotram", "text": "जपाकुसुमसंकाशं काश्यपेयं महाद्युतिम् ।\nतमोऽरिं सर्वपापघ्नं प्रणतोऽस्मि दिवाकरम् ॥",
+      "translit": "Japakusuma sankasham kashyapeyam mahadyutim\nTamorim sarvapapaghnam pranato'smi divakaram",
+      "meaning": "I bow to the Sun, red like the hibiscus flower, son of Kashyapa, of great radiance, the enemy of darkness who destroys all sins.",
+      "cta": "Chhath sunset and sunrise arghya timings for your city",
+      "hashtags": ["#ChhathPuja", "#Chhath2026", "#Surya", "#Mantra"]
+    },
+    "Kartik Purnima": {
+      "slug": "kartik-purnima", "accent": "#B9C7D6",
+      "hook": "Kartik Purnima (Dev Deepawali) is on {date}.",
+      "about": "On Kartika Purnima, devotees take a holy dip, light lamps and worship Shiva, who defeated Tripurasura on this day.",
+      "kind": "Panchakshari mantra", "text": "ॐ नमः शिवाय", "translit": "Om Namah Shivaya",
+      "meaning": "Om, salutations to Shiva.",
+      "cta": "Kartik Purnima timings for your city",
+      "hashtags": ["#KartikPurnima", "#DevDeepawali", "#Shiva", "#Mantra"]
+    }
+  }
+}

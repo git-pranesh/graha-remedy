@@ -42,3 +42,8 @@ backend/cache/
 # workspace scratch
 .freebuff/project-id
 frontend/tsconfig.tsbuildinfo
+
+# chant-studio: local Modal CLI venv and generated audio
+.venv-chant/
+chant-tests/
+social/out/

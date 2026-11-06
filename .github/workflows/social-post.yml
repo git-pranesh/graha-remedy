@@ -1,0 +1,37 @@
+name: Daily social post
+
+# Every morning, generate today's mantra card and post it to the Facebook Page and Instagram.
+# Needs repo secrets META_PAGE_ID, META_PAGE_TOKEN and META_IG_USER_ID; without them it is a dry run.
+on:
+  schedule:
+    - cron: "30 0 * * *" # 06:00 IST (GitHub may start scheduled runs a little late)
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Post for this date (YYYY-MM-DD); empty means today in IST"
+        required: false
+
+concurrency: social-post
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Devanagari fonts
+        run: sudo apt-get install -y fonts-noto-core
+      - run: node social/publish.mjs
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          POST_DATE: ${{ inputs.date }}
+          META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: social-post
+          path: social/out/
